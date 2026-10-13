@@ -1,0 +1,79 @@
+/* ==========================================================================
+   Pan y Queque - Haute Boulangerie ERP Custom Styles
+   Inspirado en la plantilla corporativa de alta gama (Plantilla/code.html)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --color-gold: #B89758;
+  --color-gold-hover: #A48446;
+  --color-sand: #F9F8F5;
+  --color-charcoal: #1A1A1A;
+  --color-muted: #71717A;
+}
+
+html {
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F9F8F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B89758;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A48446;
+}
+
+/* Dark mode scrollbar when body is dark */
+body.dark-theme::-webkit-scrollbar-track,
+.dark-theme ::-webkit-scrollbar-track {
+  background: #141414;
+}
+
+body.dark-theme::-webkit-scrollbar-thumb,
+.dark-theme ::-webkit-scrollbar-thumb {
+  background: #B89758;
+}
+
+body.dark-theme::-webkit-scrollbar-thumb:hover,
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+  background: #A48446;
+}
+
+/* Print Stylesheet for POS Boleta and Reports */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt;
+  }
+
+  nav, header, footer, .no-print, button, .breadcrumb-nav {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .printable-area {
+    margin: 0 !important;
+    padding: 10px !important;
+    box-shadow: none !important;
+    border: none !important;
+    width: 100% !important;
+  }
+}
