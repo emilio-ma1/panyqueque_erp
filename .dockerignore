@@ -1,0 +1,17 @@
+# Ignorar archivos del control de versiones y del sistema operativo
+.git
+.gitignore
+.gitattributes
+.DS_Store
+Thumbs.db
+
+# Ignorar documentación pesada y PDFs del contexto de build
+Docs/
+*.pdf
+*.docx
+
+# Ignorar logs y archivos temporales
+*.log
+.env.local
+tmp/
+scratch/

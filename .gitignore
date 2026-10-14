@@ -1,0 +1,22 @@
+# Dependencias y paquetes
+vendor/
+node_modules/
+
+# Entornos y credenciales locales
+.env
+.env.local
+*.log
+
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Archivos temporales y de pruebas
+tmp/
+temp/
+scratch/
