@@ -1,56 +1,73 @@
 /* ==========================================================================
-   Pan y Queque - Haute Boulangerie ERP Custom Styles
-   Inspirado en la plantilla corporativa de alta gama (Plantilla/code.html)
+   Pan y Queque - Atelier Architectural ERP Custom Styles
+   Inspirado en la nueva plantilla: Plantilla/stitch_bakery_erp_system
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 :root {
-  --color-gold: #B89758;
-  --color-gold-hover: #A48446;
-  --color-sand: #F9F8F5;
-  --color-charcoal: #1A1A1A;
-  --color-muted: #71717A;
+  --color-slate-950: #020617;
+  --color-slate-900: #0f172a;
+  --color-slate-800: #1e293b;
+  --color-slate-700: #334155;
+  --color-slate-200: #e2e8f0;
+  --color-slate-100: #f1f5f9;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
 }
 
 html {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   scroll-behavior: smooth;
 }
 
-/* Custom Scrollbars */
+.font-mono,
+.font-mono-tech,
+.font-mono-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Material Symbols alignment helper */
+.material-symbols-outlined {
+  vertical-align: middle;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Strict Rectangular Scrollbars (Zero-Pill Doctrine) */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F9F8F5;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #B89758;
-  border-radius: 4px;
+  background: #94a3b8;
+  border-radius: 0px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #A48446;
+  background: #64748b;
 }
 
-/* Dark mode scrollbar when body is dark */
+/* Dark theme rectangular scrollbar */
 body.dark-theme::-webkit-scrollbar-track,
 .dark-theme ::-webkit-scrollbar-track {
-  background: #141414;
+  background: #09090b;
 }
 
 body.dark-theme::-webkit-scrollbar-thumb,
 .dark-theme ::-webkit-scrollbar-thumb {
-  background: #B89758;
+  background: #27272a;
+  border-radius: 0px;
 }
 
 body.dark-theme::-webkit-scrollbar-thumb:hover,
 .dark-theme ::-webkit-scrollbar-thumb:hover {
-  background: #A48446;
+  background: #3f3f46;
 }
 
 /* Print Stylesheet for POS Boleta and Reports */

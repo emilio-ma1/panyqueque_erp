@@ -1,7 +1,13 @@
 <?php
 /**
- * Header común para el Sistema ERP - Panadería y Pastelería Pan y Queque
- * Basado en la plantilla elegante de Haute Boulangerie (Plantilla/code.html)
+ * Common header and navigation bar for the Pan y Queque ERP.
+ *
+ * Implements the Atelier Architectural ERP design system:
+ * - Opaque solid navigation (Zero-Glass Policy)
+ * - Rectilinear architectural geometry (Zero-Pill Doctrine)
+ * - Inter typography and JetBrains Mono for metrics and codes
+ * - Google Material Symbols Outlined icons
+ * Derived from templates in Plantilla/stitch_bakery_erp_system/
  */
 if (!defined('APP_NAME')) {
     require_once __DIR__ . '/config.php';
@@ -14,128 +20,165 @@ $isDarkTheme = ($currentPage === 'dashboard');
 $dbConnected = DB::isConnected();
 ?>
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth <?php echo $isDarkTheme ? 'dark' : ''; ?>">
+<html lang="es" class="<?php echo $isDarkTheme ? 'h-full bg-zinc-950 dark' : 'h-full bg-slate-100'; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($pageTitle . ' — ' . APP_COMPANY); ?></title>
-
-    <!-- Google Fonts: Cormorant Garamond & Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title><?php echo htmlspecialchars($pageTitle . ' | ' . APP_COMPANY); ?></title>
 
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Google Fonts: Inter, JetBrains Mono & Material Symbols Outlined -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: {
-                        serif: ['"Cormorant Garamond"', 'serif'],
-                        sans: ['Inter', 'sans-serif'],
-                    },
                     colors: {
                         brand: {
-                            gold: '#B89758',
-                            goldHover: '#A48446',
-                            sand: '#F9F8F5',
-                            charcoal: '#1A1A1A',
-                            muted: '#71717A',
-                            surface: '#FCFBF9'
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
                         }
                     }
                 }
             }
         }
     </script>
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/custom.css">
 </head>
-<body class="<?php echo $isDarkTheme ? 'bg-[#141414] text-gray-100 dark-theme' : 'bg-white text-brand-charcoal'; ?> font-sans antialiased selection:bg-brand-gold selection:text-white min-h-screen flex flex-col">
+<body class="<?php echo $isDarkTheme ? 'min-h-full flex flex-col bg-zinc-950 text-zinc-100 antialiased selection:bg-amber-600 selection:text-white dark-theme' : 'min-h-full flex flex-col bg-slate-100 text-slate-900 antialiased selection:bg-slate-900 selection:text-white'; ?>">
 
     <!-- ====================================================================== -->
-    <!-- HEADER: Fijo / Sticky con backdrop-blur inspirado en la plantilla -->
+    <!-- 1. HEADER DEL ERP (SÓLIDO 100%, SIN BLUR NI TRANSPARENCIAS)            -->
     <!-- ====================================================================== -->
-    <header class="sticky top-0 z-50 <?php echo $isDarkTheme ? 'bg-[#181818]/95 border-b border-gray-800' : 'bg-white/95 border-b border-gray-100'; ?> backdrop-blur-md transition-all shadow-sm">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+    <header class="<?php echo $isDarkTheme ? 'bg-zinc-900 border-b border-zinc-800 text-white' : 'bg-slate-900 border-b border-slate-800 text-white'; ?> shrink-0 sticky top-0 z-50">
+        <div class="w-full px-4 sm:px-6 flex items-center justify-between h-16">
             
-            <!-- Logo / Identidad de la Panadería -->
-            <a href="index.php" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-full border border-brand-gold/50 flex items-center justify-center text-brand-gold group-hover:border-brand-gold group-hover:scale-105 transition-all shadow-sm bg-brand-sand/50">
-                    <svg class="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18c-2.5 0-5 3.5-5 9s2.5 9 5 9m0-18c2.5 0 5 3.5 5 9s-2.5 9-5 9" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18" />
-                    </svg>
-                </div>
-                <div>
-                    <span class="font-serif text-xl md:text-2xl font-semibold tracking-wide <?php echo $isDarkTheme ? 'text-white' : 'text-brand-charcoal'; ?> block leading-none">
-                        Pan y Queque
-                    </span>
-                    <span class="text-[10px] uppercase tracking-[0.25em] text-brand-gold font-medium block mt-1">
-                        Haute Boulangerie &bull; ERP
-                    </span>
-                </div>
-            </a>
+            <!-- Logo y Razón Social Corporativa -->
+            <div class="flex items-center space-x-6">
+                <a href="index.php" class="flex items-center space-x-3 group">
+                    <div class="w-9 h-9 <?php echo $isDarkTheme ? 'bg-amber-600 text-white' : 'bg-amber-700 text-white'; ?> flex items-center justify-center font-bold text-lg rounded-none transition-none">
+                        PQ
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold tracking-tight text-white leading-tight uppercase">Pan y Queque</div>
+                        <div class="text-[11px] <?php echo $isDarkTheme ? 'text-zinc-400' : 'text-slate-400'; ?> font-mono">ERP OBRADOR V4.8</div>
+                    </div>
+                </a>
 
-            <!-- Menú Central -->
-            <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest font-medium <?php echo $isDarkTheme ? 'text-gray-300' : 'text-gray-600'; ?>">
-                <a href="index.php" class="<?php echo $currentPage === 'inicio' ? ($isDarkTheme ? 'text-white border-b-2 border-brand-gold font-bold' : 'text-brand-charcoal border-b-2 border-brand-gold font-semibold') : 'hover:text-brand-gold hover:border-b hover:border-brand-gold/60'; ?> pb-1 transition-all">
-                    Inicio
+                <div class="h-6 w-px <?php echo $isDarkTheme ? 'bg-zinc-800' : 'bg-slate-800'; ?> hidden md:block"></div>
+
+                <!-- Metadatos de Producción -->
+                <div class="hidden xl:flex items-center space-x-2 text-xs font-mono <?php echo $isDarkTheme ? 'text-zinc-300' : 'text-slate-300'; ?>">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-none inline-block"></span>
+                    <span class="font-semibold text-slate-200">PLANTA CENTRAL #01</span>
+                    <span class="<?php echo $isDarkTheme ? 'text-zinc-600' : 'text-slate-600'; ?>">|</span>
+                    <span>TURNO MATUTINO (04:00 - 13:00)</span>
+                    <span class="<?php echo $isDarkTheme ? 'text-zinc-600' : 'text-slate-600'; ?>">|</span>
+                    <span class="<?php echo $dbConnected ? 'text-emerald-400 font-semibold' : 'text-amber-400 font-semibold'; ?>">
+                        <?php echo $dbConnected ? 'POSTGRESQL 15 ACTIVO' : 'MODO LOCAL ACTIVO'; ?>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Navegación de 5 Pestañas Rectangulares (Zero-Pill) -->
+            <nav class="hidden lg:flex items-center space-x-1" id="nav-tabs">
+                <!-- 1. Inicio -->
+                <a href="index.php" class="px-3.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-none transition-none <?php
+                    echo ($currentPage === 'inicio' || $currentPage === 'index')
+                        ? ($isDarkTheme ? 'text-white bg-zinc-800 border-b-2 border-amber-500' : 'text-white bg-slate-800 border-b-2 border-amber-600')
+                        : ($isDarkTheme ? 'text-zinc-400 hover:text-white hover:bg-zinc-800/80 border-b-2 border-transparent' : 'text-slate-300 hover:text-white hover:bg-slate-800 border-b-2 border-transparent');
+                ?>">
+                    1. Inicio &amp; Catálogo
                 </a>
-                <a href="caja.php" class="<?php echo $currentPage === 'caja' ? ($isDarkTheme ? 'text-white border-b-2 border-brand-gold font-bold' : 'text-brand-charcoal border-b-2 border-brand-gold font-semibold') : 'hover:text-brand-gold hover:border-b hover:border-brand-gold/60'; ?> pb-1 transition-all">
-                    Punto de Venta
+
+                <!-- 2. POS -->
+                <a href="pos.php" class="px-3.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-none transition-none <?php
+                    echo ($currentPage === 'pos' || $currentPage === 'caja')
+                        ? ($isDarkTheme ? 'text-white bg-zinc-800 border-b-2 border-amber-500' : 'text-white bg-slate-800 border-b-2 border-amber-600')
+                        : ($isDarkTheme ? 'text-zinc-400 hover:text-white hover:bg-zinc-800/80 border-b-2 border-transparent' : 'text-slate-300 hover:text-white hover:bg-slate-800 border-b-2 border-transparent');
+                ?>">
+                    2. Punto de Venta (POS)
                 </a>
-                <a href="proveedores.php" class="<?php echo $currentPage === 'proveedores' ? ($isDarkTheme ? 'text-white border-b-2 border-brand-gold font-bold' : 'text-brand-charcoal border-b-2 border-brand-gold font-semibold') : 'hover:text-brand-gold hover:border-b hover:border-brand-gold/60'; ?> pb-1 transition-all">
-                    Proveedores &amp; Finanzas
+
+                <!-- 3. Proveedores -->
+                <a href="suppliers.php" class="px-3.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-none transition-none <?php
+                    echo ($currentPage === 'suppliers' || $currentPage === 'proveedores')
+                        ? ($isDarkTheme ? 'text-white bg-zinc-800 border-b-2 border-amber-500' : 'text-white bg-slate-800 border-b-2 border-amber-600')
+                        : ($isDarkTheme ? 'text-zinc-400 hover:text-white hover:bg-zinc-800/80 border-b-2 border-transparent' : 'text-slate-300 hover:text-white hover:bg-slate-800 border-b-2 border-transparent');
+                ?>">
+                    3. Proveedores &amp; Finanzas
                 </a>
-                <a href="reparto.php" class="<?php echo $currentPage === 'reparto' ? ($isDarkTheme ? 'text-white border-b-2 border-brand-gold font-bold' : 'text-brand-charcoal border-b-2 border-brand-gold font-semibold') : 'hover:text-brand-gold hover:border-b hover:border-brand-gold/60'; ?> pb-1 transition-all">
-                    Logística &amp; Rutas
+
+                <!-- 4. Logística -->
+                <a href="dispatch.php" class="px-3.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-none transition-none <?php
+                    echo ($currentPage === 'dispatch' || $currentPage === 'reparto')
+                        ? ($isDarkTheme ? 'text-white bg-zinc-800 border-b-2 border-amber-500' : 'text-white bg-slate-800 border-b-2 border-amber-600')
+                        : ($isDarkTheme ? 'text-zinc-400 hover:text-white hover:bg-zinc-800/80 border-b-2 border-transparent' : 'text-slate-300 hover:text-white hover:bg-slate-800 border-b-2 border-transparent');
+                ?>">
+                    4. Logística &amp; Rutas
                 </a>
-                <a href="dashboard.php" class="<?php echo $currentPage === 'dashboard' ? 'text-brand-gold border-b-2 border-brand-gold font-bold' : 'hover:text-brand-gold hover:border-b hover:border-brand-gold/60'; ?> pb-1 transition-all flex items-center gap-1.5">
-                    <span>Dashboard</span>
-                    <span class="text-[9px] bg-brand-gold/20 text-brand-gold border border-brand-gold/30 px-1.5 py-0.2 rounded font-sans uppercase">VIP</span>
+
+                <!-- 5. Dashboard VIP -->
+                <a href="dashboard.php" class="px-3.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-none transition-none <?php
+                    echo ($currentPage === 'dashboard')
+                        ? 'text-amber-400 bg-zinc-800 border-b-2 border-amber-500 font-bold'
+                        : ($isDarkTheme ? 'text-amber-400 hover:text-amber-300 hover:bg-zinc-800/80 border-b-2 border-transparent' : 'text-amber-400 hover:text-amber-300 hover:bg-slate-800 border-b-2 border-transparent');
+                ?>">
+                    5. Dashboard Ejecutivo [VIP]
                 </a>
             </nav>
 
-            <!-- CTA Derecha: Estado de Sistema Local -->
-            <div class="flex items-center gap-3">
-                <div class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full <?php echo $isDarkTheme ? 'bg-gray-800 border-gray-700 text-gray-200' : 'bg-brand-sand border-brand-gold/30 text-brand-charcoal'; ?> border text-[11px] uppercase tracking-widest font-medium">
-                    <span class="w-1.5 h-1.5 rounded-full <?php echo $dbConnected ? 'bg-emerald-500' : 'bg-brand-gold'; ?>"></span>
-                    <span><?php echo $dbConnected ? 'PostgreSQL 15 Conectado' : 'Modo Local Activo'; ?></span>
+            <!-- Panel de Usuario y Estado -->
+            <div class="flex items-center space-x-4">
+                <div class="text-right hidden sm:block">
+                    <div class="text-xs font-semibold <?php echo $isDarkTheme ? 'text-zinc-200' : 'text-slate-200'; ?>">Ing. M. Valenzuela</div>
+                    <div class="text-[11px] font-mono <?php echo $isDarkTheme ? 'text-amber-400' : 'text-slate-400'; ?>">
+                        <?php echo ($currentPage === 'dashboard') ? '[Director General]' : 'ID: OBR-9402'; ?>
+                    </div>
+                </div>
+                <div class="w-9 h-9 <?php echo $isDarkTheme ? 'bg-zinc-800 border border-zinc-700 text-zinc-200' : 'bg-slate-800 border border-slate-700 text-slate-300'; ?> flex items-center justify-center text-xs font-bold font-mono rounded-none">
+                    MV
                 </div>
 
-                <!-- Botón Menú Móvil -->
-                <button id="mobile-menu-btn" type="button" class="md:hidden p-2 rounded-lg text-brand-charcoal hover:text-brand-gold focus:outline-none" aria-label="Abrir menú">
-                    <svg id="menu-icon-open" class="w-6 h-6 block <?php echo $isDarkTheme ? 'text-white' : 'text-brand-charcoal'; ?>" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                    <svg id="menu-icon-close" class="w-6 h-6 hidden <?php echo $isDarkTheme ? 'text-white' : 'text-brand-charcoal'; ?>" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" type="button" class="lg:hidden p-2 text-white hover:bg-slate-800 rounded-none focus:outline-none" aria-label="Abrir menú">
+                    <span class="material-symbols-outlined text-xl" id="menu-icon-open">menu</span>
+                    <span class="material-symbols-outlined text-xl hidden" id="menu-icon-close">close</span>
                 </button>
             </div>
         </div>
 
-        <!-- Menú Móvil Desplegable -->
-        <div id="mobile-menu" class="hidden md:hidden <?php echo $isDarkTheme ? 'bg-[#181818] border-gray-800' : 'bg-white border-gray-200'; ?> border-t px-6 py-4 space-y-3 text-xs uppercase tracking-widest">
-            <a href="index.php" class="block py-2 <?php echo $currentPage === 'inicio' ? 'text-brand-gold font-bold' : 'text-gray-600'; ?>">
-                Inicio
+        <!-- Mobile Dropdown Menu (Solid rectangular) -->
+        <div id="mobile-menu" class="hidden lg:hidden <?php echo $isDarkTheme ? 'bg-zinc-900 border-t border-zinc-800 text-zinc-200' : 'bg-slate-900 border-t border-slate-800 text-slate-200'; ?> px-4 py-3 space-y-1 text-xs uppercase font-mono">
+            <a href="index.php" class="block py-2.5 px-3 <?php echo ($currentPage === 'inicio') ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800'; ?> rounded-none">
+                1. Inicio &amp; Catálogo
             </a>
-            <a href="caja.php" class="block py-2 <?php echo $currentPage === 'caja' ? 'text-brand-gold font-bold' : 'text-gray-600'; ?>">
-                Punto de Venta (Cajas)
+            <a href="pos.php" class="block py-2.5 px-3 <?php echo ($currentPage === 'pos') ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800'; ?> rounded-none">
+                2. Punto de Venta (POS)
             </a>
-            <a href="proveedores.php" class="block py-2 <?php echo $currentPage === 'proveedores' ? 'text-brand-gold font-bold' : 'text-gray-600'; ?>">
-                Proveedores &amp; Finanzas
+            <a href="suppliers.php" class="block py-2.5 px-3 <?php echo ($currentPage === 'suppliers') ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800'; ?> rounded-none">
+                3. Proveedores &amp; Finanzas
             </a>
-            <a href="reparto.php" class="block py-2 <?php echo $currentPage === 'reparto' ? 'text-brand-gold font-bold' : 'text-gray-600'; ?>">
-                Logística &amp; Reparto
+            <a href="dispatch.php" class="block py-2.5 px-3 <?php echo ($currentPage === 'dispatch') ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800'; ?> rounded-none">
+                4. Logística &amp; Rutas
             </a>
-            <a href="dashboard.php" class="block py-2 text-brand-gold font-bold">
-                Dashboard Gerencial (VIP)
+            <a href="dashboard.php" class="block py-2.5 px-3 text-amber-400 font-bold hover:bg-slate-800 rounded-none">
+                5. Dashboard Ejecutivo [VIP]
             </a>
         </div>
     </header>
 
-    <!-- Script para menú móvil -->
+    <!-- Script for mobile menu toggle -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const btn = document.getElementById('mobile-menu-btn');
@@ -148,12 +191,12 @@ $dbConnected = DB::isConnected();
                     const isHidden = menu.classList.contains('hidden');
                     if (isHidden) {
                         menu.classList.remove('hidden');
-                        iconOpen.classList.add('hidden');
-                        iconClose.classList.remove('hidden');
+                        if (iconOpen) iconOpen.classList.add('hidden');
+                        if (iconClose) iconClose.classList.remove('hidden');
                     } else {
                         menu.classList.add('hidden');
-                        iconOpen.classList.remove('hidden');
-                        iconClose.classList.add('hidden');
+                        if (iconOpen) iconOpen.classList.remove('hidden');
+                        if (iconClose) iconClose.classList.add('hidden');
                     }
                 });
             }
@@ -161,4 +204,4 @@ $dbConnected = DB::isConnected();
     </script>
 
     <!-- Main Content Wrapper -->
-    <main class="flex-grow">
+    <main class="flex-1 w-full overflow-y-auto">

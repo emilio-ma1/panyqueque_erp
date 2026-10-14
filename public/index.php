@@ -1,363 +1,495 @@
 <?php
 /**
- * Portal Principal / Landing del ERP
+ * Portal Principal / Obrador Central y Catálogo de Producción
  * Panadería y Pastelería Pan y Queque
- * Basado en la plantilla elegante de Haute Boulangerie (Plantilla/code.html)
+ * Diseñado bajo los estándares del Atelier Architectural ERP (Plantilla/stitch_bakery_erp_system)
  */
 $currentPage = 'inicio';
-$pageTitle = 'Portal Principal ERP';
+$pageTitle = 'Obrador Central y Catálogo';
 require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/ProductService.php';
+
+$activeProducts = ProductService::getActiveProducts();
 ?>
 
-<!-- ====================================================================== -->
-<!-- HERO SECTION: Elegancia, Titular Magnético y Espacio Negativo (Plantilla) -->
-<!-- ====================================================================== -->
-<section id="inicio" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 bg-gradient-to-b from-brand-sand/60 via-white to-white border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            
-            <!-- Columna Texto -->
-            <div class="lg:col-span-7 space-y-8">
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-sand border border-brand-gold/30 text-brand-gold text-[11px] uppercase tracking-widest font-medium">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
-                    <span>Obrador de Alta Gama &bull; Sistema ERP Centralizado</span>
+<!-- CONTENEDOR PRINCIPAL: INICIO & CATÁLOGO GENERAL (MODO CLARO SÓLIDO) -->
+<div class="p-4 sm:p-6 lg:p-8 max-w-[1536px] mx-auto space-y-6">
+
+    <!-- 1. ENCABEZADO CORPORATIVO DIRECTO (SIN BADGES NI PÍLDORAS) -->
+    <section class="bg-white border border-slate-200 p-6 sm:p-8 rounded-none shadow-none">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div>
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="w-2.5 h-2.5 bg-amber-700 rounded-none inline-block"></span>
+                    <span class="text-xs font-mono font-bold uppercase tracking-wider text-amber-700">PLANTA CENTRAL #01 // DIVISIÓN OPERATIVA</span>
+                    <span class="text-slate-400 font-mono">/</span>
+                    <span class="text-xs font-mono text-slate-600 font-medium">CATÁLOGO MAESTRO V4.8</span>
                 </div>
-                
-                <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-brand-charcoal font-normal leading-[1.15] tracking-tight">
-                    Excelencia en <span class="italic font-light text-brand-gold">Panadería</span> y Gestión Comercial
+                <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+                    Obrador Central y Catálogo de Producción
                 </h1>
-
-                <p class="text-base sm:text-lg text-gray-600 font-light max-w-xl leading-relaxed">
-                    Plataforma integral de gestión empresarial para <strong>Panadería y Pastelería Pan y Queque</strong>. Centralice de forma ágil la facturación en punto de venta, compras a proveedores, logística de distribución y analítica directiva.
+                <p class="text-xs sm:text-sm text-slate-600 mt-2 max-w-4xl leading-relaxed">
+                    Sistema de planificación y despacho mayorista para pastelería de autor y panadería tradicional con fermentación prolongada. Supervisión de recetas maestras, lotes de alta gama y abastecimiento HORECA.
                 </p>
-
-                <!-- CTAs Primario y Secundario -->
-                <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                    <a href="caja.php" class="inline-flex items-center justify-center px-8 py-3.5 text-xs uppercase tracking-widest font-medium text-white bg-brand-gold hover:bg-brand-goldHover transition-all rounded-lg shadow-sm hover:shadow">
-                        Abrir Punto de Venta (POS)
-                    </a>
-                    <a href="dashboard.php" class="inline-flex items-center justify-center px-7 py-3.5 text-xs uppercase tracking-widest font-medium text-brand-charcoal bg-white border border-gray-200 hover:border-brand-gold hover:text-brand-gold transition-all rounded-lg">
-                        Ver Dashboard Ejecutivo
-                    </a>
-                </div>
-
-                <!-- Métricas de Confianza en el Hero -->
-                <div class="pt-8 border-t border-gray-200/70 grid grid-cols-3 gap-6">
-                    <div>
-                        <p class="font-serif text-2xl font-semibold text-brand-charcoal">48h</p>
-                        <p class="text-xs text-gray-500 uppercase tracking-wider mt-0.5">Fermentación Lenta</p>
-                    </div>
-                    <div>
-                        <p class="font-serif text-2xl font-semibold text-brand-charcoal">$1.42M</p>
-                        <p class="text-xs text-gray-500 uppercase tracking-wider mt-0.5">Ventas del Día</p>
-                    </div>
-                    <div>
-                        <p class="font-serif text-2xl font-semibold text-brand-charcoal">06:00</p>
-                        <p class="text-xs text-gray-500 uppercase tracking-wider mt-0.5">Despacho en Ruta</p>
-                    </div>
-                </div>
             </div>
 
-            <!-- Columna Visual Hero (Inspirada en Plantilla) -->
-            <div class="lg:col-span-5 relative">
-                <div class="relative rounded-2xl overflow-hidden shadow-xl border border-gray-100 bg-brand-sand">
-                    <!-- Tarjeta artística representativa de la panadería -->
-                    <div class="aspect-[4/5] relative flex flex-col justify-between p-8 bg-gradient-to-br from-[#2D241E] via-[#3E3228] to-[#1C1612] text-white">
-                        <!-- Patrón sutil de fondo -->
-                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#B89758_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                        
-                        <div class="relative z-10 flex justify-between items-start">
-                            <span class="text-[10px] tracking-[0.3em] uppercase bg-black/40 border border-brand-gold/40 text-brand-gold px-3 py-1 rounded-full">
-                                Plataforma Operativa Local
-                            </span>
-                            <span class="font-serif text-xs text-gray-300">v1.0.0</span>
-                        </div>
-
-                        <div class="relative z-10 my-auto text-center py-6">
-                            <div class="w-20 h-20 mx-auto mb-5 rounded-full border border-brand-gold/50 flex items-center justify-center bg-brand-gold/10">
-                                <svg class="w-10 h-10 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18c-2.5 0-5 3.5-5 9s2.5 9 5 9m0-18c2.5 0 5 3.5 5 9s-2.5 9-5 9" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18" />
-                                </svg>
-                            </div>
-                            <h3 class="font-serif text-3xl font-light tracking-wide text-white">PAN Y QUEQUE</h3>
-                            <p class="text-xs text-brand-gold font-mono uppercase tracking-widest mt-2">Masa Madre Viva &bull; Obrador Artesanal</p>
-                        </div>
-
-                        <!-- Tarjeta flotante inferior -->
-                        <div class="relative z-10 p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 text-xs">
-                            <div class="flex items-center justify-between font-medium">
-                                <span class="text-gray-200">Estado del Sistema ERP</span>
-                                <span class="text-brand-gold font-semibold flex items-center gap-1.5">
-                                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Operativo Local
-                                </span>
-                            </div>
-                            <p class="text-gray-300 text-[11px] mt-1 font-light">4 módulos integrados: Cajas, Proveedores, Reparto y Dirección.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- ====================================================================== -->
-<!-- MÓDULOS DEL SISTEMA: Grid de Tarjetas Minimalistas (Plantilla) -->
-<!-- ====================================================================== -->
-<section id="modulos" class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12">
-        
-        <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <span class="text-[11px] uppercase tracking-[0.25em] text-brand-gold font-semibold">
-                Gestión Integral
-            </span>
-            <h2 class="font-serif text-3xl sm:text-4xl text-brand-charcoal font-normal">
-                Módulos del Sistema ERP
-            </h2>
-            <p class="text-sm text-gray-500 font-light leading-relaxed">
-                Herramientas diseñadas para satisfacer las necesidades diarias de atención en mostrador, abastecimiento, logística y dirección estratégica.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            
-            <!-- Card 1: Puntos de Venta (Cajas) -->
-            <article class="group bg-white rounded-xl border border-gray-200/80 hover:border-brand-gold/60 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden">
-                <div class="relative aspect-[16/10] overflow-hidden bg-gradient-to-tr from-[#3a2f26] to-[#5a483a] p-6 flex flex-col justify-between text-white">
-                    <span class="self-start bg-white/20 backdrop-blur-sm text-white text-[10px] uppercase tracking-wider font-medium px-3 py-1 rounded-full border border-white/20">
-                        Sala de Ventas
-                    </span>
-                    <div class="flex items-end justify-between">
-                        <span class="font-serif text-lg tracking-wide">01. Cajas &amp; POS</span>
-                        <div class="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-brand-gold">
-                            <svg class="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div class="space-y-2">
-                        <span class="text-xs text-brand-gold font-medium uppercase tracking-wider block">
-                            Facturación &bull; Boletas &bull; IVA 19%
-                        </span>
-                        <h3 class="font-serif text-xl text-brand-charcoal font-medium leading-snug">
-                            Puntos de Venta y Cajas
-                        </h3>
-                        <p class="text-xs text-gray-600 font-light leading-relaxed pt-1">
-                            Facturación diaria de marraquetas, hallullas, empanadas y tortas con catálogo interactivo, cálculo de totales y cuadratura de caja.
-                        </p>
-                    </div>
-                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
-                        <a href="caja.php" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-brand-charcoal group-hover:text-brand-gold transition-colors">
-                            <span>Ingresar al POS</span>
-                            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 2: Contabilidad y Proveedores -->
-            <article class="group bg-white rounded-xl border border-gray-200/80 hover:border-brand-gold/60 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden">
-                <div class="relative aspect-[16/10] overflow-hidden bg-gradient-to-tr from-[#2d2226] to-[#4e3a42] p-6 flex flex-col justify-between text-white">
-                    <span class="self-start bg-white/20 backdrop-blur-sm text-white text-[10px] uppercase tracking-wider font-medium px-3 py-1 rounded-full border border-white/20">
-                        Adquisiciones
-                    </span>
-                    <div class="flex items-end justify-between">
-                        <span class="font-serif text-lg tracking-wide">02. Proveedores</span>
-                        <div class="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-brand-gold">
-                            <svg class="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div class="space-y-2">
-                        <span class="text-xs text-brand-gold font-medium uppercase tracking-wider block">
-                            Harinas &bull; Levaduras &bull; Mantecas
-                        </span>
-                        <h3 class="font-serif text-xl text-brand-charcoal font-medium leading-snug">
-                            Contabilidad &amp; Compras
-                        </h3>
-                        <p class="text-xs text-gray-600 font-light leading-relaxed pt-1">
-                            Gestión de 5 proveedores de materia prima, emisión de órdenes de compra, control de cuentas por pagar y balances financieros.
-                        </p>
-                    </div>
-                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
-                        <a href="proveedores.php" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-brand-charcoal group-hover:text-brand-gold transition-colors">
-                            <span>Ver Finanzas</span>
-                            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 3: Logística y Reparto -->
-            <article class="group bg-white rounded-xl border border-gray-200/80 hover:border-brand-gold/60 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden">
-                <div class="relative aspect-[16/10] overflow-hidden bg-gradient-to-tr from-[#1f2833] to-[#2e3c4d] p-6 flex flex-col justify-between text-white">
-                    <span class="self-start bg-white/20 backdrop-blur-sm text-white text-[10px] uppercase tracking-wider font-medium px-3 py-1 rounded-full border border-white/20">
-                        Despachos en Ruta
-                    </span>
-                    <div class="flex items-end justify-between">
-                        <span class="font-serif text-lg tracking-wide">03. Distribución</span>
-                        <div class="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-brand-gold">
-                            <svg class="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div class="space-y-2">
-                        <span class="text-xs text-brand-gold font-medium uppercase tracking-wider block">
-                            Supermercados &bull; Cafeterías &bull; Sedes
-                        </span>
-                        <h3 class="font-serif text-xl text-brand-charcoal font-medium leading-snug">
-                            Logística y Reparto
-                        </h3>
-                        <p class="text-xs text-gray-600 font-light leading-relaxed pt-1">
-                            Hojas de despacho para conductores, rutas optimizadas del día y confirmación de recepción con firma de entrega digital.
-                        </p>
-                    </div>
-                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
-                        <a href="reparto.php" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-brand-charcoal group-hover:text-brand-gold transition-colors">
-                            <span>Ver Hojas de Ruta</span>
-                            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 4: Dashboard Gerencial -->
-            <article class="group bg-white rounded-xl border border-brand-gold/60 hover:border-brand-gold shadow-sm hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden">
-                <div class="relative aspect-[16/10] overflow-hidden bg-gradient-to-tr from-[#1A1A1A] via-[#2A241F] to-[#B89758] p-6 flex flex-col justify-between text-white">
-                    <span class="self-start bg-brand-gold/30 backdrop-blur-sm text-brand-gold text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full border border-brand-gold/50">
-                        Alta Dirección VIP
-                    </span>
-                    <div class="flex items-end justify-between">
-                        <span class="font-serif text-lg tracking-wide">04. Analítica</span>
-                        <div class="w-8 h-8 rounded-full border border-brand-gold flex items-center justify-center text-brand-gold">
-                            <svg class="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0h.5m-1 0h-9.5m0 0h-.5" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div class="space-y-2">
-                        <span class="text-xs text-brand-gold font-medium uppercase tracking-wider block">
-                            Margen 38.5% &bull; Ventas $1.42M
-                        </span>
-                        <h3 class="font-serif text-xl text-brand-charcoal font-medium leading-snug">
-                            Dashboard Gerencial
-                        </h3>
-                        <p class="text-xs text-gray-600 font-light leading-relaxed pt-1">
-                            Panel exclusivo con métricas consolidadas, tendencias de productos más vendidos, capacidad de hornos y balances estratégicos.
-                        </p>
-                    </div>
-                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
-                        <a href="dashboard.php" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-brand-gold group-hover:text-brand-goldHover transition-colors">
-                            <span>Abrir Dashboard</span>
-                            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- ====================================================================== -->
-<!-- SECCIÓN DE CALIDAD & CAPACIDAD OPERATIVA (Plantilla) -->
-<!-- ====================================================================== -->
-<section id="calidad" class="py-20 bg-brand-sand/60 border-y border-gray-200/60">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            
-            <div class="space-y-6">
-                <span class="text-[11px] uppercase tracking-[0.25em] text-brand-gold font-semibold">
-                    Tradición y Rigor
-                </span>
-                <h2 class="font-serif text-3xl sm:text-4xl text-brand-charcoal font-normal leading-tight">
-                    Obrador Artesanal con Control Tecnológico Integral
-                </h2>
-                <p class="text-base text-gray-600 font-light leading-relaxed">
-                    En <strong class="text-brand-charcoal font-medium"><?php echo APP_COMPANY; ?></strong> combinamos las recetas tradicionales de panificación con fermentación prolongada y la tecnología moderna para gestionar el aprovisionamiento, los despachos matutinos y la recaudación en sala.
-                </p>
-
-                <!-- Sellos de Calidad -->
-                <div class="grid grid-cols-2 gap-4 pt-4 text-xs font-medium text-brand-charcoal">
-                    <div class="flex items-center gap-2.5">
-                        <svg class="w-4 h-4 text-brand-gold shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                        </svg>
-                        <span>Masa madre viva de cultivo propio</span>
-                    </div>
-                    <div class="flex items-center gap-2.5">
-                        <svg class="w-4 h-4 text-brand-gold shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                        </svg>
-                        <span>Hornos de solera de alta capacidad</span>
-                    </div>
-                    <div class="flex items-center gap-2.5">
-                        <svg class="w-4 h-4 text-brand-gold shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                        </svg>
-                        <span>Trazabilidad completa de materias primas</span>
-                    </div>
-                    <div class="flex items-center gap-2.5">
-                        <svg class="w-4 h-4 text-brand-gold shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                        </svg>
-                        <span>Despacho refrigerado diario garantizado</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white p-8 lg:p-10 rounded-2xl shadow-sm border border-gray-200/80 space-y-6">
-                <div class="border-b border-gray-100 pb-4">
-                    <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Resumen Operativo</span>
-                    <h3 class="font-serif text-2xl text-brand-charcoal mt-1">Capacidad Diaria del Obrador</h3>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="p-4 rounded-lg bg-brand-sand/70 border border-gray-100">
-                        <p class="font-serif text-3xl font-bold text-brand-charcoal">48h</p>
-                        <p class="text-xs text-gray-600 mt-1 font-light">Fermentación en frío</p>
-                    </div>
-                    <div class="p-4 rounded-lg bg-brand-sand/70 border border-gray-100">
-                        <p class="font-serif text-3xl font-bold text-brand-charcoal">100%</p>
-                        <p class="text-xs text-gray-600 mt-1 font-light">Mantequilla pura de pasto</p>
-                    </div>
-                    <div class="p-4 rounded-lg bg-brand-sand/70 border border-gray-100">
-                        <p class="font-serif text-3xl font-bold text-brand-charcoal">1.800 kg</p>
-                        <p class="text-xs text-gray-600 mt-1 font-light">Capacidad de horneado diario</p>
-                    </div>
-                    <div class="p-4 rounded-lg bg-brand-sand/70 border border-gray-100">
-                        <p class="font-serif text-3xl font-bold text-brand-charcoal">99.8%</p>
-                        <p class="text-xs text-gray-600 mt-1 font-light">Puntualidad en despachos</p>
-                    </div>
-                </div>
-
-                <a href="caja.php" class="block text-center py-3 px-6 text-xs uppercase tracking-widest font-medium text-white bg-brand-charcoal hover:bg-black transition-colors rounded-lg shadow-sm">
-                    Ir al Punto de Venta Principal
+            <!-- Botones Rectangulares de Acceso Directo (Zero-Pill) -->
+            <div class="flex flex-wrap items-center gap-3 shrink-0">
+                <a href="pos.php" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold uppercase tracking-wider rounded-none flex items-center space-x-1.5 transition-none">
+                    <span class="material-symbols-outlined text-sm">point_of_sale</span>
+                    <span>Abrir Terminal Táctil (POS)</span>
+                </a>
+                <a href="dashboard.php" class="px-5 py-2.5 bg-amber-700 hover:bg-amber-800 text-white text-xs font-semibold uppercase tracking-wider rounded-none flex items-center space-x-1.5 transition-none">
+                    <span class="material-symbols-outlined text-sm">insights</span>
+                    <span>Métricas de Producción [VIP]</span>
                 </a>
             </div>
+        </div>
+
+        <!-- Indicadores Rápidos de la Mañana (Telemetría Sólida) -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-6 border-t border-slate-200">
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-none">
+                <div class="text-xs font-mono text-slate-500 uppercase">Capacidad Actual</div>
+                <div class="text-2xl font-bold text-slate-900 font-mono mt-1 tabular-nums">1.840 kg</div>
+                <div class="text-xs text-slate-600 mt-1">Harinas procesadas hoy</div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-none">
+                <div class="text-xs font-mono text-slate-500 uppercase">Lotes Fermentando</div>
+                <div class="text-2xl font-bold text-slate-900 font-mono mt-1 tabular-nums">42 Lotes</div>
+                <div class="text-xs text-slate-600 mt-1">Cámaras frías a 4°C</div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-none">
+                <div class="text-xs font-mono text-slate-500 uppercase">Órdenes HORECA</div>
+                <div class="text-2xl font-bold text-slate-900 font-mono mt-1 tabular-nums">28 Pedidos</div>
+                <div class="text-xs text-slate-600 mt-1">Hoteles y restaurantes</div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-none">
+                <div class="text-xs font-mono text-slate-500 uppercase">Eficiencia Térmica</div>
+                <div class="text-2xl font-bold text-emerald-700 font-mono mt-1 tabular-nums">94.2%</div>
+                <div class="text-xs text-slate-600 mt-1">Hornos de solera de piedra</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. MÓDULOS DEL SISTEMA: 4 PANELES ARQUITECTÓNICOS RECTILÍNEOS -->
+    <section class="space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+            <h2 class="text-xs font-mono uppercase tracking-wider text-slate-700 font-bold">
+                Módulos Integrados del Sistema ERP
+            </h2>
+            <span class="text-xs font-mono text-slate-500">4 Unidades Funcionales Activas</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <!-- Módulo 01: POS -->
+            <div class="bg-white border border-slate-200 p-5 rounded-none flex flex-col justify-between hover:border-slate-400 transition-none">
+                <div>
+                    <div class="flex items-center justify-between text-xs font-mono mb-2">
+                        <span class="text-slate-500 font-semibold">MÓDULO 02</span>
+                        <span class="bg-slate-100 text-slate-800 px-2 py-0.5 border border-slate-300 font-semibold">SALA DE VENTAS</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 tracking-tight">Punto de Venta (POS)</h3>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                        Terminal táctil para mostrador con catálogo visual, emisión de boletas tributarias, lector de códigos y cuadratura de caja.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-mono text-emerald-700 font-semibold flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 bg-emerald-500 rounded-none inline-block"></span> Caja #02 Activa
+                    </span>
+                    <a href="pos.php" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-medium rounded-none">
+                        Abrir POS ›
+                    </a>
+                </div>
+            </div>
+
+            <!-- Módulo 02: Proveedores -->
+            <div class="bg-white border border-slate-200 p-5 rounded-none flex flex-col justify-between hover:border-slate-400 transition-none">
+                <div>
+                    <div class="flex items-center justify-between text-xs font-mono mb-2">
+                        <span class="text-slate-500 font-semibold">MÓDULO 03</span>
+                        <span class="bg-slate-100 text-slate-800 px-2 py-0.5 border border-slate-300 font-semibold">SUMINISTRO</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 tracking-tight">Proveedores &amp; Finanzas</h3>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                        Control de materias primas críticas (harinas, levaduras, mantequillas), emisión de órdenes de compra y balances de devengo.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-mono text-slate-500">5 Proveedores</span>
+                    <a href="suppliers.php" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-medium rounded-none">
+                        Gestionar ›
+                    </a>
+                </div>
+            </div>
+
+            <!-- Módulo 03: Logística -->
+            <div class="bg-white border border-slate-200 p-5 rounded-none flex flex-col justify-between hover:border-slate-400 transition-none">
+                <div>
+                    <div class="flex items-center justify-between text-xs font-mono mb-2">
+                        <span class="text-slate-500 font-semibold">MÓDULO 04</span>
+                        <span class="bg-slate-100 text-slate-800 px-2 py-0.5 border border-slate-300 font-semibold">DISTRIBUCIÓN</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 tracking-tight">Logística &amp; Rutas</h3>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                        Monitoreo de hojas de ruta, trazabilidad de cadena de frío en furgones refrigerados y confirmación de albaranes HORECA.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-mono text-amber-700 font-semibold">+3.8°C Estable</span>
+                    <a href="dispatch.php" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-medium rounded-none">
+                        Ver Rutas ›
+                    </a>
+                </div>
+            </div>
+
+            <!-- Módulo 04: Dashboard VIP -->
+            <div class="bg-zinc-900 border border-zinc-800 text-white p-5 rounded-none flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between text-xs font-mono mb-2">
+                        <span class="text-amber-400 font-semibold">MÓDULO 05 [VIP]</span>
+                        <span class="bg-amber-950 text-amber-300 border border-amber-800 px-2 py-0.5 font-semibold">ALTA DIRECCIÓN</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white tracking-tight">Dashboard Ejecutivo</h3>
+                    <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+                        Consolidado gerencial en tiempo real, márgenes de explotación, mermas de obrador y telemetría de hornos de solera.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-zinc-800 flex items-center justify-between">
+                    <span class="text-xs font-mono text-emerald-400 font-bold">Margen: 68.4%</span>
+                    <a href="dashboard.php" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-xs font-mono font-bold rounded-none">
+                        Entrar VIP ›
+                    </a>
+                </div>
+            </div>
 
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- 3. CATÁLOGO MAESTRO DE PRODUCTOS (GRID ESTRUCTURADO PLANAR) -->
+    <section class="space-y-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-300 pb-3">
+            <div>
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900">Catálogo Maestro de Productos</h2>
+                <p class="text-xs text-slate-500 mt-0.5">Control de SKU, mermas estimadas y disponibilidad para distribución mayorista</p>
+            </div>
+            <!-- Filtros de Categoría Rectangulares -->
+            <div class="flex flex-wrap items-center gap-1.5" id="catalog-filters">
+                <button type="button" onclick="filterCatalog('ALL', this)" class="catalog-filter-btn px-3 py-1.5 bg-slate-900 text-white text-xs font-mono font-semibold rounded-none border border-slate-900">
+                    [TODOS]
+                </button>
+                <button type="button" onclick="filterCatalog('PAN', this)" class="catalog-filter-btn px-3 py-1.5 bg-white text-slate-700 hover:bg-slate-50 text-xs font-mono font-semibold rounded-none border border-slate-300">
+                    [MASA MADRE]
+                </button>
+                <button type="button" onclick="filterCatalog('VIE', this)" class="catalog-filter-btn px-3 py-1.5 bg-white text-slate-700 hover:bg-slate-50 text-xs font-mono font-semibold rounded-none border border-slate-300">
+                    [VIENNOISERIE]
+                </button>
+                <button type="button" onclick="filterCatalog('PAS', this)" class="catalog-filter-btn px-3 py-1.5 bg-white text-slate-700 hover:bg-slate-50 text-xs font-mono font-semibold rounded-none border border-slate-300">
+                    [PASTELERÍA FINA]
+                </button>
+                <button type="button" onclick="filterCatalog('SAL', this)" class="catalog-filter-btn px-3 py-1.5 bg-white text-slate-700 hover:bg-slate-50 text-xs font-mono font-semibold rounded-none border border-slate-300">
+                    [BOLLERÍA &amp; SALADOS]
+                </button>
+            </div>
+        </div>
+
+        <!-- Grid de Tarjetas Sólidas Rectangulares (Zero-Pill) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="catalog-grid">
+            
+            <!-- Item 1: Marraqueta -->
+            <div class="catalog-card bg-white border border-slate-200 p-4 rounded-none flex flex-col justify-between" data-cat="PAN">
+                <div>
+                    <div class="flex items-center justify-between text-xs font-mono mb-2">
+                        <span class="bg-slate-900 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-none">SKU: PAN-010</span>
+                        <span class="bg-emerald-50 text-emerald-800 border border-emerald-300 text-[10px] font-bold px-1.5 py-0.5 rounded-none">STOCK ALTO</span>
+                    </div>
+                    <div class="text-3xl my-2 p-3 bg-slate-50 border border-slate-100 text-center">🥖</div>
+                    <h3 class="font-bold text-slate-900 text-sm leading-snug">Pan Marraqueta de Masa Madre</h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Fermentación natural en frío 36h. Harina T65 a la piedra, 82% hidratación, corteza crujiente tradicional.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-slate-500 font-mono block uppercase">Precio Mayorista</span>
+                        <span class="text-base font-bold text-slate-900 font-mono tabular-nums">$1.890 / kg</span>
+                    </div>
+                    <a href="pos.php" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold rounded-none">
+                        Venta POS
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 2: Hallulla -->
+            <div class="catalog-card bg-white border border-slate-200 p-4 rounded-none flex flex-col justify-between" data-cat="PAN">
+                <div>
+                    <div class="flex items-center justify-between text-xs font-mono mb-2">
+                        <span class="bg-slate-900 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-none">SKU: PAN-011</span>
+                        <span class="bg-emerald-50 text-emerald-800 border border-emerald-300 text-[10px] font-bold px-1.5 py-0.5 rounded-none">STOCK ALTO</span>
+                    </div>
+                    <div class="text-3xl my-2 p-3 bg-slate-50 border border-slate-100 text-center">🥖</div>
+                    <h3 class="font-bold text-slate-900 text-sm leading-snug">Pan Hallulla Especial de Solera</h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Masa laminada artesanal con manteca de primera, miga sedosa y horneado en piso refractario de solera.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-slate-500 font-mono block uppercase">Precio Mayorista</span>
+                        <span class="text-base font-bold text-slate-900 font-mono tabular-nums">$1.890 / kg</span>
+                    </div>
+                    <a href="pos.php" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold rounded-none">
+                        Venta POS
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 3: Croissant -->
+            <div class="catalog-card bg-white border border-slate-200 p-4 rounded-none flex flex-col justify-between" data-cat="VIE">
+                <div>
+                    <div class="flex items-center justify-between text-xs font-mono mb-2">
+                        <span class="bg-slate-900 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-none">SKU: VIE-004</span>
+                        <span class="bg-emerald-50 text-emerald-800 border border-emerald-300 text-[10px] font-bold px-1.5 py-0.5 rounded-none">STOCK ALTO</span>
+                    </div>
+                    <div class="text-3xl my-2 p-3 bg-slate-50 border border-slate-100 text-center">🥐</div>
+                    <h3 class="font-bold text-slate-900 text-sm leading-snug">Croissant Mantequilla AOP Isigny</h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Hojaldrado de 24 capas con mantequilla pura 84% MG de Normandía. Alveolado uniforme en nido de abeja.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-slate-500 font-mono block uppercase">Precio Mayorista</span>
+                        <span class="text-base font-bold text-slate-900 font-mono tabular-nums">$2.400 / unid</span>
+                    </div>
+                    <a href="pos.php" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold rounded-none">
+                        Venta POS
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 4: Empanadas -->
+            <div class="catalog-card bg-white border border-slate-200 p-4 rounded-none flex flex-col justify-between" data-cat="SAL">
+                <div>
+                    <div class="flex items-center justify-between text-xs font-mono mb-2">
+                        <span class="bg-slate-900 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-none">SKU: EMP-003</span>
+                        <span class="bg-amber-50 text-amber-900 border border-amber-300 text-[10px] font-bold px-1.5 py-0.5 rounded-none">STOCK MEDIO</span>
+                    </div>
+                    <div class="text-3xl my-2 p-3 bg-slate-50 border border-slate-100 text-center">🥟</div>
+                    <h3 class="font-bold text-slate-900 text-sm leading-snug">Empanadas de Pino al Horno</h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Carne picada de vacuno seleccionada, cebolla estofada 12h, aceituna de Huasco, huevo duro y masa crujiente.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-slate-500 font-mono block uppercase">Precio Mayorista</span>
+                        <span class="text-base font-bold text-slate-900 font-mono tabular-nums">$2.400 / unid</span>
+                    </div>
+                    <a href="pos.php" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold rounded-none">
+                        Venta POS
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 5: Torta Hojarasca -->
+            <div class="catalog-card bg-white border border-slate-200 p-4 rounded-none flex flex-col justify-between" data-cat="PAS">
+                <div>
+                    <div class="flex items-center justify-between text-xs font-mono mb-2">
+                        <span class="bg-slate-900 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-none">SKU: PAS-012</span>
+                        <span class="bg-amber-50 text-amber-900 border border-amber-300 text-[10px] font-bold px-1.5 py-0.5 rounded-none">STOCK LIMITADO</span>
+                    </div>
+                    <div class="text-3xl my-2 p-3 bg-slate-50 border border-slate-100 text-center">🎂</div>
+                    <h3 class="font-bold text-slate-900 text-sm leading-snug">Torta Hojarasca Manjar Lúcuma</h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        15 porciones con manjar de campo artesanal en pailas de cobre, crema de lúcuma pura y hojarasca crocante.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-slate-500 font-mono block uppercase">Precio Mayorista</span>
+                        <span class="text-base font-bold text-slate-900 font-mono tabular-nums">$18.500 / unid</span>
+                    </div>
+                    <a href="pos.php" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold rounded-none">
+                        Venta POS
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 6: Torta Ópera -->
+            <div class="catalog-card bg-white border border-slate-200 p-4 rounded-none flex flex-col justify-between" data-cat="PAS">
+                <div>
+                    <div class="flex items-center justify-between text-xs font-mono mb-2">
+                        <span class="bg-slate-900 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-none">SKU: PAS-022</span>
+                        <span class="bg-slate-100 text-slate-800 border border-slate-300 text-[10px] font-bold px-1.5 py-0.5 rounded-none">POR ENCARGO</span>
+                    </div>
+                    <div class="text-3xl my-2 p-3 bg-slate-50 border border-slate-100 text-center">🧁</div>
+                    <h3 class="font-bold text-slate-900 text-sm leading-snug">Tarta Ópera Grand Cru 8 Porciones</h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Bizcocho Joconde impregnado de café arábica, ganache chocolate 70% y crema de mantequilla café de grano.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-slate-500 font-mono block uppercase">Precio Mayorista</span>
+                        <span class="text-base font-bold text-slate-900 font-mono tabular-nums">$18.500 / unid</span>
+                    </div>
+                    <a href="pos.php" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold rounded-none">
+                        Venta POS
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 7: Baguette Tradición -->
+            <div class="catalog-card bg-white border border-slate-200 p-4 rounded-none flex flex-col justify-between" data-cat="PAN">
+                <div>
+                    <div class="flex items-center justify-between text-xs font-mono mb-2">
+                        <span class="bg-slate-900 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-none">SKU: PAN-001</span>
+                        <span class="bg-emerald-50 text-emerald-800 border border-emerald-300 text-[10px] font-bold px-1.5 py-0.5 rounded-none">STOCK ALTO</span>
+                    </div>
+                    <div class="text-3xl my-2 p-3 bg-slate-50 border border-slate-100 text-center">🥖</div>
+                    <h3 class="font-bold text-slate-900 text-sm leading-snug">Baguette Tradición Francesa T65</h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Harina francesa T65 Label Rouge, amasado lento en espiral, fermentación en lino y horneado con vapor.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-slate-500 font-mono block uppercase">Precio Mayorista</span>
+                        <span class="text-base font-bold text-slate-900 font-mono tabular-nums">$1.450 / unid</span>
+                    </div>
+                    <a href="pos.php" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold rounded-none">
+                        Venta POS
+                    </a>
+                </div>
+            </div>
+
+            <!-- Item 8: Pain au Chocolat -->
+            <div class="catalog-card bg-white border border-slate-200 p-4 rounded-none flex flex-col justify-between" data-cat="VIE">
+                <div>
+                    <div class="flex items-center justify-between text-xs font-mono mb-2">
+                        <span class="bg-slate-900 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-none">SKU: VIE-007</span>
+                        <span class="bg-amber-50 text-amber-900 border border-amber-300 text-[10px] font-bold px-1.5 py-0.5 rounded-none">STOCK MEDIO</span>
+                    </div>
+                    <div class="text-3xl my-2 p-3 bg-slate-50 border border-slate-100 text-center">🥐</div>
+                    <h3 class="font-bold text-slate-900 text-sm leading-snug">Pain au Chocolat Doble Barra 70%</h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Doble barra de chocolate bitter 70%, hojaldre fermentado con mantequilla AOP y brillo natural de yema campera.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-slate-500 font-mono block uppercase">Precio Mayorista</span>
+                        <span class="text-base font-bold text-slate-900 font-mono tabular-nums">$2.650 / unid</span>
+                    </div>
+                    <a href="pos.php" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold rounded-none">
+                        Venta POS
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. FÓRMULAS MAESTRAS & PORCENTAJES DE PANADERO (INGENIERÍA CULINARIA) -->
+    <section class="bg-white border border-slate-200 p-6 sm:p-8 rounded-none">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200 pb-4 mb-6">
+            <div>
+                <div class="text-xs font-mono uppercase text-amber-700 font-bold tracking-wider">ESPECIFICACIONES DE FERMENTACIÓN &amp; MEZCLA</div>
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight mt-0.5">Fórmulas Maestras y Porcentajes de Panadero</h2>
+                <p class="text-xs text-slate-500 mt-0.5">Parámetros reológicos, índice de hidratación y tiempos de fermentación controlada en bloque</p>
+            </div>
+            <div class="flex items-center space-x-2">
+                <span class="px-3 py-1.5 bg-slate-100 border border-slate-300 text-slate-800 text-xs font-mono font-semibold rounded-none">
+                    Lotes en Cámara: 42 Lotes
+                </span>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                    <tr class="bg-slate-100 text-slate-700 font-mono uppercase font-semibold border-b border-slate-300">
+                        <th class="py-3 px-4">Fórmula / Producto</th>
+                        <th class="py-3 px-4">Tipo Harina</th>
+                        <th class="py-3 px-3 text-right">Hidratación</th>
+                        <th class="py-3 px-3 text-right">Masa Madre</th>
+                        <th class="py-3 px-3 text-right">Sal</th>
+                        <th class="py-3 px-4">Fermentación Bloque</th>
+                        <th class="py-3 px-4">Temp. Horneado</th>
+                        <th class="py-3 px-4 text-center">Estado Lote</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 font-mono">
+                    <tr class="hover:bg-slate-50">
+                        <td class="py-3 px-4 font-bold text-slate-900 font-sans">Marraqueta de Solera</td>
+                        <td class="py-3 px-4 text-slate-600">Trigo Seleccionado T65</td>
+                        <td class="py-3 px-3 text-right font-bold text-slate-900 tabular-nums">78.5%</td>
+                        <td class="py-3 px-3 text-right text-slate-700 tabular-nums">25.0%</td>
+                        <td class="py-3 px-3 text-right text-slate-700 tabular-nums">2.0%</td>
+                        <td class="py-3 px-4 text-slate-600">36 horas (4°C)</td>
+                        <td class="py-3 px-4 font-bold text-amber-800">245°C Vapor</td>
+                        <td class="py-3 px-4 text-center"><span class="bg-emerald-50 text-emerald-800 border border-emerald-300 px-2 py-0.5 text-[10px] font-bold">HORNEANDO</span></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50">
+                        <td class="py-3 px-4 font-bold text-slate-900 font-sans">Hallulla Especial de Solera</td>
+                        <td class="py-3 px-4 text-slate-600">Trigo Blanco Flor + Manteca</td>
+                        <td class="py-3 px-3 text-right font-bold text-slate-900 tabular-nums">54.0%</td>
+                        <td class="py-3 px-3 text-right text-slate-700 tabular-nums">15.0%</td>
+                        <td class="py-3 px-3 text-right text-slate-700 tabular-nums">2.2%</td>
+                        <td class="py-3 px-4 text-slate-600">12 horas (8°C)</td>
+                        <td class="py-3 px-4 font-bold text-amber-800">230°C Seco</td>
+                        <td class="py-3 px-4 text-center"><span class="bg-emerald-50 text-emerald-800 border border-emerald-300 px-2 py-0.5 text-[10px] font-bold">HORNEANDO</span></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50">
+                        <td class="py-3 px-4 font-bold text-slate-900 font-sans">Croissant AOP Isigny</td>
+                        <td class="py-3 px-4 text-slate-600">Harina de Fuerza T45 + 84% MG</td>
+                        <td class="py-3 px-3 text-right font-bold text-slate-900 tabular-nums">60.0%</td>
+                        <td class="py-3 px-3 text-right text-slate-700 tabular-nums">Poolish 20%</td>
+                        <td class="py-3 px-3 text-right text-slate-700 tabular-nums">1.8%</td>
+                        <td class="py-3 px-4 text-slate-600">24 horas (2°C)</td>
+                        <td class="py-3 px-4 font-bold text-amber-800">190°C Rotativo</td>
+                        <td class="py-3 px-4 text-center"><span class="bg-amber-50 text-amber-800 border border-amber-300 px-2 py-0.5 text-[10px] font-bold">EN REPOSO</span></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50">
+                        <td class="py-3 px-4 font-bold text-slate-900 font-sans">Baguette Tradición Francesa</td>
+                        <td class="py-3 px-4 text-slate-600">Harina T65 Label Rouge</td>
+                        <td class="py-3 px-3 text-right font-bold text-slate-900 tabular-nums">75.0%</td>
+                        <td class="py-3 px-3 text-right text-slate-700 tabular-nums">Levain 20%</td>
+                        <td class="py-3 px-3 text-right text-slate-700 tabular-nums">1.9%</td>
+                        <td class="py-3 px-4 text-slate-600">28 horas (5°C)</td>
+                        <td class="py-3 px-4 font-bold text-amber-800">250°C Vapor</td>
+                        <td class="py-3 px-4 text-center"><span class="bg-emerald-50 text-emerald-800 border border-emerald-300 px-2 py-0.5 text-[10px] font-bold">HORNEANDO</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</div>
+
+<!-- Script interactivo de filtrado de catálogo -->
+<script>
+    function filterCatalog(cat, btn) {
+        // Toggle active button style
+        document.querySelectorAll('.catalog-filter-btn').forEach(b => {
+            b.classList.remove('bg-slate-900', 'text-white', 'border-slate-900');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        });
+        btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+        btn.classList.add('bg-slate-900', 'text-white', 'border-slate-900');
+
+        // Filter cards
+        const cards = document.querySelectorAll('.catalog-card');
+        cards.forEach(card => {
+            if (cat === 'ALL' || card.getAttribute('data-cat') === cat) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

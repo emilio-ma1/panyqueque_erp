@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-slate-100" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ARTEPAN &amp; CO. | ERP Obrador - Terminal POS Punto de Venta</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              700: '#9b4500',
+              800: '#7a3600',
+              900: '#5c2900'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<meta content="web_standard" name="shell-type"/></head>
+<body class="min-h-full flex flex-col bg-slate-100 text-slate-900 antialiased selection:bg-slate-900 selection:text-white">
+<!-- 1. HEADER / BARRA SUPERIOR DEL ERP ARTEPAN & CO. -->
+<header class="bg-slate-900 border-b border-slate-800 text-white shrink-0 sticky top-0 z-50">
+<div class="w-full px-5 flex items-center justify-between h-16">
+<!-- Logo y Razón Social Corporativa -->
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-3">
+<div class="w-9 h-9 bg-amber-700 text-white flex items-center justify-center font-bold text-lg rounded-none">
+          A
+        </div>
+<div>
+<div class="text-sm font-bold tracking-tight text-white leading-tight">ARTEPAN &amp; CO.</div>
+<div class="text-[11px] text-slate-400 font-mono-code">ERP OBRADOR V4.8</div>
+</div>
+</div>
+<div class="h-6 w-px bg-slate-800 hidden md:block"></div>
+<!-- Info de Turno y Centro de Costos -->
+<div class="hidden xl:flex items-center space-x-2 text-xs font-mono-code text-slate-300">
+<span class="w-2 h-2 bg-emerald-500 inline-block"></span>
+<span class="font-semibold text-slate-200">PLANTA CENTRAL #01</span>
+<span class="text-slate-600">|</span>
+<span>TURNO MATUTINO (04:00 - 13:00)</span>
+</div>
+</div>
+<!-- Menú de 5 Pestañas (Botones Rectangulares Planos) -->
+<nav class="flex items-center space-x-1" id="nav-tabs">
+<button class="px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-white hover:bg-slate-800 border-b-2 border-transparent rounded-none transition-none">
+        1. INICIO &amp; CATÁLOGO
+      </button>
+<button class="px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-slate-800 border-b-2 border-amber-600 rounded-none transition-none shadow-none">
+        2. PUNTO DE VENTA (POS)
+      </button>
+<button class="px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-white hover:bg-slate-800 border-b-2 border-transparent rounded-none transition-none">
+        3. PROVEEDORES &amp; FINANZAS
+      </button>
+<button class="px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-white hover:bg-slate-800 border-b-2 border-transparent rounded-none transition-none">
+        4. LOGÍSTICA &amp; RUTAS
+      </button>
+<button class="px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-amber-400 hover:text-amber-300 hover:bg-slate-800 border-b-2 border-transparent rounded-none transition-none">
+        5. DASHBOARD EJECUTIVO [VIP]
+      </button>
+</nav>
+<!-- Info de sesión / Operador & Cajón -->
+<div class="flex items-center space-x-4">
+<div class="text-right hidden sm:block">
+<div class="text-xs font-semibold text-slate-200">C. Rivas [ID: OP-412]</div>
+<div class="text-[11px] text-emerald-400 font-mono-code flex items-center justify-end space-x-1">
+<span class="w-1.5 h-1.5 bg-emerald-400 inline-block"></span>
+<span>CAJÓN: ABIERTO / SINC</span>
+</div>
+</div>
+<div class="w-8 h-8 bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold text-slate-300 rounded-none">
+        CR
+      </div>
+</div>
+</div>
+</header>
+<!-- SUBBARRA TÉCNICA DE ESTADO DEL POS -->
+<section class="w-full bg-slate-200 border-b border-slate-300 px-6 py-2.5 flex flex-wrap items-center justify-between gap-3 shrink-0">
+<div class="flex items-center space-x-3">
+<div class="w-2.5 h-2.5 bg-amber-700"></div>
+<div class="flex items-center space-x-2">
+<span class="text-[11px] font-bold uppercase tracking-wider text-slate-600 font-mono-code">TERMINAL DE CAJA TÁCTIL:</span>
+<h1 class="text-xs font-bold text-slate-900 uppercase font-mono-code tracking-wide">PUNTO DE VENTA #POS-01 • ARTEPAN OBRADOR</h1>
+</div>
+</div>
+<div class="flex items-center space-x-6 text-xs font-mono-code">
+<div class="flex items-center space-x-2">
+<span class="text-slate-500 uppercase">PLANTA:</span>
+<span class="font-bold text-slate-800">PLANTA CENTRAL #01</span>
+</div>
+<div class="h-3 w-px bg-slate-300"></div>
+<div class="flex items-center space-x-2">
+<span class="text-slate-500 uppercase">TURNO:</span>
+<span class="font-bold text-slate-800">MATUTINO (04:00 - 13:00)</span>
+</div>
+<div class="h-3 w-px bg-slate-300"></div>
+<div class="flex items-center space-x-2">
+<span class="text-slate-500 uppercase">OPERADOR:</span>
+<span class="font-bold text-slate-900 bg-white px-2 py-0.5 border border-slate-300">C. RIVAS [ID: OP-412]</span>
+</div>
+<div class="h-3 w-px bg-slate-300"></div>
+<div class="flex items-center space-x-2">
+<span class="text-slate-500 uppercase">ESTADO CAJÓN:</span>
+<span class="font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 border border-emerald-300">ABIERTO / SINCRONIZADO</span>
+</div>
+</div>
+</section>
+<!-- CONTENEDOR PRINCIPAL: POS 2 COLUMNAS (65% / 35%) -->
+<main class="flex-1 w-full p-4 lg:p-6 space-y-6">
+<div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+<!-- COLUMNA IZQUIERDA (65% - lg:col-span-8 / 66.6%) -->
+<div class="lg:col-span-8 flex flex-col space-y-4">
+<!-- BARRA DE BÚSQUEDA Y ACCIONES DIRECTAS -->
+<div class="bg-white border border-slate-200 rounded-none p-3 shadow-none">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-2">
+<div class="md:col-span-8 flex items-center bg-slate-100 border border-slate-300">
+<div class="w-10 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined text-lg">barcode_scanner</span>
+</div>
+<input class="w-full bg-slate-100 text-slate-900 text-xs font-mono-code px-2 py-2.5 outline-none placeholder:text-slate-400 focus:bg-white" id="pos-search-input" onkeyup="filterProductsManual()" placeholder="Escanear código de barras o ingresar SKU / Nombre de producto..." type="text"/>
+</div>
+<div class="md:col-span-4 flex space-x-2">
+<button class="flex-1 bg-slate-900 text-white text-xs font-bold uppercase tracking-wider py-2.5 px-3 hover:bg-slate-800 rounded-none transition-none flex items-center justify-center space-x-1" onclick="filterProductsManual()">
+<span class="material-symbols-outlined text-sm">search</span>
+<span>BUSCAR / ESCANEAR</span>
+</button>
+<button class="bg-slate-200 text-slate-800 text-xs font-bold uppercase tracking-wider py-2.5 px-3 hover:bg-slate-300 border border-slate-300 rounded-none transition-none" onclick="clearSearchFilter()">
+              LIMPIAR
+            </button>
+</div>
+</div>
+</div>
+<!-- SELECTOR DE CATEGORÍAS (BOTONES RECTANGULARES SÓLIDOS) -->
+<div class="flex flex-wrap gap-1.5 bg-slate-200 border border-slate-300 p-1.5 rounded-none">
+<button class="cat-pill-btn bg-slate-900 text-white text-xs font-bold font-mono-code uppercase px-3.5 py-2 tracking-wider rounded-none transition-none border border-slate-900" onclick="setCategoryFilter('ALL', this)">
+          [TODOS]
+        </button>
+<button class="cat-pill-btn bg-white text-slate-800 hover:bg-slate-100 text-xs font-bold font-mono-code uppercase px-3.5 py-2 tracking-wider rounded-none transition-none border border-slate-300" onclick="setCategoryFilter('PAN', this)">
+          [PANADERÍA MASA MADRE]
+        </button>
+<button class="cat-pill-btn bg-white text-slate-800 hover:bg-slate-100 text-xs font-bold font-mono-code uppercase px-3.5 py-2 tracking-wider rounded-none transition-none border border-slate-300" onclick="setCategoryFilter('VIE', this)">
+          [VIENNOISERIE]
+        </button>
+<button class="cat-pill-btn bg-white text-slate-800 hover:bg-slate-100 text-xs font-bold font-mono-code uppercase px-3.5 py-2 tracking-wider rounded-none transition-none border border-slate-300" onclick="setCategoryFilter('PAS', this)">
+          [PASTELERÍA FINA]
+        </button>
+<button class="cat-pill-btn bg-white text-slate-800 hover:bg-slate-100 text-xs font-bold font-mono-code uppercase px-3.5 py-2 tracking-wider rounded-none transition-none border border-slate-300" onclick="setCategoryFilter('CAF', this)">
+          [CAFETERÍA DE ESPECIALIDAD]
+        </button>
+</div>
+<!-- GRID TÁCTIL DE PRODUCTOS DESTACADOS (8 ITEMS RECTANGULARES SÓLIDOS) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="pos-grid">
+<!-- ITEM 1: Hogaza Campesina T65 -->
+<div class="pos-item-card bg-white border border-slate-200 rounded-sm p-3 flex flex-col justify-between hover:border-slate-400 transition-none cursor-pointer" data-category="PAN" data-name="Hogaza Campesina T65" data-price="4.80" data-sku="PAN-010" onclick="addToTicket('PAN-010', 'Hogaza Campesina T65', 4.80)">
+<div class="flex flex-col">
+<div class="w-full h-28 bg-slate-100 border border-slate-200 mb-2 overflow-hidden relative">
+<img alt="Hogaza Campesina T65 Masa Madre" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTjm9S2h_UQFXZ5OvFOzCZtrVF1aKVBOx13TvaLK6mOlKKrFU5e_nD0Rev1dn2DfctUqYGyG3MVxWNvUiQDvdgzpcaDCP4FrZrWf5FS-QHVVTFY2OiLZ0KAtlKc2UjjBUpJx-wXlDrAEMxOGyS_CNq3CMEuLoJaCQxWJsZb4QHkK-qEoxzhFX5sPtI9d_s1wcZBlV2Sn2lTvtje33sCjgAVtBrA_lEOdrjt4ho1zEJOJw8RUDpVgE"/>
+<span class="absolute top-1.5 left-1.5 bg-slate-900 text-white font-mono-code text-[10px] font-bold px-1.5 py-0.5 rounded-none">T65</span>
+</div>
+<div class="flex justify-between items-start mb-0.5">
+<span class="font-mono-code text-[11px] text-slate-500 font-semibold">SKU: PAN-010</span>
+<span class="text-[10px] font-bold text-amber-800 bg-amber-50 px-1 border border-amber-200 font-mono-code">MASA MADRE</span>
+</div>
+<h3 class="text-xs font-bold text-slate-900 leading-snug">Hogaza Campesina T65</h3>
+<p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">Fermentación natural 36h piedra.</p>
+</div>
+<div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between">
+<span class="font-mono-code text-sm font-bold text-slate-900">$4.80</span>
+<button class="bg-slate-900 text-white font-mono-code text-[10px] font-bold px-2 py-1 uppercase hover:bg-slate-800 rounded-none">
+              + AÑADIR
+            </button>
+</div>
+</div>
+<!-- ITEM 2: Baguette Tradición Label Rouge -->
+<div class="pos-item-card bg-white border border-slate-200 rounded-sm p-3 flex flex-col justify-between hover:border-slate-400 transition-none cursor-pointer" data-category="PAN" data-name="Baguette Tradición Label Rouge" data-price="2.10" data-sku="PAN-012" onclick="addToTicket('PAN-012', 'Baguette Tradición Label Rouge', 2.10)">
+<div class="flex flex-col">
+<div class="w-full h-28 bg-slate-100 border border-slate-200 mb-2 overflow-hidden relative">
+<img alt="Baguette Tradición Label Rouge" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE2G9rHF8Tezo-hQw0kfMZ02wUSAJwxFs54pta1WITsEQRuj8Hax0_gCK9bNP4BuhEENQxHDCekscsfplOLvPwBVjdvA_-Wp04fFnKinXO-A7L-eRpkKVCPsXz9LgVzNIdvZmKYg-iSV0ukBuCznUdP6PvmXONjZp0XtGbVVhpz6O0BsIXckRgEn6VyyiJvU9pfehxkEGOgxxpM918Fg1hUxpP6efmX9yGR_4tqX6c7C1l5ZAh3T8"/>
+<span class="absolute top-1.5 left-1.5 bg-red-700 text-white font-mono-code text-[10px] font-bold px-1.5 py-0.5 rounded-none">ROUGE</span>
+</div>
+<div class="flex justify-between items-start mb-0.5">
+<span class="font-mono-code text-[11px] text-slate-500 font-semibold">SKU: PAN-012</span>
+<span class="text-[10px] font-bold text-slate-700 bg-slate-100 px-1 border border-slate-300 font-mono-code">TRADICIÓN</span>
+</div>
+<h3 class="text-xs font-bold text-slate-900 leading-snug">Baguette Tradición Label Rouge</h3>
+<p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">Alveolado abierto y corteza crujiente.</p>
+</div>
+<div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between">
+<span class="font-mono-code text-sm font-bold text-slate-900">$2.10</span>
+<button class="bg-slate-900 text-white font-mono-code text-[10px] font-bold px-2 py-1 uppercase hover:bg-slate-800 rounded-none">
+              + AÑADIR
+            </button>
+</div>
+</div>
+<!-- ITEM 3: Croissant Mantequilla AOP Isigny -->
+<div class="pos-item-card bg-white border border-slate-200 rounded-sm p-3 flex flex-col justify-between hover:border-slate-400 transition-none cursor-pointer" data-category="VIE" data-name="Croissant Mantequilla AOP Isigny" data-price="2.60" data-sku="VIE-004" onclick="addToTicket('VIE-004', 'Croissant Mantequilla AOP Isigny', 2.60)">
+<div class="flex flex-col">
+<div class="w-full h-28 bg-slate-100 border border-slate-200 mb-2 overflow-hidden relative">
+<img alt="Croissant Mantequilla AOP Isigny" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmfNYAi3vggHRd-chf0SkvsYz9Pc7swnEqKMwr9nc2f_G9dUUAJXK6rdcdgeYgVjG1JOycZU_VN7yT8XiSwV8K0oBotq6TT5v0xWI0S8Hts006xaj0SCz9-lVJsGNSybvg-PrzvexKIPpJ8unEdQyVGSRSIQ74tUz-_wiX-_2MAMlTn3kg2w8mlzH4qCdwlJ6V4CS8769thPfttcFHM3ZlWACskSLVBtQolbnwMLqnhjevqB65G_I"/>
+<span class="absolute top-1.5 left-1.5 bg-amber-700 text-white font-mono-code text-[10px] font-bold px-1.5 py-0.5 rounded-none">AOP</span>
+</div>
+<div class="flex justify-between items-start mb-0.5">
+<span class="font-mono-code text-[11px] text-slate-500 font-semibold">SKU: VIE-004</span>
+<span class="text-[10px] font-bold text-amber-800 bg-amber-50 px-1 border border-amber-200 font-mono-code">LAMINADO</span>
+</div>
+<h3 class="text-xs font-bold text-slate-900 leading-snug">Croissant Mantequilla AOP Isigny</h3>
+<p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">Mantequilla Charentes-Isigny 84% MG.</p>
+</div>
+<div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between">
+<span class="font-mono-code text-sm font-bold text-slate-900">$2.60</span>
+<button class="bg-slate-900 text-white font-mono-code text-[10px] font-bold px-2 py-1 uppercase hover:bg-slate-800 rounded-none">
+              + AÑADIR
+            </button>
+</div>
+</div>
+<!-- ITEM 4: Pain au Chocolat Valrhona 70% -->
+<div class="pos-item-card bg-white border border-slate-200 rounded-sm p-3 flex flex-col justify-between hover:border-slate-400 transition-none cursor-pointer" data-category="VIE" data-name="Pain au Chocolat Valrhona 70%" data-price="2.95" data-sku="VIE-007" onclick="addToTicket('VIE-007', 'Pain au Chocolat Valrhona 70%', 2.95)">
+<div class="flex flex-col">
+<div class="w-full h-28 bg-stone-900 border border-slate-200 mb-2 flex flex-col items-center justify-center p-2 text-center relative text-white">
+<span class="font-mono-code font-bold text-amber-400 text-xs">VALRHONA 70%</span>
+<span class="text-[10px] text-stone-300 font-mono-code mt-0.5">BATONS GUANAJA</span>
+<span class="absolute top-1.5 left-1.5 bg-amber-600 text-white font-mono-code text-[10px] font-bold px-1.5 py-0.5 rounded-none">PUR CACAO</span>
+</div>
+<div class="flex justify-between items-start mb-0.5">
+<span class="font-mono-code text-[11px] text-slate-500 font-semibold">SKU: VIE-007</span>
+<span class="text-[10px] font-bold text-slate-800 bg-slate-100 px-1 border border-slate-300 font-mono-code">PREMIUM</span>
+</div>
+<h3 class="text-xs font-bold text-slate-900 leading-snug">Pain au Chocolat Valrhona 70%</h3>
+<p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">Doble barra puro cacao Guanaja.</p>
+</div>
+<div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between">
+<span class="font-mono-code text-sm font-bold text-slate-900">$2.95</span>
+<button class="bg-slate-900 text-white font-mono-code text-[10px] font-bold px-2 py-1 uppercase hover:bg-slate-800 rounded-none">
+              + AÑADIR
+            </button>
+</div>
+</div>
+<!-- ITEM 5: Brioche Nanterre Artesanal -->
+<div class="pos-item-card bg-white border border-slate-200 rounded-sm p-3 flex flex-col justify-between hover:border-slate-400 transition-none cursor-pointer" data-category="VIE" data-name="Brioche Nanterre Artesanal" data-price="5.50" data-sku="VIE-015" onclick="addToTicket('VIE-015', 'Brioche Nanterre Artesanal', 5.50)">
+<div class="flex flex-col">
+<div class="w-full h-28 bg-amber-100 border border-slate-200 mb-2 flex flex-col items-center justify-center p-2 text-center relative">
+<span class="font-mono-code font-bold text-amber-900 text-xs">BRIOCHE NANTERRE</span>
+<span class="text-[10px] text-amber-800 font-mono-code mt-0.5">YEMAS CAMPERAS</span>
+<span class="absolute top-1.5 left-1.5 bg-amber-800 text-white font-mono-code text-[10px] font-bold px-1.5 py-0.5 rounded-none">450 GR</span>
+</div>
+<div class="flex justify-between items-start mb-0.5">
+<span class="font-mono-code text-[11px] text-slate-500 font-semibold">SKU: VIE-015</span>
+<span class="text-[10px] font-bold text-amber-800 bg-amber-50 px-1 border border-amber-200 font-mono-code">HORNO LEÑA</span>
+</div>
+<h3 class="text-xs font-bold text-slate-900 leading-snug">Brioche Nanterre Artesanal</h3>
+<p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">Miga sedosa, fermentación lenta.</p>
+</div>
+<div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between">
+<span class="font-mono-code text-sm font-bold text-slate-900">$5.50</span>
+<button class="bg-slate-900 text-white font-mono-code text-[10px] font-bold px-2 py-1 uppercase hover:bg-slate-800 rounded-none">
+              + AÑADIR
+            </button>
+</div>
+</div>
+<!-- ITEM 6: Tarta Ópera Porciones -->
+<div class="pos-item-card bg-white border border-slate-200 rounded-sm p-3 flex flex-col justify-between hover:border-slate-400 transition-none cursor-pointer" data-category="PAS" data-name="Tarta Ópera Porciones" data-price="32.00" data-sku="PAS-022" onclick="addToTicket('PAS-022', 'Tarta Ópera Porciones', 32.00)">
+<div class="flex flex-col">
+<div class="w-full h-28 bg-slate-800 border border-slate-200 mb-2 flex flex-col items-center justify-center p-2 text-center relative text-white">
+<span class="font-mono-code font-bold text-amber-300 text-xs">OPÉRA GRAND CRU</span>
+<span class="text-[10px] text-slate-300 font-mono-code mt-0.5">8 PORCIONES / ORO 24K</span>
+<span class="absolute top-1.5 left-1.5 bg-slate-900 text-white font-mono-code text-[10px] font-bold px-1.5 py-0.5 rounded-none">PASTELERÍA</span>
+</div>
+<div class="flex justify-between items-start mb-0.5">
+<span class="font-mono-code text-[11px] text-slate-500 font-semibold">SKU: PAS-022</span>
+<span class="text-[10px] font-bold text-purple-800 bg-purple-50 px-1 border border-purple-200 font-mono-code">ENTREMET</span>
+</div>
+<h3 class="text-xs font-bold text-slate-900 leading-snug">Tarta Ópera Porciones</h3>
+<p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">Bizcocho Joconde, café espresso y ganache.</p>
+</div>
+<div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between">
+<span class="font-mono-code text-sm font-bold text-slate-900">$32.00</span>
+<button class="bg-slate-900 text-white font-mono-code text-[10px] font-bold px-2 py-1 uppercase hover:bg-slate-800 rounded-none">
+              + AÑADIR
+            </button>
+</div>
+</div>
+<!-- ITEM 7: Tartaleta Vainilla Bourbon & Pecanas -->
+<div class="pos-item-card bg-white border border-slate-200 rounded-sm p-3 flex flex-col justify-between hover:border-slate-400 transition-none cursor-pointer" data-category="PAS" data-name="Tartaleta Vainilla Bourbon &amp; Pecanas" data-price="4.50" data-sku="PAS-031" onclick="addToTicket('PAS-031', 'Tartaleta Vainilla Bourbon &amp; Pecanas', 4.50)">
+<div class="flex flex-col">
+<div class="w-full h-28 bg-stone-100 border border-slate-200 mb-2 flex flex-col items-center justify-center p-2 text-center relative">
+<span class="font-mono-code font-bold text-stone-800 text-xs">BOURBON &amp; PECANAS</span>
+<span class="text-[10px] text-stone-600 font-mono-code mt-0.5">SABLÉE PUR BEURRE</span>
+<span class="absolute top-1.5 left-1.5 bg-stone-700 text-white font-mono-code text-[10px] font-bold px-1.5 py-0.5 rounded-none">INDIVIDUAL</span>
+</div>
+<div class="flex justify-between items-start mb-0.5">
+<span class="font-mono-code text-[11px] text-slate-500 font-semibold">SKU: PAS-031</span>
+<span class="text-[10px] font-bold text-stone-700 bg-stone-200 px-1 border border-stone-300 font-mono-code">TARTALETA</span>
+</div>
+<h3 class="text-xs font-bold text-slate-900 leading-snug">Tartaleta Vainilla Bourbon &amp; Pecanas</h3>
+<p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">Crema diplomática Madagascar con praliné.</p>
+</div>
+<div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between">
+<span class="font-mono-code text-sm font-bold text-slate-900">$4.50</span>
+<button class="bg-slate-900 text-white font-mono-code text-[10px] font-bold px-2 py-1 uppercase hover:bg-slate-800 rounded-none">
+              + AÑADIR
+            </button>
+</div>
+</div>
+<!-- ITEM 8: Café Espresso Doble Origen Etiopía -->
+<div class="pos-item-card bg-white border border-slate-200 rounded-sm p-3 flex flex-col justify-between hover:border-slate-400 transition-none cursor-pointer" data-category="CAF" data-name="Café Espresso Doble Origen Etiopía" data-price="2.80" data-sku="CAF-001" onclick="addToTicket('CAF-001', 'Café Espresso Doble Origen Etiopía', 2.80)">
+<div class="flex flex-col">
+<div class="w-full h-28 bg-amber-950 border border-slate-200 mb-2 flex flex-col items-center justify-center p-2 text-center relative text-white">
+<span class="font-mono-code font-bold text-amber-200 text-xs">ESPRESSO DOBLE</span>
+<span class="text-[10px] text-amber-300 font-mono-code mt-0.5">ETIOPÍA YIRGACHEFFE</span>
+<span class="absolute top-1.5 left-1.5 bg-amber-900 text-white font-mono-code text-[10px] font-bold px-1.5 py-0.5 rounded-none">BARISTA</span>
+</div>
+<div class="flex justify-between items-start mb-0.5">
+<span class="font-mono-code text-[11px] text-slate-500 font-semibold">SKU: CAF-001</span>
+<span class="text-[10px] font-bold text-amber-900 bg-amber-100 px-1 border border-amber-300 font-mono-code">ESPECIALIDAD</span>
+</div>
+<h3 class="text-xs font-bold text-slate-900 leading-snug">Café Espresso Doble Origen Etiopía</h3>
+<p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">Extracción doble 18g/36g con notas florales.</p>
+</div>
+<div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between">
+<span class="font-mono-code text-sm font-bold text-slate-900">$2.80</span>
+<button class="bg-slate-900 text-white font-mono-code text-[10px] font-bold px-2 py-1 uppercase hover:bg-slate-800 rounded-none">
+              + AÑADIR
+            </button>
+</div>
+</div>
+</div>
+<!-- MÓDULO DE ACCIONES RÁPIDAS DEL OBRADOR -->
+<div class="bg-white border border-slate-200 p-3 rounded-none">
+<div class="flex items-center justify-between mb-2 pb-1 border-b border-slate-200">
+<span class="text-[11px] font-bold font-mono-code uppercase text-slate-600 tracking-wider">MÓDULO DE ACCIONES RÁPIDAS DEL OBRADOR</span>
+<span class="text-[10px] text-slate-500 font-mono-code">MODO MANUAL V4.8</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono-code text-xs font-bold py-2.5 px-3 border border-slate-300 rounded-none flex items-center justify-center space-x-1 transition-none" onclick="promptAddCustomItem()" type="button">
+<span class="material-symbols-outlined text-sm">add_box</span>
+<span>+ AGREGAR ÍTEM LIBRE</span>
+</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-amber-900 font-mono-code text-xs font-bold py-2.5 px-3 border border-slate-300 rounded-none flex items-center justify-center space-x-1 transition-none" onclick="applyB2BDiscount()" type="button">
+<span class="material-symbols-outlined text-sm">percent</span>
+<span>DESCUENTO B2B / HORECA</span>
+</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono-code text-xs font-bold py-2.5 px-3 border border-slate-300 rounded-none flex items-center justify-center space-x-1 transition-none" onclick="holdTicket()" type="button">
+<span class="material-symbols-outlined text-sm">pause_circle</span>
+<span>PONER EN ESPERA TICKET</span>
+</button>
+</div>
+</div>
+</div>
+<!-- COLUMNA DERECHA: COMANDA ACTIVA & PASARELA DE COBRO (35% - lg:col-span-4) -->
+<div class="lg:col-span-4 flex flex-col space-y-4">
+<div class="bg-white border border-slate-200 p-4 rounded-none shadow-none flex flex-col space-y-4">
+<!-- ENCABEZADO DEL TICKET -->
+<div class="bg-slate-900 text-white p-3 border border-slate-900">
+<div class="flex items-center justify-between pb-1">
+<span class="text-[10px] font-mono-code uppercase tracking-wider text-slate-400">ORDEN EN CURSO</span>
+<span class="bg-amber-600 text-white font-mono-code text-[10px] font-bold px-1.5 py-0.5">EN LÍNEA</span>
+</div>
+<div class="text-sm font-bold font-mono-code tracking-tight">VENTA MOSTRADOR BOUTIQUE - ORDEN #POS-0842</div>
+<div class="mt-2 pt-2 border-t border-slate-800 flex items-center justify-between">
+<span class="text-[11px] font-mono-code text-slate-400 uppercase">CANAL DE PEDIDO:</span>
+<select class="bg-slate-800 text-white font-mono-code text-xs px-2 py-1 border border-slate-700 outline-none rounded-none" id="pos-client-channel">
+<option value="BOUTIQUE">Mostrador Boutique</option>
+<option value="TELEFONO">Pedido Telefónico</option>
+</select>
+</div>
+</div>
+<!-- LISTADO DE PRODUCTOS CARGADOS -->
+<div>
+<div class="flex justify-between text-[11px] font-mono-code uppercase font-bold text-slate-500 pb-2 border-b border-slate-200 px-1">
+<span>DETALLE PRODUCTO</span>
+<span>CANT. / TOTAL</span>
+</div>
+<div class="space-y-1.5 max-h-56 overflow-y-auto pt-2" id="ticket-items-list">
+<!-- ITEM 1: Hogaza Campesina T65 x 3 -->
+<div class="ticket-row bg-slate-50 border border-slate-200 p-2.5 flex items-center justify-between rounded-none" data-sku="PAN-010">
+<div class="flex-1 pr-2">
+<div class="text-xs font-bold text-slate-900">Hogaza Campesina T65</div>
+<div class="text-[11px] font-mono-code text-slate-500">$4.80 c/u [PAN-010]</div>
+</div>
+<div class="flex items-center space-x-2">
+<div class="flex items-center border border-slate-300 bg-white">
+<button class="w-6 h-6 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold font-mono-code flex items-center justify-center border-r border-slate-300" onclick="updateQtyTicket('PAN-010', -1)" type="button">-</button>
+<span class="w-7 text-center font-mono-code text-xs font-bold text-slate-900">3</span>
+<button class="w-6 h-6 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold font-mono-code flex items-center justify-center border-l border-slate-300" onclick="updateQtyTicket('PAN-010', 1)" type="button">+</button>
+</div>
+<div class="w-14 text-right font-mono-code text-xs font-bold text-slate-900">
+                  $14.40
+                </div>
+<button class="text-slate-400 hover:text-red-700 ml-1" onclick="removeTicketItem('PAN-010')" type="button">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</div>
+<!-- ITEM 2: Croissant Mantequilla AOP x 4 -->
+<div class="ticket-row bg-slate-50 border border-slate-200 p-2.5 flex items-center justify-between rounded-none" data-sku="VIE-004">
+<div class="flex-1 pr-2">
+<div class="text-xs font-bold text-slate-900">Croissant Mantequilla AOP Isigny</div>
+<div class="text-[11px] font-mono-code text-slate-500">$2.60 c/u [VIE-004]</div>
+</div>
+<div class="flex items-center space-x-2">
+<div class="flex items-center border border-slate-300 bg-white">
+<button class="w-6 h-6 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold font-mono-code flex items-center justify-center border-r border-slate-300" onclick="updateQtyTicket('VIE-004', -1)" type="button">-</button>
+<span class="w-7 text-center font-mono-code text-xs font-bold text-slate-900">4</span>
+<button class="w-6 h-6 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold font-mono-code flex items-center justify-center border-l border-slate-300" onclick="updateQtyTicket('VIE-004', 1)" type="button">+</button>
+</div>
+<div class="w-14 text-right font-mono-code text-xs font-bold text-slate-900">
+                  $10.40
+                </div>
+<button class="text-slate-400 hover:text-red-700 ml-1" onclick="removeTicketItem('VIE-004')" type="button">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</div>
+<!-- ITEM 3: Pain au Chocolat Valrhona x 2 -->
+<div class="ticket-row bg-slate-50 border border-slate-200 p-2.5 flex items-center justify-between rounded-none" data-sku="VIE-007">
+<div class="flex-1 pr-2">
+<div class="text-xs font-bold text-slate-900">Pain au Chocolat Valrhona 70%</div>
+<div class="text-[11px] font-mono-code text-slate-500">$2.95 c/u [VIE-007]</div>
+</div>
+<div class="flex items-center space-x-2">
+<div class="flex items-center border border-slate-300 bg-white">
+<button class="w-6 h-6 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold font-mono-code flex items-center justify-center border-r border-slate-300" onclick="updateQtyTicket('VIE-007', -1)" type="button">-</button>
+<span class="w-7 text-center font-mono-code text-xs font-bold text-slate-900">2</span>
+<button class="w-6 h-6 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold font-mono-code flex items-center justify-center border-l border-slate-300" onclick="updateQtyTicket('VIE-007', 1)" type="button">+</button>
+</div>
+<div class="w-14 text-right font-mono-code text-xs font-bold text-slate-900">
+                  $5.90
+                </div>
+<button class="text-slate-400 hover:text-red-700 ml-1" onclick="removeTicketItem('VIE-007')" type="button">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- RESUMEN FINANCIERO -->
+<div class="bg-slate-100 border border-slate-300 p-3 space-y-1.5 rounded-none font-mono-code">
+<div class="flex justify-between text-xs text-slate-600">
+<span>SUBTOTAL TARIFA BASE:</span>
+<span class="font-bold text-slate-900" id="ticket-subtotal-val">$30.70</span>
+</div>
+<div class="flex justify-between text-xs text-slate-600">
+<span>IVA ALIMENTACIÓN (10%):</span>
+<span class="font-bold text-slate-900" id="ticket-iva-val">$3.07</span>
+</div>
+<div class="flex justify-between items-baseline pt-2 mt-1 border-t border-slate-300 bg-white px-3 py-2 border">
+<span class="text-xs font-bold uppercase text-slate-900">TOTAL A PAGAR:</span>
+<span class="text-2xl font-bold text-slate-900 font-mono-code" id="ticket-total-val">$33.77</span>
+</div>
+</div>
+<!-- TECLADO NUMÉRICO TÁCTIL EN PANTALLA & CONTROL DE EFECTIVO -->
+<div class="bg-white border border-slate-300 p-3 space-y-2 rounded-none">
+<!-- Desglose de Pago Recibido y Cambio -->
+<div class="grid grid-cols-2 gap-2 pb-1 border-b border-slate-200">
+<div class="bg-slate-50 border border-slate-200 p-2">
+<span class="block text-[10px] font-mono-code uppercase text-slate-500 font-semibold">PAGO RECIBIDO</span>
+<div class="flex items-center text-sm font-mono-code font-bold text-slate-900">
+<span class="text-slate-500 mr-0.5">$</span>
+<input class="w-full bg-transparent font-mono-code font-bold text-slate-900 outline-none" id="pos-cash-input" readonly="" type="text" value="50.00"/>
+</div>
+</div>
+<div class="bg-emerald-50 border border-emerald-200 p-2">
+<span class="block text-[10px] font-mono-code uppercase text-emerald-700 font-semibold">CAMBIO A DEVOLVER</span>
+<span class="block text-sm font-mono-code font-bold text-emerald-800" id="pos-change-val">$16.23</span>
+</div>
+</div>
+<!-- Atajos rápidos de efectivo -->
+<div class="grid grid-cols-5 gap-1">
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-mono-code font-bold py-1.5 border border-slate-300 rounded-none transition-none" onclick="setQuickCash(10)" type="button">$10</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-mono-code font-bold py-1.5 border border-slate-300 rounded-none transition-none" onclick="setQuickCash(20)" type="button">$20</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-mono-code font-bold py-1.5 border border-slate-300 rounded-none transition-none" onclick="setQuickCash(50)" type="button">$50</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-mono-code font-bold py-1.5 border border-slate-300 rounded-none transition-none" onclick="setQuickCash(100)" type="button">$100</button>
+<button class="bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-mono-code font-bold py-1.5 rounded-none uppercase transition-none" onclick="setExactCash()" type="button">EXACTO</button>
+</div>
+<!-- Teclado Numérico Directo -->
+<div class="grid grid-cols-4 gap-1">
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono-code font-bold text-sm py-2 border border-slate-200 rounded-none transition-none" onclick="appendPadNum('7')" type="button">7</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono-code font-bold text-sm py-2 border border-slate-200 rounded-none transition-none" onclick="appendPadNum('8')" type="button">8</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono-code font-bold text-sm py-2 border border-slate-200 rounded-none transition-none" onclick="appendPadNum('9')" type="button">9</button>
+<button class="bg-red-100 hover:bg-red-200 text-red-800 font-mono-code font-bold text-xs py-2 border border-red-300 rounded-none uppercase transition-none" onclick="clearPadCash()" type="button">C</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono-code font-bold text-sm py-2 border border-slate-200 rounded-none transition-none" onclick="appendPadNum('4')" type="button">4</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono-code font-bold text-sm py-2 border border-slate-200 rounded-none transition-none" onclick="appendPadNum('5')" type="button">5</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono-code font-bold text-sm py-2 border border-slate-200 rounded-none transition-none" onclick="appendPadNum('6')" type="button">6</button>
+<button class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-mono-code font-bold text-xs py-2 border border-slate-300 rounded-none transition-none" onclick="deletePadCash()" type="button">⌫</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono-code font-bold text-sm py-2 border border-slate-200 rounded-none transition-none" onclick="appendPadNum('1')" type="button">1</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono-code font-bold text-sm py-2 border border-slate-200 rounded-none transition-none" onclick="appendPadNum('2')" type="button">2</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono-code font-bold text-sm py-2 border border-slate-200 rounded-none transition-none" onclick="appendPadNum('3')" type="button">3</button>
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono-code font-bold text-sm py-2 border border-slate-200 rounded-none transition-none" onclick="appendPadNum('0')" type="button">0</button>
+<button class="col-span-2 bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono-code font-bold text-xs py-2 border border-slate-200 rounded-none transition-none" onclick="appendPadNum('00')" type="button">00</button>
+<button class="col-span-2 bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono-code font-bold text-sm py-2 border border-slate-200 rounded-none transition-none" onclick="appendPadNum('.')" type="button">.</button>
+</div>
+</div>
+<!-- TRES BOTONES RECTANGULARES SÓLIDOS GIGANTES DE COBRO -->
+<div class="space-y-2">
+<button class="w-full bg-slate-900 hover:bg-slate-800 text-white p-3.5 flex items-center justify-between rounded-none border border-slate-900 transition-none" onclick="executePaymentModal('EFECTIVO')" type="button">
+<span class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-lg">payments</span>
+<span class="text-sm font-bold font-mono-code uppercase tracking-wider">EFECTIVO</span>
+</span>
+<span class="bg-slate-800 text-slate-300 font-mono-code text-xs px-2 py-0.5 border border-slate-700 font-bold">[F7]</span>
+</button>
+<button class="w-full bg-amber-700 hover:bg-amber-800 text-white p-3.5 flex items-center justify-between rounded-none border border-amber-800 transition-none" onclick="executePaymentModal('TARJETA DATÁFONO')" type="button">
+<span class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-lg">credit_card</span>
+<span class="text-sm font-bold font-mono-code uppercase tracking-wider">TARJETA DATÁFONO</span>
+</span>
+<span class="bg-amber-800 text-amber-200 font-mono-code text-xs px-2 py-0.5 border border-amber-900 font-bold">[F8]</span>
+</button>
+<button class="w-full bg-slate-800 hover:bg-slate-700 text-white p-3.5 flex items-center justify-between rounded-none border border-slate-700 transition-none" onclick="executePaymentModal('TRANSFERENCIA QR B2B')" type="button">
+<span class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-lg">qr_code_2</span>
+<span class="text-sm font-bold font-mono-code uppercase tracking-wider">TRANSFERENCIA QR B2B</span>
+</span>
+<span class="bg-slate-900 text-slate-300 font-mono-code text-xs px-2 py-0.5 border border-slate-600 font-bold">[F9]</span>
+</button>
+</div>
+<!-- ACCIONES SECUNDARIAS DEL TICKET -->
+<div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-200">
+<button class="bg-white hover:bg-slate-100 text-slate-800 font-mono-code text-xs font-bold py-2 px-2 border border-slate-300 rounded-none flex items-center justify-center space-x-1 uppercase transition-none" onclick="printProforma()" type="button">
+<span class="material-symbols-outlined text-sm">print</span>
+<span>IMPRIMIR PROFORMA</span>
+</button>
+<button class="bg-white hover:bg-red-50 text-red-700 font-mono-code text-xs font-bold py-2 px-2 border border-red-300 rounded-none flex items-center justify-center space-x-1 uppercase transition-none" onclick="cancelCurrentOrder()" type="button">
+<span class="material-symbols-outlined text-sm">delete_forever</span>
+<span>CANCELAR ORDEN</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. SECCIÓN INFERIOR: HISTORIAL DE ÚLTIMOS TICKETS EMITIDOS DEL TURNO -->
+<section class="w-full bg-white border border-slate-200 p-5 rounded-none shadow-none space-y-4">
+<div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
+<div class="flex items-center space-x-3">
+<div class="w-2.5 h-2.5 bg-slate-900"></div>
+<h2 class="text-xs font-bold text-slate-900 font-mono-code uppercase tracking-wide">
+          ÚLTIMOS TICKETS EMITIDOS • TURNO MATUTINO (04:00 - 13:00)
+        </h2>
+<span class="bg-slate-100 text-slate-800 font-mono-code text-[11px] px-2 py-0.5 border border-slate-300 font-bold">
+          TOTAL HOY: 142 TICKETS
+        </span>
+</div>
+<div class="flex items-center space-x-2">
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-mono-code font-bold uppercase px-3 py-1.5 border border-slate-300 rounded-none flex items-center space-x-1 transition-none" onclick="alert('Actualizando registros fiscales con el servidor central...')" type="button">
+<span class="material-symbols-outlined text-xs">sync</span>
+<span>ACTUALIZAR REGISTROS</span>
+</button>
+<button class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono-code font-bold uppercase px-3 py-1.5 rounded-none flex items-center space-x-1 transition-none" onclick="alert('Generando Arqueo Parcial (X) de Caja...')" type="button">
+<span class="material-symbols-outlined text-xs">receipt_long</span>
+<span>ARQUEO PARCIAL (X)</span>
+</button>
+</div>
+</div>
+<!-- TABLA COMPLETA DE AUDITORÍA FISCAL -->
+<div class="overflow-x-auto border border-slate-200">
+<table class="w-full text-left font-mono-code text-xs">
+<thead class="bg-slate-100 text-slate-600 uppercase border-b border-slate-200 text-[11px]">
+<tr>
+<th class="p-3"># TICKET / FACTURA</th>
+<th class="p-3">HORA</th>
+<th class="p-3">CLIENTE / TIPO</th>
+<th class="p-3">ARTÍCULOS Y LÍNEAS</th>
+<th class="p-3">MÉTODO PAGO</th>
+<th class="p-3 text-right">IMPORTE TOTAL</th>
+<th class="p-3 text-center">ESTADO FISCAL</th>
+<th class="p-3 text-center">ACCIONES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 text-slate-800">
+<tr class="hover:bg-slate-50 transition-none">
+<td class="p-3 font-bold text-slate-900">#POS-0841</td>
+<td class="p-3 text-slate-500">10:24:15</td>
+<td class="p-3"><span class="bg-slate-100 text-slate-700 px-2 py-0.5 border border-slate-300">Mostrador Boutique</span></td>
+<td class="p-3 font-sans text-xs">2x Croissant Isigny, 1x Espresso Doble, 1x Hogaza T65</td>
+<td class="p-3"><span class="font-bold text-amber-800">TARJETA DATÁFONO</span></td>
+<td class="p-3 text-right font-bold text-slate-900">$12.80</td>
+<td class="p-3 text-center"><span class="bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 text-[10px] font-bold">COBRADO</span></td>
+<td class="p-3 text-center space-x-1">
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 px-2 py-1 text-[11px] font-bold border border-slate-300 rounded-none uppercase" onclick="alert('Reimprimiendo duplicado fiscal Ticket #POS-0841...')" type="button">
+<span class="material-symbols-outlined text-xs align-middle">print</span> DUPLICADO
+              </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-none">
+<td class="p-3 font-bold text-slate-900">#POS-0840</td>
+<td class="p-3 text-slate-500">10:18:02</td>
+<td class="p-3"><span class="bg-slate-200 text-slate-800 px-2 py-0.5 border border-slate-300">HORECA Express</span></td>
+<td class="p-3 font-sans text-xs">12x Baguette Tradición, 8x Barra Rústica Centeno</td>
+<td class="p-3"><span class="font-bold text-slate-800">TRANSFERENCIA QR</span></td>
+<td class="p-3 text-right font-bold text-slate-900">$48.50</td>
+<td class="p-3 text-center"><span class="bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 text-[10px] font-bold">COBRADO</span></td>
+<td class="p-3 text-center space-x-1">
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 px-2 py-1 text-[11px] font-bold border border-slate-300 rounded-none uppercase" onclick="alert('Reimprimiendo albarán de entrega con firma Ticket #POS-0840...')" type="button">
+<span class="material-symbols-outlined text-xs align-middle">receipt</span> ALBARÁN
+              </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-none">
+<td class="p-3 font-bold text-slate-900">#POS-0839</td>
+<td class="p-3 text-slate-500">10:05:44</td>
+<td class="p-3"><span class="bg-slate-100 text-slate-700 px-2 py-0.5 border border-slate-300">Mostrador Boutique</span></td>
+<td class="p-3 font-sans text-xs">1x Tarta Ópera Porciones, 2x Brioche Nanterre</td>
+<td class="p-3"><span class="font-bold text-slate-900">EFECTIVO</span></td>
+<td class="p-3 text-right font-bold text-slate-900">$43.00</td>
+<td class="p-3 text-center"><span class="bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 text-[10px] font-bold">COBRADO</span></td>
+<td class="p-3 text-center space-x-1">
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 px-2 py-1 text-[11px] font-bold border border-slate-300 rounded-none uppercase" onclick="alert('Reimprimiendo duplicado fiscal Ticket #POS-0839...')" type="button">
+<span class="material-symbols-outlined text-xs align-middle">print</span> DUPLICADO
+              </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- 4. FOOTER CORPORATIVO INSTITUCIONAL SÓLIDO -->
+<footer class="bg-slate-900 border-t border-slate-800 py-3.5 px-6 text-slate-400 text-xs font-mono-code flex flex-col sm:flex-row justify-between items-center shrink-0">
+<div class="flex items-center space-x-2">
+<span>ARTEPAN &amp; CO. SISTEMA DE GESTIÓN EMPRESARIAL ©</span>
+<span class="text-slate-700">|</span>
+<span>PHP 8.3 / TAILWIND CSS SÓLIDO</span>
+</div>
+<div class="flex items-center space-x-4 mt-2 sm:mt-0 text-slate-300">
+<span>SERVER: SVR-OBRADOR-MAD01</span>
+<span class="text-slate-600">|</span>
+<span>PING: 14ms</span>
+<span class="text-slate-600">|</span>
+<span class="text-emerald-400 font-bold">ESTADO: 100% OPERATIVO</span>
+</div>
+</footer>
+<!-- SCRIPT DE LÓGICA DE CONTROL DEL PUNTO DE VENTA (VANILLA JS COMPLETO) -->
+<script>
+  let posTicketState = [
+    { sku: 'PAN-010', name: 'Hogaza Campesina T65', price: 4.80, qty: 3 },
+    { sku: 'VIE-004', name: 'Croissant Mantequilla AOP Isigny', price: 2.60, qty: 4 },
+    { sku: 'VIE-007', name: 'Pain au Chocolat Valrhona 70%', price: 2.95, qty: 2 }
+  ];
+
+  function renderPosTicket() {
+    const container = document.getElementById('ticket-items-list');
+    if (!container) return;
+
+    container.innerHTML = '';
+    let subtotal = 0;
+
+    if (posTicketState.length === 0) {
+      container.innerHTML = `
+        <div class="bg-slate-50 border border-slate-200 p-6 text-center text-slate-500 font-mono-code text-xs">
+          [SIN ARTÍCULOS EN COMANDA - TOQUE UN PRODUCTO PARA AÑADIR]
+        </div>
+      `;
+      document.getElementById('ticket-subtotal-val').innerText = '$0.00';
+      document.getElementById('ticket-iva-val').innerText = '$0.00';
+      document.getElementById('ticket-total-val').innerText = '$0.00';
+      recalculateChange();
+      return;
+    }
+
+    posTicketState.forEach(item => {
+      const itemTotal = item.price * item.qty;
+      subtotal += itemTotal;
+
+      const row = document.createElement('div');
+      row.className = 'ticket-row bg-slate-50 border border-slate-200 p-2.5 flex items-center justify-between rounded-none';
+      row.setAttribute('data-sku', item.sku);
+      row.innerHTML = `
+        <div class="flex-1 pr-2">
+          <div class="text-xs font-bold text-slate-900">${item.name}</div>
+          <div class="text-[11px] font-mono-code text-slate-500">$${item.price.toFixed(2)} c/u [${item.sku}]</div>
+        </div>
+        <div class="flex items-center space-x-2">
+          <div class="flex items-center border border-slate-300 bg-white">
+            <button type="button" onclick="updateQtyTicket('${item.sku}', -1)" class="w-6 h-6 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold font-mono-code flex items-center justify-center border-r border-slate-300">-</button>
+            <span class="w-7 text-center font-mono-code text-xs font-bold text-slate-900">${item.qty}</span>
+            <button type="button" onclick="updateQtyTicket('${item.sku}', 1)" class="w-6 h-6 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold font-mono-code flex items-center justify-center border-l border-slate-300">+</button>
+          </div>
+          <div class="w-14 text-right font-mono-code text-xs font-bold text-slate-900">
+            $${itemTotal.toFixed(2)}
+          </div>
+          <button type="button" onclick="removeTicketItem('${item.sku}')" class="text-slate-400 hover:text-red-700 ml-1">
+            <span class="material-symbols-outlined text-sm">close</span>
+          </button>
+        </div>
+      `;
+      container.appendChild(row);
+    });
+
+    const iva = subtotal * 0.10;
+    const total = subtotal + iva;
+
+    document.getElementById('ticket-subtotal-val').innerText = `$${subtotal.toFixed(2)}`;
+    document.getElementById('ticket-iva-val').innerText = `$${iva.toFixed(2)}`;
+    document.getElementById('ticket-total-val').innerText = `$${total.toFixed(2)}`;
+
+    recalculateChange();
+  }
+
+  function addToTicket(sku, name, price) {
+    const existing = posTicketState.find(it => it.sku === sku);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      posTicketState.push({ sku, name, price, qty: 1 });
+    }
+    renderPosTicket();
+  }
+
+  function updateQtyTicket(sku, delta) {
+    const idx = posTicketState.findIndex(it => it.sku === sku);
+    if (idx !== -1) {
+      posTicketState[idx].qty += delta;
+      if (posTicketState[idx].qty <= 0) {
+        posTicketState.splice(idx, 1);
+      }
+    }
+    renderPosTicket();
+  }
+
+  function removeTicketItem(sku) {
+    posTicketState = posTicketState.filter(it => it.sku !== sku);
+    renderPosTicket();
+  }
+
+  function promptAddCustomItem() {
+    const desc = prompt("Descripción del artículo especial de obrador:", "Pieza Especial de Repostería");
+    if (!desc) return;
+    const priceStr = prompt("Precio de venta ($):", "6.00");
+    const price = parseFloat(priceStr);
+    if (isNaN(price) || price <= 0) {
+      alert("Precio no válido.");
+      return;
+    }
+    const sku = "LIB-" + Math.floor(100 + Math.random() * 900);
+    addToTicket(sku, desc, price);
+  }
+
+  function applyB2BDiscount() {
+    if (posTicketState.length === 0) {
+      alert("No hay artículos en el ticket para aplicar tarifa especial.");
+      return;
+    }
+    const disc = prompt("Porcentaje de descuento B2B / HORECA a aplicar sobre toda la comanda (%):", "15");
+    const pct = parseFloat(disc);
+    if (isNaN(pct) || pct <= 0 || pct > 100) return;
+    
+    posTicketState.forEach(item => {
+      item.price = item.price * (1 - (pct / 100));
+    });
+    alert(`Se ha aplicado un descuento del ${pct}% a las tarifas.`);
+    renderPosTicket();
+  }
+
+  function holdTicket() {
+    if (posTicketState.length === 0) {
+      alert("No hay orden activa para poner en espera.");
+      return;
+    }
+    alert("Orden #POS-0842 guardada temporalmente en 'Tickets en Espera'. Cajón listo para nueva comanda.");
+    posTicketState = [];
+    renderPosTicket();
+  }
+
+  function cancelCurrentOrder() {
+    if (confirm('¿CONFIRMA CANCELACIÓN DE LA ORDEN #POS-0842? Todos los ítems serán liberados al inventario de mostrador.')) {
+      posTicketState = [];
+      renderPosTicket();
+    }
+  }
+
+  function printProforma() {
+    if (posTicketState.length === 0) {
+      alert('No es posible emitir proforma sin artículos registrados.');
+      return;
+    }
+    alert('ENVIANDO SEÑAL ESC/POS A IMPRESORA TÉRMICA DE TALLER #01.\nDocumento: PROFORMA LEGAL DE MOSTRADOR ARTEPAN & CO.');
+  }
+
+  // Lógica del teclado numérico y cálculo de cambio
+  function recalculateChange() {
+    const totalStr = document.getElementById('ticket-total-val').innerText.replace('$', '');
+    const total = parseFloat(totalStr) || 0;
+    const cashStr = document.getElementById('pos-cash-input').value;
+    const cash = parseFloat(cashStr) || 0;
+    
+    const change = cash - total;
+    const changeEl = document.getElementById('pos-change-val');
+    if (changeEl) {
+      if (change >= 0) {
+        changeEl.innerText = `$${change.toFixed(2)}`;
+        changeEl.className = "block text-sm font-mono-code font-bold text-emerald-800";
+      } else {
+        changeEl.innerText = `-$${Math.abs(change).toFixed(2)}`;
+        changeEl.className = "block text-sm font-mono-code font-bold text-red-700";
+      }
+    }
+  }
+
+  function setQuickCash(val) {
+    document.getElementById('pos-cash-input').value = val.toFixed(2);
+    recalculateChange();
+  }
+
+  function setExactCash() {
+    const totalStr = document.getElementById('ticket-total-val').innerText.replace('$', '');
+    const total = parseFloat(totalStr) || 0;
+    document.getElementById('pos-cash-input').value = total.toFixed(2);
+    recalculateChange();
+  }
+
+  function appendPadNum(char) {
+    const input = document.getElementById('pos-cash-input');
+    if (input.value === '0.00' || input.value === '0') {
+      input.value = char === '.' ? '0.' : char;
+    } else {
+      input.value += char;
+    }
+    recalculateChange();
+  }
+
+  function clearPadCash() {
+    document.getElementById('pos-cash-input').value = '0.00';
+    recalculateChange();
+  }
+
+  function deletePadCash() {
+    const input = document.getElementById('pos-cash-input');
+    input.value = input.value.slice(0, -1);
+    if (!input.value) input.value = '0';
+    recalculateChange();
+  }
+
+  function executePaymentModal(method) {
+    if (posTicketState.length === 0) {
+      alert('ADVERTENCIA: La comanda está vacía. Seleccione productos antes de liquidar.');
+      return;
+    }
+    const total = document.getElementById('ticket-total-val').innerText;
+    const cash = document.getElementById('pos-cash-input').value;
+    const change = document.getElementById('pos-change-val').innerText;
+    
+    alert(`=== OPERACIÓN DE COBRO COMPLETADA ===\nCanal: Mostrador Central Boutique\nMétodo: ${method}\nTotal Cobrado: ${total}\nEntregado: $${cash}\nCambio: ${change}\nTicket Fiscal Factura Simplificada emitido con éxito.`);
+    posTicketState = [];
+    document.getElementById('pos-cash-input').value = '0.00';
+    renderPosTicket();
+  }
+
+  function setCategoryFilter(category, btnElement) {
+    document.querySelectorAll('.cat-pill-btn').forEach(b => {
+      b.classList.remove('bg-slate-900', 'text-white', 'border-slate-900');
+      b.classList.add('bg-white', 'text-slate-800', 'border-slate-300');
+    });
+    btnElement.classList.remove('bg-white', 'text-slate-800', 'border-slate-300');
+    btnElement.classList.add('bg-slate-900', 'text-white', 'border-slate-900');
+
+    const items = document.querySelectorAll('.pos-item-card');
+    items.forEach(card => {
+      const itemCat = card.getAttribute('data-category');
+      if (category === 'ALL' || itemCat === category) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+
+  function filterProductsManual() {
+    const query = document.getElementById('pos-search-input').value.toLowerCase().trim();
+    const items = document.querySelectorAll('.pos-item-card');
+    items.forEach(card => {
+      const name = (card.getAttribute('data-name') || '').toLowerCase();
+      const sku = (card.getAttribute('data-sku') || '').toLowerCase();
+      if (name.includes(query) || sku.includes(query)) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+
+  function clearSearchFilter() {
+    document.getElementById('pos-search-input').value = '';
+    const items = document.querySelectorAll('.pos-item-card');
+    items.forEach(card => card.classList.remove('hidden'));
+  }
+
+  // Atajos de teclado físicos (F7, F8, F9)
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'F7') {
+      e.preventDefault();
+      executePaymentModal('EFECTIVO');
+    } else if (e.key === 'F8') {
+      e.preventDefault();
+      executePaymentModal('TARJETA DATÁFONO');
+    } else if (e.key === 'F9') {
+      e.preventDefault();
+      executePaymentModal('TRANSFERENCIA QR B2B');
+    }
+  });
+
+  // Inicialización
+  window.addEventListener('DOMContentLoaded', () => {
+    renderPosTicket();
+  });
+</script>
+</body></html>

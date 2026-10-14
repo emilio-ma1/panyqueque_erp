@@ -1,89 +1,77 @@
     </main>
 
     <!-- ====================================================================== -->
-    <!-- FOOTER: Corporativo, Limpio con Copyright Dinámico (Plantilla) -->
+    <!-- FOOTER: Corporativo, Sólido y Rectilíneo (Atelier Architectural ERP)    -->
     <!-- ====================================================================== -->
-    <footer class="bg-brand-charcoal text-white pt-16 pb-12 border-t border-gray-800 mt-16 transition-colors">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <footer class="<?php echo ($currentPage === 'dashboard') ? 'bg-zinc-950 border-t border-zinc-800 text-zinc-300' : 'bg-slate-950 border-t border-slate-800 text-slate-300'; ?> pt-12 pb-8 mt-12 transition-none">
+        <div class="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
             
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 pb-12 border-b border-gray-800">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b <?php echo ($currentPage === 'dashboard') ? 'border-zinc-800' : 'border-slate-800'; ?>">
                 
                 <!-- Columna 1: Marca y descripción -->
-                <div class="space-y-4 md:col-span-1">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full border border-brand-gold/50 flex items-center justify-center text-brand-gold">
-                            <svg class="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18c-2.5 0-5 3.5-5 9s2.5 9 5 9m0-18c2.5 0 5 3.5 5 9s-2.5 9-5 9" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18" />
-                            </svg>
+                <div class="space-y-3 md:col-span-1">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 <?php echo ($currentPage === 'dashboard') ? 'bg-amber-600 text-white' : 'bg-amber-700 text-white'; ?> flex items-center justify-center font-bold text-sm rounded-none">
+                            PQ
                         </div>
-                        <span class="font-serif text-xl font-semibold tracking-wide text-white">
+                        <span class="text-sm font-bold tracking-tight text-white uppercase">
                             <?php echo APP_COMPANY; ?>
                         </span>
                     </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed">
-                        Artesanos del pan y la viennoiserie tradicional. Comprometidos con la excelencia gastronómica, el control operativo y la gestión comercial de alta gama.
+                    <p class="text-xs <?php echo ($currentPage === 'dashboard') ? 'text-zinc-400' : 'text-slate-400'; ?> leading-relaxed">
+                        Sistema integral de planificación, control térmico de obrador, facturación POS en mostrador y logística HORECA.
                     </p>
-                    <div class="text-[11px] text-brand-gold uppercase tracking-widest font-mono">
-                        Versión ERP: <span class="text-white font-medium">v<?php echo APP_VERSION; ?></span>
+                    <div class="text-[11px] font-mono <?php echo ($currentPage === 'dashboard') ? 'text-amber-400' : 'text-slate-400'; ?>">
+                        SISTEMA ERP: <span class="text-white font-semibold">V4.8-RELEASE</span>
                     </div>
                 </div>
 
                 <!-- Columna 2: Enlaces a Módulos ERP -->
                 <div>
-                    <h4 class="text-xs uppercase tracking-widest text-brand-gold font-semibold mb-4">Módulos del Sistema</h4>
-                    <ul class="space-y-2.5 text-xs text-gray-400 font-light">
-                        <li><a href="index.php" class="hover:text-white transition-colors flex items-center gap-1.5"><span>&rsaquo;</span> Portal Principal</a></li>
-                        <li><a href="caja.php" class="hover:text-white transition-colors flex items-center gap-1.5"><span>&rsaquo;</span> Puntos de Venta (POS)</a></li>
-                        <li><a href="proveedores.php" class="hover:text-white transition-colors flex items-center gap-1.5"><span>&rsaquo;</span> Contabilidad &amp; Proveedores</a></li>
-                        <li><a href="reparto.php" class="hover:text-white transition-colors flex items-center gap-1.5"><span>&rsaquo;</span> Logística &amp; Reparto</a></li>
-                        <li><a href="dashboard.php" class="hover:text-white transition-colors flex items-center gap-1.5"><span>&rsaquo;</span> Dashboard Ejecutivo</a></li>
+                    <h4 class="text-xs uppercase font-mono tracking-wider text-white font-bold mb-3">Módulos del Sistema</h4>
+                    <ul class="space-y-2 text-xs <?php echo ($currentPage === 'dashboard') ? 'text-zinc-400' : 'text-slate-400'; ?> font-mono">
+                        <li><a href="index.php" class="hover:text-white transition-none flex items-center gap-1.5"><span>›</span> 1. Inicio &amp; Catálogo</a></li>
+                        <li><a href="pos.php" class="hover:text-white transition-none flex items-center gap-1.5"><span>›</span> 2. Punto de Venta (POS)</a></li>
+                        <li><a href="suppliers.php" class="hover:text-white transition-none flex items-center gap-1.5"><span>›</span> 3. Proveedores &amp; Finanzas</a></li>
+                        <li><a href="dispatch.php" class="hover:text-white transition-none flex items-center gap-1.5"><span>›</span> 4. Logística &amp; Rutas</a></li>
+                        <li><a href="dashboard.php" class="hover:text-amber-400 text-amber-400 transition-none flex items-center gap-1.5"><span>›</span> 5. Dashboard Ejecutivo [VIP]</a></li>
                     </ul>
                 </div>
 
                 <!-- Columna 3: Calidad y Filosofía -->
                 <div>
-                    <h4 class="text-xs uppercase tracking-widest text-brand-gold font-semibold mb-4">Filosofía &amp; Obrador</h4>
-                    <ul class="space-y-2.5 text-xs text-gray-400 font-light">
-                        <li>Masa Madre de Larga Fermentación</li>
-                        <li>Harinas Ecológicas de Molino Tradicional</li>
-                        <li>Mantequilla Francesa AOP Certificada</li>
-                        <li>Horneado Continuo en Solera Refractaria</li>
-                        <li>Control de Calidad y Trazabilidad</li>
+                    <h4 class="text-xs uppercase font-mono tracking-wider text-white font-bold mb-3">Estándares del Obrador</h4>
+                    <ul class="space-y-2 text-xs <?php echo ($currentPage === 'dashboard') ? 'text-zinc-400' : 'text-slate-400'; ?>">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-amber-600 rounded-none inline-block"></span> Masa Madre Viva (Cultivo Propio 48h)</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-amber-600 rounded-none inline-block"></span> Harina T65 Molida a la Piedra</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-amber-600 rounded-none inline-block"></span> Mantequilla de Pasto AOP Isigny</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-amber-600 rounded-none inline-block"></span> Hornos de Solera Refractaria a 245°C</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-amber-600 rounded-none inline-block"></span> Trazabilidad Térmica HORECA (+3.8°C)</li>
                     </ul>
                 </div>
 
                 <!-- Columna 4: Casa Matriz & Atención -->
                 <div>
-                    <h4 class="text-xs uppercase tracking-widest text-brand-gold font-semibold mb-4">Casa Matriz &amp; Obrador</h4>
-                    <address class="not-italic space-y-2.5 text-xs text-gray-400 font-light">
-                        <p class="flex items-start gap-2">
-                            <span class="text-brand-gold font-semibold">Dir:</span>
-                            <span>Av. Central #1024, Sala Principal</span>
-                        </p>
-                        <p class="flex items-center gap-2">
-                            <span class="text-brand-gold font-semibold">Tel:</span>
-                            <span>+56 9 8765 4321</span>
-                        </p>
-                        <p class="flex items-center gap-2">
-                            <span class="text-brand-gold font-semibold">Mail:</span>
-                            <span>contacto@panyqueque.cl</span>
-                        </p>
-                        <p class="text-[11px] text-gray-500 pt-1">Atención: Lunes a Sábado (06:00 - 20:30)</p>
+                    <h4 class="text-xs uppercase font-mono tracking-wider text-white font-bold mb-3">Planta Central &amp; Turnos</h4>
+                    <address class="not-italic space-y-2 text-xs <?php echo ($currentPage === 'dashboard') ? 'text-zinc-400' : 'text-slate-400'; ?>">
+                        <p class="font-mono">Planta Central #01 &bull; Av. Central #1024</p>
+                        <p class="font-mono">Turno Matutino: 04:00 - 13:00</p>
+                        <p class="font-mono">Turno Tarde: 13:00 - 21:00</p>
+                        <p class="text-[11px] font-mono pt-1 text-slate-500">Mesa de Ayuda ERP: anexo 9402</p>
                     </address>
                 </div>
 
             </div>
 
-            <!-- Fila inferior: Copyright Dinámico -->
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+            <!-- Fila inferior: Copyright Dinámico y Telemetría -->
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs font-mono <?php echo ($currentPage === 'dashboard') ? 'text-zinc-500' : 'text-slate-500'; ?> gap-3">
                 <p>&copy; <?php echo APP_YEAR; ?> <?php echo APP_COMPANY; ?>. Todos los derechos reservados.</p>
-                <div class="flex items-center gap-6">
-                    <span class="inline-flex items-center gap-1.5 <?php echo (class_exists('DB') && DB::isConnected()) ? 'text-emerald-400' : 'text-brand-gold'; ?>">
-                        <span class="w-1.5 h-1.5 rounded-full <?php echo (class_exists('DB') && DB::isConnected()) ? 'bg-emerald-400' : 'bg-brand-gold'; ?>"></span>
-                        <span><?php echo (class_exists('DB') && DB::isConnected()) ? 'PostgreSQL 15 Conectado' : 'Sistema Local Activo'; ?></span>
+                <div class="flex items-center gap-4">
+                    <span class="inline-flex items-center gap-1.5 px-2 py-0.5 <?php echo (class_exists('DB') && DB::isConnected()) ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-amber-950 text-amber-400 border border-amber-800'; ?> rounded-none">
+                        <span class="w-1.5 h-1.5 rounded-none <?php echo (class_exists('DB') && DB::isConnected()) ? 'bg-emerald-400' : 'bg-amber-400'; ?>"></span>
+                        <span><?php echo (class_exists('DB') && DB::isConnected()) ? 'POSTGRESQL 15 ONLINE' : 'MODO LOCAL ACTIVO'; ?></span>
                     </span>
-                    <span class="text-brand-gold">Haute Boulangerie ERP</span>
+                    <span class="text-slate-400 uppercase">Atelier Architectural ERP</span>
                 </div>
             </div>
 

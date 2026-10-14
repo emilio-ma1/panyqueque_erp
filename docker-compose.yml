@@ -1,5 +1,5 @@
 services:
-  # Servidor Web ERP (PHP 8.2 + Apache + Driver PostgreSQL)
+  # ERP Web Server (PHP 8.2 + Apache + PostgreSQL Driver)
   web:
     container_name: panyqueque_erp_web
     build:
@@ -10,34 +10,30 @@ services:
     ports:
       - "8080:80"
     volumes:
-      # Montaje en caliente para desarrollo en vivo
+      # Hot-reload mount for live development
       - .:/var/www/html
-      # Configuración de Apache personalizada (DocumentRoot en /public)
+      # Custom Apache configuration (DocumentRoot at /public)
       - ./docker/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    env_file:
+      - .env
     environment:
-      - TZ=America/Santiago
       - APACHE_RUN_USER=www-data
       - APACHE_RUN_GROUP=www-data
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_NAME=panyqueque_erp
-      - DB_USER=erp_user
-      - DB_PASS=erp_password_2026
     depends_on:
       - db
     networks:
       - panyqueque_net
 
-  # Base de Datos Central (PostgreSQL 15)
+  # Central Database (PostgreSQL 15)
   db:
     container_name: panyqueque_erp_db
     image: postgres:15-alpine
     restart: unless-stopped
     environment:
-      - POSTGRES_DB=panyqueque_erp
-      - POSTGRES_USER=erp_user
-      - POSTGRES_PASSWORD=erp_password_2026
-      - TZ=America/Santiago
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - TZ=${TZ:-America/Santiago}
     ports:
       - "5432:5432"
     volumes:
