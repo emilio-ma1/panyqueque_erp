@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-slate-100" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ARTEPAN &amp; CO. | Módulo 03: Proveedores &amp; Finanzas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    .font-mono-tech { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="min-h-full flex flex-col bg-slate-100 text-slate-900 antialiased selection:bg-slate-900 selection:text-white">
+<!-- 1. HEADER DEL ERP (SÓLIDO 100%, SIN TRANSPARENCIAS NI BLUR) -->
+<header class="bg-slate-950 border-b border-slate-800 text-white shrink-0 sticky top-0 z-50">
+<div class="w-full px-5 h-16 flex items-center justify-between">
+<!-- Logo, Versión y Metadatos de Turno -->
+<div class="flex items-center space-x-5">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-amber-600 text-slate-950 font-bold flex items-center justify-center text-sm rounded-none">
+            A
+          </div>
+<div>
+<div class="text-xs font-bold tracking-wider uppercase text-white leading-tight">ARTEPAN &amp; CO.</div>
+<div class="text-[11px] font-mono-tech text-slate-400">ERP OBRADOR V4.8</div>
+</div>
+</div>
+<div class="h-6 w-px bg-slate-800 hidden md:block"></div>
+<div class="hidden lg:flex items-center space-x-2 text-[11px] font-mono-tech text-slate-400">
+<span class="w-2 h-2 bg-emerald-500 rounded-none inline-block"></span>
+<span class="text-slate-200">PLANTA CENTRAL #01</span>
+<span class="text-slate-700">|</span>
+<span>TURNO MATUTINO (04:00 - 13:00)</span>
+</div>
+</div>
+<!-- Navegación Superior Fija (5 Pestañas Rectangulares) -->
+<nav class="hidden md:flex items-center h-16">
+<button class="px-3.5 h-full text-xs font-semibold uppercase tracking-wider text-slate-400 hover:text-white hover:bg-slate-900 border-b-2 border-transparent rounded-none transition-none">
+          1. Inicio &amp; Catálogo
+        </button>
+<button class="px-3.5 h-full text-xs font-semibold uppercase tracking-wider text-slate-400 hover:text-white hover:bg-slate-900 border-b-2 border-transparent rounded-none transition-none">
+          2. Punto de Venta (POS)
+        </button>
+<button class="px-3.5 h-full text-xs font-semibold uppercase tracking-wider text-white bg-slate-800 border-b-2 border-amber-500 rounded-none transition-none">
+          3. Proveedores &amp; Finanzas
+        </button>
+<button class="px-3.5 h-full text-xs font-semibold uppercase tracking-wider text-slate-400 hover:text-white hover:bg-slate-900 border-b-2 border-transparent rounded-none transition-none">
+          4. Logística &amp; Rutas
+        </button>
+<button class="px-3.5 h-full text-xs font-semibold uppercase tracking-wider text-amber-400 hover:text-amber-300 hover:bg-slate-900 border-b-2 border-transparent rounded-none transition-none">
+          5. Dashboard Ejecutivo [VIP]
+        </button>
+</nav>
+<!-- Usuario y Rol Corporativo -->
+<div class="flex items-center space-x-3">
+<div class="text-right hidden sm:block">
+<div class="text-xs font-semibold text-slate-200">M. Valenzuela</div>
+<div class="text-[11px] font-mono-tech text-amber-400">Director Financiero</div>
+</div>
+<div class="w-8 h-8 bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-mono-tech font-bold text-slate-300 rounded-none">
+          MV
+        </div>
+</div>
+</div>
+</header>
+<!-- CONTENIDO PRINCIPAL -->
+<main class="flex-1 w-full max-w-[1680px] mx-auto p-4 md:p-6 space-y-6">
+<!-- 2. BARRA DE ACCIONES Y TÍTULO -->
+<div class="bg-white border border-slate-200 p-5 rounded-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<div>
+<div class="flex items-center space-x-2 text-[11px] font-mono-tech uppercase tracking-wider text-slate-600 mb-1">
+<span class="w-2 h-2 bg-amber-600 rounded-none inline-block"></span>
+<span>Módulo 03 // Libro Mayor, Cadenas de Suministro y Proveedores</span>
+</div>
+<h1 class="text-xl md:text-2xl font-bold tracking-tight text-slate-950">
+          Control Financiero de Compras y Cuentas de Explotación
+        </h1>
+<p class="text-xs md:text-sm text-slate-600 mt-1">
+          Balance de devengo, compras industriales de harinas y conciliación de cuentas HORECA.
+        </p>
+</div>
+<!-- Botones de Acción Rápidos y Rectangulares -->
+<div class="flex flex-wrap items-center gap-2 shrink-0">
+<button class="bg-slate-950 hover:bg-slate-800 text-white px-3.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-none flex items-center space-x-1.5 cursor-pointer" onclick="abrirModalCompra()">
+<span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
+<span>+ Nueva Orden de Compra (PO)</span>
+</button>
+<button class="bg-slate-200 hover:bg-slate-300 text-slate-900 px-3.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-none flex items-center space-x-1.5 cursor-pointer" onclick="exportarBalances()">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Exportar Balances (CSV/XLS)</span>
+</button>
+<button class="bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 px-3.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-none flex items-center space-x-1.5 cursor-pointer" onclick="descargarAuditoria()">
+<span class="material-symbols-outlined text-[16px]">description</span>
+<span>Descargar Informe Auditoría</span>
+</button>
+</div>
+</div>
+<!-- 3. TARJETAS SUPERIORES DE BALANCE SÓLIDAS (GRID 4 COLUMNAS) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Cuentas por Pagar (AP) -->
+<div class="bg-white border border-slate-200 p-4 rounded-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between text-[11px] font-mono-tech text-slate-500 uppercase tracking-wider mb-1">
+<span>Pasivo Corriente</span>
+<span class="text-amber-800 font-bold">[AP]</span>
+</div>
+<div class="text-xs font-bold text-slate-800 uppercase">Cuentas por Pagar</div>
+<div class="text-2xl font-bold font-mono-tech text-slate-950 mt-2">$48,920.00</div>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-[11px] font-mono-tech">
+<div class="flex justify-between text-slate-700">
+<span>Vencimiento &lt;15 días:</span>
+<strong class="text-amber-800 font-bold">$18,400.00</strong>
+</div>
+<div class="flex justify-between text-slate-600">
+<span>Vencimiento 30-60 días:</span>
+<strong class="text-slate-900">$30,520.00</strong>
+</div>
+<div class="w-full bg-slate-200 h-1.5 mt-2 rounded-none">
+<div class="bg-amber-600 h-1.5" style="width: 38%"></div>
+</div>
+</div>
+</div>
+<!-- Cuentas por Cobrar (AR) -->
+<div class="bg-white border border-slate-200 p-4 rounded-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between text-[11px] font-mono-tech text-slate-500 uppercase tracking-wider mb-1">
+<span>Activo Corriente</span>
+<span class="text-emerald-800 font-bold">[AR]</span>
+</div>
+<div class="text-xs font-bold text-slate-800 uppercase">Cuentas por Cobrar (HORECA)</div>
+<div class="text-2xl font-bold font-mono-tech text-slate-950 mt-2">$64,150.00</div>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-[11px] font-mono-tech">
+<div class="flex justify-between text-slate-700">
+<span>Cartera HORECA Activa:</span>
+<strong class="text-emerald-800 font-bold">18 Clientes A1</strong>
+</div>
+<div class="text-slate-600 truncate">
+            Cobros pendientes hoteles 5* y estrellas Michelin
+          </div>
+<div class="w-full bg-slate-200 h-1.5 mt-2 rounded-none">
+<div class="bg-emerald-600 h-1.5" style="width: 82%"></div>
+</div>
+</div>
+</div>
+<!-- Valoración de Inventario (FIFO) -->
+<div class="bg-white border border-slate-200 p-4 rounded-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between text-[11px] font-mono-tech text-slate-500 uppercase tracking-wider mb-1">
+<span>Existencias Almacén</span>
+<span class="text-slate-700 font-bold">[FIFO]</span>
+</div>
+<div class="text-xs font-bold text-slate-800 uppercase">Valoración de Inventario</div>
+<div class="text-2xl font-bold font-mono-tech text-slate-950 mt-2">$29,600.00</div>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-[11px] font-mono-tech">
+<div class="flex justify-between text-slate-700">
+<span>Materias en Silo:</span>
+<strong class="text-slate-900">$21,312.00</strong>
+</div>
+<div class="text-slate-600 truncate">
+            Materias primas en silos y cámaras a -18°C
+          </div>
+<div class="w-full bg-slate-200 h-1.5 mt-2 rounded-none">
+<div class="bg-slate-800 h-1.5" style="width: 72%"></div>
+</div>
+</div>
+</div>
+<!-- Desembolso Mensual Insumos -->
+<div class="bg-white border border-slate-200 p-4 rounded-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between text-[11px] font-mono-tech text-slate-500 uppercase tracking-wider mb-1">
+<span>Ejecución Presupuestaria</span>
+<span class="text-blue-800 font-bold">[OPEX]</span>
+</div>
+<div class="text-xs font-bold text-slate-800 uppercase">Desembolso Mensual Insumos</div>
+<div class="text-2xl font-bold font-mono-tech text-slate-950 mt-2">$38,200.00</div>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-[11px] font-mono-tech">
+<div class="flex justify-between text-slate-700">
+<span>Presupuesto Ejecutado:</span>
+<strong class="text-blue-900 font-bold">84.6%</strong>
+</div>
+<div class="flex justify-between text-slate-600">
+<span>Límite Mensual Autorizado:</span>
+<strong class="text-slate-900">$45,000.00</strong>
+</div>
+<div class="w-full bg-slate-200 h-1.5 mt-2 rounded-none">
+<div class="bg-blue-700 h-1.5" style="width: 84.6%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. DIRECTORIO DE PROVEEDORES HOMOLOGADOS (TABLA COMPLETA) -->
+<div class="bg-white border border-slate-200 rounded-sm">
+<div class="p-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-900 flex items-center space-x-2">
+<span class="w-2 h-2 bg-slate-900 rounded-none inline-block"></span>
+<span>Directorio de Proveedores Homologados (Cadena Acreditada)</span>
+</h2>
+<p class="text-xs text-slate-500 mt-0.5">Relación de fabricantes auditados, condiciones comerciales y certificaciones vigentes.</p>
+</div>
+<div class="text-xs font-mono-tech text-slate-600 bg-slate-100 px-3 py-1 border border-slate-200 rounded-none">
+          4 PROVEEDORES ACTIVOS CLASE A
+        </div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="bg-slate-100 border-b border-slate-200 text-slate-700 font-semibold uppercase tracking-wider text-[11px]">
+<th class="py-3 px-4">Proveedor Homologado</th>
+<th class="py-3 px-4">NIF / Identificación</th>
+<th class="py-3 px-4">Producto Suministrado</th>
+<th class="py-3 px-4 text-center">Condiciones de Pago</th>
+<th class="py-3 px-4 text-center">Certificación Sanitaria</th>
+<th class="py-3 px-4 text-center">Estado Contable</th>
+<th class="py-3 px-4 text-right">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 text-slate-800">
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-4 font-semibold text-slate-900">
+                Grands Moulins de Paris S.A.
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">Iberia &amp; Francia Central</span>
+</td>
+<td class="py-3 px-4 font-mono-tech text-slate-600">FR-90412883-M</td>
+<td class="py-3 px-4">Harinas T65 y T80 molidas a piedra</td>
+<td class="py-3 px-4 text-center font-mono-tech font-medium">30 días devengo</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-slate-100 border border-slate-300 text-slate-800 px-2 py-0.5 text-[10px] font-mono-tech uppercase font-semibold rounded-none">
+                  IFS Food v8
+                </span>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-emerald-100 border border-emerald-300 text-emerald-900 px-2 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  Facturación Activa
+                </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="bg-slate-900 hover:bg-slate-800 text-white px-2.5 py-1 text-[11px] font-medium uppercase rounded-none cursor-pointer" onclick="generarPedidoRapido('Harina T65 Francesa 25kg', 'Grands Moulins de Paris S.A.')">
+                  Pedir
+                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-4 font-semibold text-slate-900">
+                Elle &amp; Vire Professional
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">Normandie Lácteos Especiales</span>
+</td>
+<td class="py-3 px-4 font-mono-tech text-slate-600">FR-54891024-K</td>
+<td class="py-3 px-4">Mantequillas AOP Isigny y Nata 35%</td>
+<td class="py-3 px-4 text-center font-mono-tech font-medium">45 días devengo</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-slate-100 border border-slate-300 text-slate-800 px-2 py-0.5 text-[10px] font-mono-tech uppercase font-semibold rounded-none">
+                  BRCGS Packaging AA
+                </span>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-emerald-100 border border-emerald-300 text-emerald-900 px-2 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  Al Día
+                </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="bg-slate-900 hover:bg-slate-800 text-white px-2.5 py-1 text-[11px] font-medium uppercase rounded-none cursor-pointer" onclick="generarPedidoRapido('Mantequilla AOP Isigny 84% MG', 'Elle &amp; Vire Professional')">
+                  Pedir
+                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-4 font-semibold text-slate-900">
+                Valrhona Cacao (Valrhona España S.L.)
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">Chocolaterie Pure Origine</span>
+</td>
+<td class="py-3 px-4 font-mono-tech text-slate-600">ES-B31980244</td>
+<td class="py-3 px-4">Coberturas de chocolate Guanaja, Caraïbe, Gianduja</td>
+<td class="py-3 px-4 text-center font-mono-tech font-medium">30 días</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-slate-100 border border-slate-300 text-slate-800 px-2 py-0.5 text-[10px] font-mono-tech uppercase font-semibold rounded-none">
+                  ISO 22000
+                </span>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-emerald-100 border border-emerald-300 text-emerald-900 px-2 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  Al Día
+                </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="bg-slate-900 hover:bg-slate-800 text-white px-2.5 py-1 text-[11px] font-medium uppercase rounded-none cursor-pointer" onclick="generarPedidoRapido('Cobertura Guanaja 70%', 'Valrhona Cacao')">
+                  Pedir
+                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-4 font-semibold text-slate-900">
+                Smurfit Kappa Group
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">División Empaques Alimentarios</span>
+</td>
+<td class="py-3 px-4 font-mono-tech text-slate-600">ES-A28109402</td>
+<td class="py-3 px-4">Packaging alimentario microcanal biodegradable</td>
+<td class="py-3 px-4 text-center font-mono-tech font-medium">60 días</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-slate-100 border border-slate-300 text-slate-800 px-2 py-0.5 text-[10px] font-mono-tech uppercase font-semibold rounded-none">
+                  FSC / ISO 22000
+                </span>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-emerald-100 border border-emerald-300 text-emerald-900 px-2 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  Al Día
+                </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="bg-slate-900 hover:bg-slate-800 text-white px-2.5 py-1 text-[11px] font-medium uppercase rounded-none cursor-pointer" onclick="generarPedidoRapido('Cajas Microcanal Kraft Obrador', 'Smurfit Kappa Group')">
+                  Pedir
+                </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-3 bg-slate-50 border-t border-slate-200 text-slate-600 text-[11px] font-mono-tech flex flex-col sm:flex-row justify-between items-center gap-2">
+<span>CONTRATOS MARCO VIGENTES: PERÍODO FISCAL 2025/2026</span>
+<span>AUDITORÍA EXTERNA: KPMG DICIEMBRE 2024 (APROBADO)</span>
+</div>
+</div>
+<!-- 5. TABLA CONTABLE DE MATERIAS PRIMAS CRÍTICAS & ALERTAS DE REORDEN -->
+<div class="bg-white border border-slate-200 rounded-sm">
+<div class="p-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-900 flex items-center space-x-2">
+<span class="w-2 h-2 bg-amber-600 rounded-none inline-block"></span>
+<span>Tabla Contable de Materias Primas Críticas &amp; Alertas de Reorden</span>
+</h2>
+<p class="text-xs text-slate-500 mt-0.5">Control volumétrico de silos, umbrales de seguridad y ritmos de consumo diario.</p>
+</div>
+<div class="flex items-center space-x-2">
+<input class="bg-slate-50 border border-slate-300 text-xs px-3 py-1.5 rounded-none outline-none focus:border-slate-900 font-mono-tech" id="buscadorMateria" onkeyup="filtrarMaterias()" placeholder="Filtrar insumo o silo..." type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs" id="tablaMaterias">
+<thead>
+<tr class="bg-slate-100 border-b border-slate-200 text-slate-700 font-semibold uppercase tracking-wider text-[11px]">
+<th class="py-3 px-4">Insumo / Referencia</th>
+<th class="py-3 px-4">Silo / Ubicación</th>
+<th class="py-3 px-4 text-right">Stock Físico Actual</th>
+<th class="py-3 px-4 text-right">Punto Pedido Mínimo</th>
+<th class="py-3 px-4 text-right">Consumo Diario Medio</th>
+<th class="py-3 px-4 text-center">Estado de Abastecimiento</th>
+<th class="py-3 px-4 text-right">Acción Operativa</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 text-slate-800">
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-4 font-semibold text-slate-900">
+                Harina T65 Francesa Grano Noble
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">Sacos 25kg / Lote GM-2025</span>
+</td>
+<td class="py-3 px-4 font-mono-tech text-slate-700">Silo Principal #01</td>
+<td class="py-3 px-4 text-right font-mono-tech font-bold text-slate-900">3,450 kg</td>
+<td class="py-3 px-4 text-right font-mono-tech text-slate-600">1,200 kg</td>
+<td class="py-3 px-4 text-right font-mono-tech text-slate-600">145 kg/día</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-emerald-100 border border-emerald-300 text-emerald-900 px-2.5 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  ÓPTIMO
+                </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="bg-slate-200 hover:bg-slate-300 text-slate-800 px-2 py-1 text-[11px] font-medium uppercase rounded-none cursor-pointer" onclick="generarPedidoRapido('Harina T65 Francesa Grano Noble', 'Grands Moulins de Paris S.A.')">
+                  Añadir Stock
+                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-4 font-semibold text-slate-900">
+                Mantequilla AOP Isigny 84% MG
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">Bloques 10kg Laminación</span>
+</td>
+<td class="py-3 px-4 font-mono-tech text-slate-700">Cámara Refrigerada #02 (+4°C)</td>
+<td class="py-3 px-4 text-right font-mono-tech font-bold text-amber-800">180 kg</td>
+<td class="py-3 px-4 text-right font-mono-tech text-slate-600">250 kg</td>
+<td class="py-3 px-4 text-right font-mono-tech text-slate-600">32 kg/día</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-amber-100 border border-amber-300 text-amber-900 px-2.5 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  REORDEN INMEDIATO
+                </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="bg-amber-600 hover:bg-amber-700 text-white px-2 py-1 text-[11px] font-medium uppercase rounded-none cursor-pointer" onclick="generarPedidoRapido('Mantequilla AOP Isigny 84% MG', 'Elle &amp; Vire Professional')">
+                  Emitir Orden
+                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-4 font-semibold text-slate-900">
+                Harina T80 Molida a la Piedra Bio
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">Centeno &amp; Trigo Integral</span>
+</td>
+<td class="py-3 px-4 font-mono-tech text-slate-700">Silo Especialidades #02</td>
+<td class="py-3 px-4 text-right font-mono-tech font-bold text-slate-900">920 kg</td>
+<td class="py-3 px-4 text-right font-mono-tech text-slate-600">400 kg</td>
+<td class="py-3 px-4 text-right font-mono-tech text-slate-600">40 kg/día</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-slate-100 border border-slate-300 text-slate-800 px-2.5 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  BAJO CONTROL
+                </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="bg-slate-200 hover:bg-slate-300 text-slate-800 px-2 py-1 text-[11px] font-medium uppercase rounded-none cursor-pointer" onclick="generarPedidoRapido('Harina T80 Molida a la Piedra Bio', 'Grands Moulins de Paris S.A.')">
+                  Añadir Stock
+                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-4 font-semibold text-slate-900">
+                Cobertura Guanaja 70% Cacao Puro
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">Gotas Fundición 3kg</span>
+</td>
+<td class="py-3 px-4 font-mono-tech text-slate-700">Almacén Climatizado Seco (16°C)</td>
+<td class="py-3 px-4 text-right font-mono-tech font-bold text-slate-900">110 kg</td>
+<td class="py-3 px-4 text-right font-mono-tech text-slate-600">60 kg</td>
+<td class="py-3 px-4 text-right font-mono-tech text-slate-600">9 kg/día</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-emerald-100 border border-emerald-300 text-emerald-900 px-2.5 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  ÓPTIMO
+                </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="bg-slate-200 hover:bg-slate-300 text-slate-800 px-2 py-1 text-[11px] font-medium uppercase rounded-none cursor-pointer" onclick="generarPedidoRapido('Cobertura Guanaja 70% Cacao Puro', 'Valrhona Cacao')">
+                  Añadir Stock
+                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-4 font-semibold text-slate-900">
+                Levadura Viva Prensada Panificación
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">Bloques 500g Conservación Fría</span>
+</td>
+<td class="py-3 px-4 font-mono-tech text-slate-700">Cámara Refrigerada #01 (+2°C)</td>
+<td class="py-3 px-4 text-right font-mono-tech font-bold text-amber-800">45 kg</td>
+<td class="py-3 px-4 text-right font-mono-tech text-slate-600">60 kg</td>
+<td class="py-3 px-4 text-right font-mono-tech text-slate-600">12 kg/día</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-amber-100 border border-amber-300 text-amber-900 px-2.5 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  REORDEN INMEDIATO
+                </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="bg-amber-600 hover:bg-amber-700 text-white px-2 py-1 text-[11px] font-medium uppercase rounded-none cursor-pointer" onclick="generarPedidoRapido('Levadura Viva Prensada', 'Lesaffre Ibérica')">
+                  Emitir Orden
+                </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-3 bg-slate-50 border-t border-slate-200 text-slate-600 text-[11px] font-mono-tech flex flex-col sm:flex-row justify-between items-center gap-2">
+<span>ALERTAS DE STOCK ACTIVA: 2 INSUMOS POR DEBAJO DEL UMBRAL DE SEGURIDAD</span>
+<span>PRÓXIMO REABASTECIMIENTO PROGRAMADO: MAÑANA 05:00 AM</span>
+</div>
+</div>
+<!-- 6. TABLA DE ÓRDENES DE COMPRA RECIENTES (PO) -->
+<div class="bg-white border border-slate-200 rounded-sm">
+<div class="p-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-900 flex items-center space-x-2">
+<span class="w-2 h-2 bg-slate-900 rounded-none inline-block"></span>
+<span>Libro de Órdenes de Compra Industriales Recientes (PO)</span>
+</h2>
+<p class="text-xs text-slate-500 mt-0.5">Seguimiento de devengos, pagos a 30/60 días y estados de conciliación bancaria.</p>
+</div>
+<!-- Pestañas Filtro de Órdenes -->
+<div class="flex items-center space-x-1 bg-slate-100 p-1 border border-slate-200">
+<button class="px-2.5 py-1 text-xs font-semibold uppercase bg-slate-900 text-white rounded-none" id="btn-filtro-todas" onclick="filtrarEstadoOC('TODAS')">
+            Todas (5)
+          </button>
+<button class="px-2.5 py-1 text-xs font-semibold uppercase text-slate-700 hover:bg-slate-200 rounded-none" id="btn-filtro-pagadas" onclick="filtrarEstadoOC('PAGADO')">
+            Pagadas
+          </button>
+<button class="px-2.5 py-1 text-xs font-semibold uppercase text-slate-700 hover:bg-slate-200 rounded-none" id="btn-filtro-pendientes" onclick="filtrarEstadoOC('PENDIENTE')">
+            Pendientes
+          </button>
+<button class="px-2.5 py-1 text-xs font-semibold uppercase text-slate-700 hover:bg-slate-200 rounded-none" id="btn-filtro-revision" onclick="filtrarEstadoOC('EN REVISIÓN')">
+            En Revisión
+          </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs" id="tablaOrdenesCompra">
+<thead>
+<tr class="bg-slate-100 border-b border-slate-200 text-slate-700 font-semibold uppercase tracking-wider text-[11px]">
+<th class="py-3 px-4"># PO / Folio Fiscal</th>
+<th class="py-3 px-4 text-center">Fecha Emisión</th>
+<th class="py-3 px-4">Proveedor Acreditado</th>
+<th class="py-3 px-4 text-right">Importe Total</th>
+<th class="py-3 px-4 text-center">Condición de Pago</th>
+<th class="py-3 px-4 text-center">Estado Contable</th>
+<th class="py-3 px-4 text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 text-slate-800">
+<tr class="hover:bg-slate-50 fila-oc" data-estado="PAGADO">
+<td class="py-3 px-4 font-mono-tech font-bold text-slate-900">PO-2025-0891</td>
+<td class="py-3 px-4 text-center font-mono-tech text-slate-600">12/10/2025</td>
+<td class="py-3 px-4 font-medium text-slate-900">
+                Grands Moulins de Paris S.A.
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">Suministro 4,000kg Harina T65</span>
+</td>
+<td class="py-3 px-4 text-right font-mono-tech font-bold text-slate-900">$5,520.00</td>
+<td class="py-3 px-4 text-center font-mono-tech text-slate-600">30 días devengo</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-emerald-100 border border-emerald-300 text-emerald-900 px-2.5 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  PAGADO
+                </span>
+</td>
+<td class="py-3 px-4 text-right space-x-1">
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 px-2 py-1 text-[11px] uppercase rounded-none cursor-pointer" onclick="verFactura('PO-2025-0891')">
+                  Ver Factura
+                </button>
+<span class="text-emerald-700 font-mono-tech text-[11px] font-semibold px-2 py-1">Conciliado ✓</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 fila-oc" data-estado="PENDIENTE">
+<td class="py-3 px-4 font-mono-tech font-bold text-slate-900">PO-2025-0895</td>
+<td class="py-3 px-4 text-center font-mono-tech text-slate-600">18/10/2025</td>
+<td class="py-3 px-4 font-medium text-slate-900">
+                Elle &amp; Vire Professional
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">500kg Mantequilla AOP Isigny</span>
+</td>
+<td class="py-3 px-4 text-right font-mono-tech font-bold text-slate-900">$4,900.00</td>
+<td class="py-3 px-4 text-center font-mono-tech text-slate-600">45 días devengo</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-amber-100 border border-amber-300 text-amber-900 px-2.5 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  PENDIENTE
+                </span>
+</td>
+<td class="py-3 px-4 text-right space-x-1">
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 px-2 py-1 text-[11px] uppercase rounded-none cursor-pointer" onclick="verFactura('PO-2025-0895')">
+                  Ver Factura
+                </button>
+<button class="bg-slate-900 hover:bg-slate-800 text-white px-2 py-1 text-[11px] uppercase rounded-none cursor-pointer" onclick="conciliarPO('PO-2025-0895')">
+                  Conciliar
+                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 fila-oc" data-estado="PENDIENTE">
+<td class="py-3 px-4 font-mono-tech font-bold text-slate-900">PO-2025-0899</td>
+<td class="py-3 px-4 text-center font-mono-tech text-slate-600">21/10/2025</td>
+<td class="py-3 px-4 font-medium text-slate-900">
+                Smurfit Kappa Group
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">Lote 2,500 cajas microcanal kraft</span>
+</td>
+<td class="py-3 px-4 text-right font-mono-tech font-bold text-slate-900">$2,125.00</td>
+<td class="py-3 px-4 text-center font-mono-tech text-slate-600">60 días confirming</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-amber-100 border border-amber-300 text-amber-900 px-2.5 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  PENDIENTE
+                </span>
+</td>
+<td class="py-3 px-4 text-right space-x-1">
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 px-2 py-1 text-[11px] uppercase rounded-none cursor-pointer" onclick="verFactura('PO-2025-0899')">
+                  Ver Factura
+                </button>
+<button class="bg-slate-900 hover:bg-slate-800 text-white px-2 py-1 text-[11px] uppercase rounded-none cursor-pointer" onclick="conciliarPO('PO-2025-0899')">
+                  Conciliar
+                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 fila-oc" data-estado="EN REVISIÓN">
+<td class="py-3 px-4 font-mono-tech font-bold text-slate-900">PO-2025-0904</td>
+<td class="py-3 px-4 text-center font-mono-tech text-slate-600">24/10/2025</td>
+<td class="py-3 px-4 font-medium text-slate-900">
+                Valrhona Cacao
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">70kg Guanaja + 30kg Gianduja</span>
+</td>
+<td class="py-3 px-4 text-right font-mono-tech font-bold text-slate-900">$2,250.00</td>
+<td class="py-3 px-4 text-center font-mono-tech text-slate-600">30 días devengo</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-slate-100 border border-slate-300 text-slate-800 px-2.5 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  EN REVISIÓN
+                </span>
+</td>
+<td class="py-3 px-4 text-right space-x-1">
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 px-2 py-1 text-[11px] uppercase rounded-none cursor-pointer" onclick="verFactura('PO-2025-0904')">
+                  Ver Factura
+                </button>
+<button class="bg-amber-600 hover:bg-amber-700 text-white px-2 py-1 text-[11px] uppercase rounded-none cursor-pointer" onclick="conciliarPO('PO-2025-0904')">
+                  Conciliar
+                </button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 fila-oc" data-estado="PAGADO">
+<td class="py-3 px-4 font-mono-tech font-bold text-slate-900">PO-2025-0872</td>
+<td class="py-3 px-4 text-center font-mono-tech text-slate-600">02/10/2025</td>
+<td class="py-3 px-4 font-medium text-slate-900">
+                Valrhona Cacao
+                <span class="block text-[11px] font-mono-tech text-slate-500 font-normal">Coberturas de Verano y Mantecas</span>
+</td>
+<td class="py-3 px-4 text-right font-mono-tech font-bold text-slate-900">$4,355.00</td>
+<td class="py-3 px-4 text-center font-mono-tech text-slate-600">30 días devengo</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-emerald-100 border border-emerald-300 text-emerald-900 px-2.5 py-0.5 text-[10px] font-semibold uppercase rounded-none">
+                  PAGADO
+                </span>
+</td>
+<td class="py-3 px-4 text-right space-x-1">
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 px-2 py-1 text-[11px] uppercase rounded-none cursor-pointer" onclick="verFactura('PO-2025-0872')">
+                  Ver Factura
+                </button>
+<span class="text-emerald-700 font-mono-tech text-[11px] font-semibold px-2 py-1">Conciliado ✓</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-3 bg-slate-50 border-t border-slate-200 text-slate-600 text-[11px] font-mono-tech flex flex-col sm:flex-row justify-between items-center gap-2">
+<span>TOTAL ÓRDENES REGISTRADAS: 5 EXPEDIENTES</span>
+<div class="space-x-4">
+<span>PENDIENTE DE LIQUIDACIÓN: <strong class="text-amber-800">$7,025.00</strong></span>
+<span>LIQUIDADO EN BANCO: <strong class="text-slate-950">$9,875.00</strong></span>
+</div>
+</div>
+</div>
+</main>
+<!-- MODAL SÓLIDO: EMITIR NUEVA ORDEN DE COMPRA (PO) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center hidden" id="modal-po">
+<!-- Telón de fondo 100% sólido opaco, sin transparencias ni blur -->
+<div class="fixed inset-0 bg-slate-950" onclick="cerrarModalCompra()"></div>
+<div class="relative bg-white border-2 border-slate-900 w-full max-w-xl mx-4 shadow-2xl z-10 flex flex-col rounded-none">
+<div class="bg-slate-950 text-white p-4 flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="w-2.5 h-2.5 bg-amber-500 rounded-none inline-block"></span>
+<span class="font-bold text-sm tracking-wider uppercase">Nueva Orden de Compra Industrial (PO)</span>
+</div>
+<button class="text-slate-400 hover:text-white font-mono-tech text-base cursor-pointer" onclick="cerrarModalCompra()">✕</button>
+</div>
+<div class="p-5 space-y-4 text-slate-900">
+<div>
+<label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Proveedor Homologado</label>
+<select class="w-full bg-slate-50 border border-slate-300 text-slate-900 p-2 text-xs rounded-none outline-none focus:border-slate-950" id="po-proveedor">
+<option>Grands Moulins de Paris S.A.</option>
+<option>Elle &amp; Vire Professional</option>
+<option>Valrhona Cacao (Valrhona España S.L.)</option>
+<option>Smurfit Kappa Group</option>
+</select>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div>
+<label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Materia Prima / Insumo</label>
+<input class="w-full bg-slate-50 border border-slate-300 text-slate-900 p-2 text-xs rounded-none outline-none focus:border-slate-950 font-medium" id="po-insumo" type="text" value="Harina T65 Francesa Grano Noble"/>
+</div>
+<div>
+<label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Cantidad Solicitada (kg/uds)</label>
+<input class="w-full bg-slate-50 border border-slate-300 text-slate-900 p-2 text-xs rounded-none outline-none focus:border-slate-950 font-mono-tech" id="po-cantidad" type="number" value="1000"/>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div>
+<label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Condición de Pago</label>
+<select class="w-full bg-slate-50 border border-slate-300 text-slate-900 p-2 text-xs rounded-none outline-none focus:border-slate-950">
+<option>30 DÍAS DEVENGO (Transferencia)</option>
+<option>45 DÍAS DEVENGO (Confirming)</option>
+<option>60 DÍAS CONFIRMING</option>
+<option>PAGO CONTADO AL DESCARGUE</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-semibold uppercase text-slate-700 mb-1">Punto de Entrega / Silo</label>
+<input class="w-full bg-slate-100 border border-slate-300 text-slate-600 p-2 text-xs rounded-none outline-none font-mono-tech" readonly="" type="text" value="Planta Central #01 - Silo Harinas"/>
+</div>
+</div>
+<div class="bg-slate-100 border border-slate-200 p-3 flex items-center justify-between text-xs font-mono-tech">
+<span class="text-slate-600 uppercase font-semibold">Base Imponible + IVA (10%):</span>
+<span class="text-sm font-bold text-slate-950">$1,380.00</span>
+</div>
+</div>
+<div class="bg-slate-100 border-t border-slate-200 p-3 flex justify-end space-x-2">
+<button class="bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 px-4 py-2 text-xs font-semibold uppercase rounded-none cursor-pointer" onclick="cerrarModalCompra()">
+          Cancelar
+        </button>
+<button class="bg-slate-950 hover:bg-slate-800 text-white px-5 py-2 text-xs font-semibold uppercase rounded-none cursor-pointer" onclick="confirmarPO()">
+          Autorizar &amp; Generar PO
+        </button>
+</div>
+</div>
+</div>
+<!-- 7. FOOTER CORPORATIVO INSTITUCIONAL COMPLETO -->
+<footer class="bg-slate-950 border-t border-slate-800 py-4 px-6 text-slate-400 text-xs font-mono-tech flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
+<div class="flex items-center space-x-2">
+<span class="text-slate-200 font-semibold">ARTEPAN &amp; CO. SISTEMA DE GESTIÓN EMPRESARIAL © 2025</span>
+<span class="text-slate-700">|</span>
+<span>EDICIÓN INDUSTRIAL V4.8</span>
+<span class="text-slate-700">|</span>
+<span>OBRADOR CENTRAL MADRID</span>
+</div>
+<div class="flex items-center space-x-4 text-[11px]">
+<span>SERVER: <strong class="text-slate-300">SVR-OBRADOR-MAD01</strong></span>
+<span class="text-slate-700">|</span>
+<span>LATENCIA: <strong class="text-slate-300">12ms</strong></span>
+<span class="text-slate-700">|</span>
+<span class="text-emerald-400 font-semibold">ESTADO: 100% OPERATIVO</span>
+</div>
+</footer>
+<!-- LÓGICA JAVASCRIPT SIN DEPENDENCIAS -->
+<script>
+    function abrirModalCompra() {
+      document.getElementById('modal-po').classList.remove('hidden');
+    }
+
+    function cerrarModalCompra() {
+      document.getElementById('modal-po').classList.add('hidden');
+    }
+
+    function confirmarPO() {
+      const prov = document.getElementById('po-proveedor').value;
+      const insumo = document.getElementById('po-insumo').value;
+      const cant = document.getElementById('po-cantidad').value;
+      const folio = 'PO-2025-' + Math.floor(1000 + Math.random() * 9000);
+      alert('Orden de Compra emitida y firmada digitalmente:\n\nFolio: ' + folio + '\nProveedor: ' + prov + '\nInsumo: ' + insumo + ' (' + cant + ' unidades/kg)\n\nEnviado a libro de devengos del ERP.');
+      cerrarModalCompra();
+    }
+
+    function generarPedidoRapido(insumo, proveedor) {
+      document.getElementById('po-insumo').value = insumo;
+      document.getElementById('po-proveedor').value = proveedor;
+      abrirModalCompra();
+    }
+
+    function exportarBalances() {
+      const csv = "Folio,Fecha,Proveedor,Total,Estado\nPO-2025-0891,12/10/2025,Grands Moulins de Paris S.A.,5520.00,PAGADO\nPO-2025-0895,18/10/2025,Elle & Vire Professional,4900.00,PENDIENTE\nPO-2025-0899,21/10/2025,Smurfit Kappa Group,2125.00,PENDIENTE\nPO-2025-0904,24/10/2025,Valrhona Cacao,2250.00,EN REVISION\nPO-2025-0872,02/10/2025,Valrhona Cacao,4355.00,PAGADO";
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", "Libro_Mayor_Proveedores_Artepan_Co.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function descargarAuditoria() {
+      alert("Generando expediente contable certificado en formato PDF...\nAuditoría KPMG de devengos Q1 2025 disponible para descarga.");
+    }
+
+    function verFactura(folio) {
+      alert("Acceso al archivo contable digital para el folio " + folio + ".\nComprobante fiscal con sello de hacienda verificado.");
+    }
+
+    function conciliarPO(folio) {
+      alert("La orden de compra " + folio + " ha sido conciliada contra el extracto bancario en curso.");
+    }
+
+    function filtrarMaterias() {
+      const q = document.getElementById('buscadorMateria').value.toLowerCase();
+      const filas = document.querySelectorAll('#tablaMaterias tbody tr');
+      filas.forEach(fila => {
+        const texto = fila.textContent.toLowerCase();
+        fila.style.display = texto.includes(q) ? '' : 'none';
+      });
+    }
+
+    function filtrarEstadoOC(estado) {
+      const filas = document.querySelectorAll('.fila-oc');
+      filas.forEach(fila => {
+        if (estado === 'TODAS' || fila.getAttribute('data-estado') === estado) {
+          fila.style.display = '';
+        } else {
+          fila.style.display = 'none';
+        }
+      });
+
+      const botones = [
+        { id: 'btn-filtro-todas', key: 'TODAS' },
+        { id: 'btn-filtro-pagadas', key: 'PAGADO' },
+        { id: 'btn-filtro-pendientes', key: 'PENDIENTE' },
+        { id: 'btn-filtro-revision', key: 'EN REVISIÓN' }
+      ];
+
+      botones.forEach(b => {
+        const btn = document.getElementById(b.id);
+        if (b.key === estado) {
+          btn.className = "px-2.5 py-1 text-xs font-semibold uppercase bg-slate-900 text-white rounded-none";
+        } else {
+          btn.className = "px-2.5 py-1 text-xs font-semibold uppercase text-slate-700 hover:bg-slate-200 rounded-none";
+        }
+      });
+    }
+  </script>
+</body></html>

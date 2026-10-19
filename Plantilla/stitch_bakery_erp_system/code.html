@@ -1,0 +1,1496 @@
+<!DOCTYPE html><html class="h-full bg-slate-100" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ARTEPAN &amp; CO. | ERP Ejecutivo &amp; Control de Obrador</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              700: '#b45309',
+              800: '#92400e',
+              900: '#78350f',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="h-full flex flex-col text-slate-900 antialiased selection:bg-slate-800 selection:text-white">
+<!-- BARRA DE NAVEGACIÓN SUPERIOR (SÓLIDA 100%, SIN BLUR NI TRANSPARENCIAS) -->
+<header class="bg-slate-900 border-b border-slate-800 text-white shrink-0 sticky top-0 z-50">
+<div class="w-full px-6 flex items-center justify-between h-16">
+<!-- Logo y Razón Social Corporativa -->
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-3">
+<div class="w-9 h-9 bg-amber-700 text-white flex items-center justify-center font-bold text-lg rounded-none">
+            A
+          </div>
+<div>
+<div class="text-sm font-bold tracking-tight text-white leading-tight">ARTEPAN &amp; CO.</div>
+<div class="text-xs text-slate-400 font-mono">ERP OBRADOR V4.8</div>
+</div>
+</div>
+<div class="h-6 w-px bg-slate-800 hidden md:block"></div>
+<!-- Indicador de Turno y Centro de Costos -->
+<div class="hidden lg:flex items-center space-x-2 text-xs font-mono text-slate-300">
+<span class="w-2 h-2 bg-emerald-500 inline-block"></span>
+<span class="">PLANTA CENTRAL #01</span>
+<span class="text-slate-600">|</span>
+<span class="">TURNO MATUTINO (04:00 - 13:00)</span>
+</div>
+</div>
+<!-- Menú de 5 Pestañas (Botones Rectangulares Planos) -->
+<nav class="flex items-center space-x-1" id="nav-tabs">
+<button class="nav-btn px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-slate-800 border-b-2 border-amber-600 rounded-none transition-none" id="btn-inicio" onclick="switchTab('inicio')">
+          1. Inicio &amp; Catálogo
+        </button>
+<button class="nav-btn px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-white hover:bg-slate-800 border-b-2 border-transparent rounded-none transition-none" id="btn-pos" onclick="switchTab('pos')">
+          2. Punto de Venta (POS)
+        </button>
+<button class="nav-btn px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-white hover:bg-slate-800 border-b-2 border-transparent rounded-none transition-none" id="btn-proveedores" onclick="switchTab('proveedores')">
+          3. Proveedores &amp; Finanzas
+        </button>
+<button class="nav-btn px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-white hover:bg-slate-800 border-b-2 border-transparent rounded-none transition-none" id="btn-logistica" onclick="switchTab('logistica')">
+          4. Logística &amp; Rutas
+        </button>
+<button class="nav-btn px-4 py-2 text-xs font-semibold uppercase tracking-wider text-amber-400 hover:text-amber-300 hover:bg-zinc-800 border-b-2 border-transparent rounded-none transition-none" id="btn-dashboard" onclick="switchTab('dashboard')">
+          5. Dashboard Ejecutivo [VIP]
+        </button>
+</nav>
+<!-- Panel de Usuario & Fecha -->
+<div class="flex items-center space-x-4">
+<div class="text-right hidden sm:block">
+<div class="text-xs font-semibold text-slate-200">Ing. M. Valenzuela</div>
+<div class="text-xs text-slate-400 font-mono">ID: OBR-9402</div>
+</div>
+<div class="w-8 h-8 bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold text-slate-300 rounded-none">
+          MV
+        </div>
+</div>
+</div>
+</header>
+<!-- CONTENEDOR PRINCIPAL -->
+<main class="flex-1 w-full overflow-y-auto">
+<!-- ======================================================== -->
+<!-- PESTAÑA 1: INICIO & CATÁLOGO GENERAL (MODO CLARO SÓLIDO) -->
+<!-- ======================================================== -->
+<section class="tab-content active p-8 max-w-7xl mx-auto space-y-8" id="tab-inicio">
+<!-- Encabezado Corporativo Directo (Sin Badges ni Píldoras) -->
+<div class="bg-white border border-slate-200 p-8 shadow-none">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div>
+<h1 class="text-3xl font-bold text-slate-900 tracking-tight">Obrador Central y Catálogo de Producción</h1>
+<p class="text-sm text-slate-600 mt-2 max-w-3xl">
+              Sistema de planificación y despacho mayorista para pastelería de autor y panadería tradicional con fermentación lenta. Supervisión de recetas maestras, lotes de alta gama y abastecimiento HORECA.
+            </p>
+</div>
+<!-- Botones Rectangulares de Acceso Directo -->
+<div class="flex flex-wrap items-center gap-3 shrink-0">
+<button class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold uppercase tracking-wider rounded-none" onclick="switchTab('pos')">
+              Abrir Terminal Táctil
+            </button>
+<button class="px-5 py-2.5 bg-amber-700 hover:bg-amber-800 text-white text-xs font-semibold uppercase tracking-wider rounded-none" onclick="switchTab('dashboard')">
+              Métricas de Producción
+            </button>
+</div>
+</div>
+<!-- Indicadores Rápidos de la Mañana -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-6 border-t border-slate-200">
+<div class="bg-slate-50 border border-slate-200 p-4">
+<div class="text-xs font-mono text-slate-500 uppercase">Capacidad Actual</div>
+<div class="text-2xl font-bold text-slate-900 mt-1">1,840 kg</div>
+<div class="text-xs text-slate-600 mt-1">Harinas procesadas hoy</div>
+</div>
+<div class="bg-slate-50 border border-slate-200 p-4">
+<div class="text-xs font-mono text-slate-500 uppercase">Lotes Fermentando</div>
+<div class="text-2xl font-bold text-slate-900 mt-1">42 Lotes</div>
+<div class="text-xs text-slate-600 mt-1">Cámaras frías a 4°C</div>
+</div>
+<div class="bg-slate-50 border border-slate-200 p-4">
+<div class="text-xs font-mono text-slate-500 uppercase">Órdenes HORECA</div>
+<div class="text-2xl font-bold text-slate-900 mt-1">28 Pedidos</div>
+<div class="text-xs text-slate-600 mt-1">Hoteles y restaurantes</div>
+</div>
+<div class="bg-slate-50 border border-slate-200 p-4">
+<div class="text-xs font-mono text-slate-500 uppercase">Eficiencia Térmica</div>
+<div class="text-2xl font-bold text-emerald-700 mt-1">94.2%</div>
+<div class="text-xs text-slate-600 mt-1">Hornos de solera de piedra</div>
+</div>
+</div>
+</div>
+<!-- Filtros de Catálogo -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-300 pb-4">
+<div>
+<h2 class="text-xl font-bold text-slate-900">Catálogo Maestro de Productos</h2>
+<p class="text-xs text-slate-500 mt-0.5">Control de SKU, mermas estimadas y disponibilidad para distribución</p>
+</div>
+<div class="flex items-center space-x-2">
+<button class="px-3 py-1.5 bg-slate-900 text-white text-xs font-medium rounded-none">Todos</button>
+<button class="px-3 py-1.5 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-medium rounded-none">Masa Madre</button>
+<button class="px-3 py-1.5 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-medium rounded-none">Viennoiserie</button>
+<button class="px-3 py-1.5 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-medium rounded-none">Pastelería Fina</button>
+</div>
+</div>
+<!-- Grid Estructurado de Productos (Tarjetas Sólidas con Bordes Mínimos) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Producto 1 -->
+<div class="bg-white border border-slate-200 p-4 flex flex-col justify-between">
+<div>
+<div class="w-full h-44 bg-slate-200 border border-slate-300 mb-4 overflow-hidden relative">
+<img alt="Hogaza Campesina Masa Madre" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&amp;fit=crop&amp;w=700&amp;q=80">
+<div class="absolute top-2 left-2 bg-slate-900 text-white text-xs font-mono font-bold px-2 py-1 rounded-none">
+SKU: PAN-010
+</div>
+</div>
+<div class="flex items-start justify-between gap-2">
+<h3 class="font-bold text-slate-900 text-base leading-snug">Hogaza Campesina Masa Madre</h3>
+<span class="bg-emerald-100 text-emerald-800 text-xs font-mono font-semibold px-2 py-0.5 border border-emerald-300 rounded-none">STOCK ALTO</span>
+</div>
+<p class="text-xs text-slate-600 mt-2 leading-relaxed">
+Fermentación en frío 36h. Harina T65 molida a la piedra y centeno integral. 82% hidratación.
+</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between">
+<div>
+<span class="text-xs text-slate-500 font-mono block">PRECIO MAYORISTA</span>
+<span class="text-lg font-bold text-slate-900 font-mono">$4.80 / ud</span>
+</div>
+<button class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium rounded-none" onclick="addToCart('Hogaza Campesina', 4.80)">
+Añadir a Pedido
+</button>
+</div>
+</div>
+<!-- Producto 2 -->
+<div class="bg-white border border-slate-200 p-4 flex flex-col justify-between">
+<div>
+<div class="w-full h-44 bg-slate-200 border border-slate-300 mb-4 overflow-hidden relative">
+<img alt="Croissant de Mantequilla Isigny" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&amp;fit=crop&amp;w=700&amp;q=80">
+<div class="absolute top-2 left-2 bg-slate-900 text-white text-xs font-mono font-bold px-2 py-1 rounded-none">
+SKU: VIE-004
+</div>
+</div>
+<div class="flex items-start justify-between gap-2">
+<h3 class="font-bold text-slate-900 text-base leading-snug">Croissant Mantequilla AOP Isigny</h3>
+<span class="bg-emerald-100 text-emerald-800 text-xs font-mono font-semibold px-2 py-0.5 border border-emerald-300 rounded-none">STOCK ALTO</span>
+</div>
+<p class="text-xs text-slate-600 mt-2 leading-relaxed">
+Hojaldrado artesanal de 24 capas. Mantequilla de Normandía AOP 84% M.G. alveolado nido de abeja.
+</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between">
+<div>
+<span class="text-xs text-slate-500 font-mono block">PRECIO MAYORISTA</span>
+<span class="text-lg font-bold text-slate-900 font-mono">$2.60 / ud</span>
+</div>
+<button class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium rounded-none" onclick="addToCart('Croissant AOP Isigny', 2.60)">
+Añadir a Pedido
+</button>
+</div>
+</div>
+<!-- Producto 3 -->
+<div class="bg-white border border-slate-200 p-4 flex flex-col justify-between">
+<div>
+<div class="w-full h-44 bg-slate-200 border border-slate-300 mb-4 overflow-hidden relative">
+<img alt="Pain au Chocolat Valrhona" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?auto=format&amp;fit=crop&amp;w=700&amp;q=80">
+<div class="absolute top-2 left-2 bg-slate-900 text-white text-xs font-mono font-bold px-2 py-1 rounded-none">
+SKU: VIE-007
+</div>
+</div>
+<div class="flex items-start justify-between gap-2">
+<h3 class="font-bold text-slate-900 text-base leading-snug">Pain au Chocolat Valrhona 70%</h3>
+<span class="bg-amber-100 text-amber-800 text-xs font-mono font-semibold px-2 py-0.5 border border-amber-300 rounded-none">STOCK MEDIO</span>
+</div>
+<p class="text-xs text-slate-600 mt-2 leading-relaxed">
+Doble barra de chocolate Guanaja de origen controlado. Brillo natural de yema campera.
+</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between">
+<div>
+<span class="text-xs text-slate-500 font-mono block">PRECIO MAYORISTA</span>
+<span class="text-lg font-bold text-slate-900 font-mono">$2.95 / ud</span>
+</div>
+<button class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium rounded-none" onclick="addToCart('Pain au Chocolat 70%', 2.95)">
+Añadir a Pedido
+</button>
+</div>
+</div>
+<!-- Producto 4 -->
+<div class="bg-white border border-slate-200 p-4 flex flex-col justify-between">
+<div>
+<div class="w-full h-44 bg-slate-200 border border-slate-300 mb-4 overflow-hidden relative">
+<img alt="Tarta Ópera Clásica" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&amp;fit=crop&amp;w=700&amp;q=80">
+<div class="absolute top-2 left-2 bg-slate-900 text-white text-xs font-mono font-bold px-2 py-1 rounded-none">
+SKU: PAS-022
+</div>
+</div>
+<div class="flex items-start justify-between gap-2">
+<h3 class="font-bold text-slate-900 text-base leading-snug">Tarta Ópera Clásica 8 Porciones</h3>
+<span class="bg-red-100 text-red-800 text-xs font-mono font-semibold px-2 py-0.5 border border-red-300 rounded-none">POR ENCARGO</span>
+</div>
+<p class="text-xs text-slate-600 mt-2 leading-relaxed">
+Bizcocho Joconde impregnado de café arábica, ganache y crema de mantequilla al café.
+</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between">
+<div>
+<span class="text-xs text-slate-500 font-mono block">PRECIO MAYORISTA</span>
+<span class="text-lg font-bold text-slate-900 font-mono">$32.00 / ud</span>
+</div>
+<button class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium rounded-none" onclick="addToCart('Tarta Ópera Clásica', 32.00)">
+Añadir a Pedido
+</button>
+</div>
+</div>
+<!-- Producto 5 -->
+<div class="bg-white border border-slate-200 p-4 flex flex-col justify-between">
+<div>
+<div class="w-full h-44 bg-slate-200 border border-slate-300 mb-4 overflow-hidden relative">
+<img alt="Baguette Tradición Francesa" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&amp;fit=crop&amp;w=700&amp;q=80">
+<div class="absolute top-2 left-2 bg-slate-900 text-white text-xs font-mono font-bold px-2 py-1 rounded-none">
+SKU: PAN-001
+</div>
+</div>
+<div class="flex items-start justify-between gap-2">
+<h3 class="font-bold text-slate-900 text-base leading-snug">Baguette Tradición Francesa Label Rouge</h3>
+<span class="bg-emerald-100 text-emerald-800 text-xs font-mono font-semibold px-2 py-0.5 border border-emerald-300 rounded-none">STOCK ALTO</span>
+</div>
+<p class="text-xs text-slate-600 mt-2 leading-relaxed">
+Corteza caramelizada crujiente, miga alveolada húmeda con crema natural de trigo T65.
+</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between">
+<div>
+<span class="text-xs text-slate-500 font-mono block">PRECIO MAYORISTA</span>
+<span class="text-lg font-bold text-slate-900 font-mono">$1.75 / ud</span>
+</div>
+<button class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium rounded-none" onclick="addToCart('Baguette Tradición Label Rouge', 1.75)">
+Añadir a Pedido
+</button>
+</div>
+</div>
+<!-- Producto 6 -->
+<div class="bg-white border border-slate-200 p-4 flex flex-col justify-between">
+<div>
+<div class="w-full h-44 bg-slate-200 border border-slate-300 mb-4 overflow-hidden relative">
+<img alt="Tartaleta Frambuesa y Vainilla Bourbon" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&amp;fit=crop&amp;w=700&amp;q=80">
+<div class="absolute top-2 left-2 bg-slate-900 text-white text-xs font-mono font-bold px-2 py-1 rounded-none">
+SKU: PAS-015
+</div>
+</div>
+<div class="flex items-start justify-between gap-2">
+<h3 class="font-bold text-slate-900 text-base leading-snug">Tartaleta Vainilla Bourbon y Frambuesa</h3>
+<span class="bg-emerald-100 text-emerald-800 text-xs font-mono font-semibold px-2 py-0.5 border border-emerald-300 rounded-none">STOCK ALTO</span>
+</div>
+<p class="text-xs text-slate-600 mt-2 leading-relaxed">
+Masa sablée crujiente con confit de frambuesa ecológica y ganache montada de Madagascar.
+</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between">
+<div>
+<span class="text-xs text-slate-500 font-mono block">PRECIO MAYORISTA</span>
+<span class="text-lg font-bold text-slate-900 font-mono">$5.40 / ud</span>
+</div>
+<button class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium rounded-none" onclick="addToCart('Tartaleta Vainilla &amp; Frambuesa', 5.40)">
+Añadir a Pedido
+</button>
+</div>
+</div>
+<!-- Producto 7 -->
+<div class="bg-white border border-slate-200 p-4 flex flex-col justify-between">
+<div>
+<div class="w-full h-44 bg-slate-200 border border-slate-300 mb-4 overflow-hidden relative">
+<img alt="Brioche Nanterre Mantequilla" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&amp;fit=crop&amp;w=700&amp;q=80">
+<div class="absolute top-2 left-2 bg-slate-900 text-white text-xs font-mono font-bold px-2 py-1 rounded-none">
+SKU: BRI-003
+</div>
+</div>
+<div class="flex items-start justify-between gap-2">
+<h3 class="font-bold text-slate-900 text-base leading-snug">Brioche Nanterre Mantequilla 500g</h3>
+<span class="bg-amber-100 text-amber-800 text-xs font-mono font-semibold px-2 py-0.5 border border-amber-300 rounded-none">STOCK MEDIO</span>
+</div>
+<p class="text-xs text-slate-600 mt-2 leading-relaxed">
+Textura de pluma con huevos frescos camperos y 45% mantequilla clarificada de Bretaña.
+</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between">
+<div>
+<span class="text-xs text-slate-500 font-mono block">PRECIO MAYORISTA</span>
+<span class="text-lg font-bold text-slate-900 font-mono">$6.20 / ud</span>
+</div>
+<button class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium rounded-none" onclick="addToCart('Brioche Nanterre 500g', 6.20)">
+Añadir a Pedido
+</button>
+</div>
+</div>
+<!-- Producto 8 -->
+<div class="bg-white border border-slate-200 p-4 flex flex-col justify-between">
+<div>
+<div class="w-full h-44 bg-slate-200 border border-slate-300 mb-4 overflow-hidden relative">
+<img alt="Macarons Artesanales Gourmet" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1569864321390-bf38e7ef9e63?auto=format&amp;fit=crop&amp;w=700&amp;q=80">
+<div class="absolute top-2 left-2 bg-slate-900 text-white text-xs font-mono font-bold px-2 py-1 rounded-none">
+SKU: PAS-088
+</div>
+</div>
+<div class="flex items-start justify-between gap-2">
+<h3 class="font-bold text-slate-900 text-base leading-snug">Caja Macarons Selección (12 Uds)</h3>
+<span class="bg-emerald-100 text-emerald-800 text-xs font-mono font-semibold px-2 py-0.5 border border-emerald-300 rounded-none">STOCK ALTO</span>
+</div>
+<p class="text-xs text-slate-600 mt-2 leading-relaxed">
+Pistacho de Bronte, Yuzu japonés, Café arábica, Frambuesa y Cobertura Guanaja 70%.
+</p>
+</div>
+<div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between">
+<div>
+<span class="text-xs text-slate-500 font-mono block">PRECIO MAYORISTA</span>
+<span class="text-lg font-bold text-slate-900 font-mono">$18.50 / caja</span>
+</div>
+<button class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium rounded-none" onclick="addToCart('Caja Macarons 12 Uds', 18.50)">
+Añadir a Pedido
+</button>
+</div>
+</div>
+</div>
+<!-- ======================================================== -->
+<!-- SECCIÓN TÉCNICA: FÓRMULAS MAESTRAS & ESCANDALLOS TÉCNICOS -->
+<!-- ======================================================== -->
+<div class="border-t border-slate-300 pt-8 space-y-6">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+<div>
+<div class="text-xs font-mono uppercase text-amber-700 font-bold tracking-wider">ESPECIFICACIONES DE FERMENTACIÓN &amp; MEZCLA</div>
+<h2 class="text-xl font-bold text-slate-900 tracking-tight mt-0.5">Fórmulas Maestras y Porcentajes de Panadero</h2>
+<p class="text-xs text-slate-500 mt-0.5">Parámetros reológicos, índice de hidratación y tiempos de fermentación controlada en bloque</p>
+</div>
+<div class="flex items-center space-x-2">
+<button class="px-3 py-1.5 bg-white border border-slate-300 text-slate-800 hover:bg-slate-50 text-xs font-mono font-semibold rounded-none">
+Descargar Fichas PDF
+</button>
+<button class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold uppercase tracking-wider rounded-none">
++ Nueva Fórmula
+</button>
+</div>
+</div>
+<!-- Tabla de Fórmulas y Porcentajes -->
+<div class="bg-white border border-slate-200 overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead class="bg-slate-100 border-b border-slate-200 font-mono text-slate-600 uppercase">
+<tr>
+<th class="py-3 px-4">Receta Maestra</th>
+<th class="py-3 px-4">Harina Base (100%)</th>
+<th class="py-3 px-4 text-center">% Hidratación</th>
+<th class="py-3 px-4 text-center">% Masa Madre</th>
+<th class="py-3 px-4 text-center">% Sal Marina</th>
+<th class="py-3 px-4">Autólisis</th>
+<th class="py-3 px-4">Bloque Frío (4°C)</th>
+<th class="py-3 px-4 text-right">Costo Masa / kg</th>
+<th class="py-3 px-4 text-center">Estado</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 font-sans">
+<tr>
+<td class="py-3 px-4 font-bold text-slate-900">
+Hogaza Campesina Rústica
+<span class="block text-[11px] font-mono text-slate-500">FM-PAN-01</span>
+</td>
+<td class="py-3 px-4 font-mono text-slate-700">T65 Piedra (85%) + Centeno T130 (15%)</td>
+<td class="py-3 px-4 text-center font-mono font-bold text-slate-900">82%</td>
+<td class="py-3 px-4 text-center font-mono text-slate-700">22% (Centeno Sólida)</td>
+<td class="py-3 px-4 text-center font-mono text-slate-700">2.1%</td>
+<td class="py-3 px-4 font-mono text-slate-700">45 min (22°C)</td>
+<td class="py-3 px-4 font-mono font-semibold text-slate-800">36 horas</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">$0.78 / kg</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-emerald-100 text-emerald-800 font-mono px-2 py-0.5 border border-emerald-300 font-semibold rounded-none">HOMOLOGADA</span>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-bold text-slate-900">
+Baguette Tradición Francesa
+<span class="block text-[11px] font-mono text-slate-500">FM-PAN-02</span>
+</td>
+<td class="py-3 px-4 font-mono text-slate-700">Trigo T65 Label Rouge (100%)</td>
+<td class="py-3 px-4 text-center font-mono font-bold text-slate-900">74%</td>
+<td class="py-3 px-4 text-center font-mono text-slate-700">15% (Líquida 100%)</td>
+<td class="py-3 px-4 text-center font-mono text-slate-700">1.9%</td>
+<td class="py-3 px-4 font-mono text-slate-700">60 min (20°C)</td>
+<td class="py-3 px-4 font-mono font-semibold text-slate-800">24 horas</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">$0.64 / kg</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-emerald-100 text-emerald-800 font-mono px-2 py-0.5 border border-emerald-300 font-semibold rounded-none">HOMOLOGADA</span>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-bold text-slate-900">
+Brioche Clásico Pur Beurre
+<span class="block text-[11px] font-mono text-slate-500">FM-BRI-05</span>
+</td>
+<td class="py-3 px-4 font-mono text-slate-700">Trigo Fuerte T45 W380 (100%)</td>
+<td class="py-3 px-4 text-center font-mono font-bold text-slate-900">48% (Huevos frescos)</td>
+<td class="py-3 px-4 text-center font-mono text-slate-700">8% (Levain Dulce)</td>
+<td class="py-3 px-4 text-center font-mono text-slate-700">2.0%</td>
+<td class="py-3 px-4 font-mono text-slate-700">Sin autólisis</td>
+<td class="py-3 px-4 font-mono font-semibold text-slate-800">18 horas</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">$2.42 / kg</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-emerald-100 text-emerald-800 font-mono px-2 py-0.5 border border-emerald-300 font-semibold rounded-none">HOMOLOGADA</span>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-bold text-slate-900">
+Hojaldre Croissant AOP Isigny
+<span class="block text-[11px] font-mono text-slate-500">FM-VIE-01</span>
+</td>
+<td class="py-3 px-4 font-mono text-slate-700">T45 Gruau (70%) + T55 (30%)</td>
+<td class="py-3 px-4 text-center font-mono font-bold text-slate-900">54% (Leche entera)</td>
+<td class="py-3 px-4 text-center font-mono text-slate-700">10% (Poolish frágil)</td>
+<td class="py-3 px-4 text-center font-mono text-slate-700">2.2%</td>
+<td class="py-3 px-4 font-mono text-slate-700">20 min reposo</td>
+<td class="py-3 px-4 font-mono font-semibold text-slate-800">14 horas (Bloque)</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">$3.15 / kg</td>
+<td class="py-3 px-4 text-center">
+<span class="bg-emerald-100 text-emerald-800 font-mono px-2 py-0.5 border border-emerald-300 font-semibold rounded-none">HOMOLOGADA</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ======================================================== -->
+<!-- SECCIÓN TÉCNICA: VISOR DE LOTES DE PRODUCCIÓN ACTIVOS   -->
+<!-- ======================================================== -->
+<div class="border-t border-slate-300 pt-8 space-y-6">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+<div>
+<div class="text-xs font-mono uppercase text-slate-500 font-bold tracking-wider">TRAZABILIDAD EN TIEMPO REAL &amp; PLANIFICACIÓN</div>
+<h2 class="text-xl font-bold text-slate-900 tracking-tight mt-0.5">Lotes de Producción Activos en Planta</h2>
+<p class="text-xs text-slate-500 mt-0.5">Monitoreo de fase de masa, cámara frigorífica, amasadora asignada y orden de horneado matutino</p>
+</div>
+<div class="flex items-center space-x-3 text-xs font-mono text-slate-600">
+<span class="flex items-center space-x-1.5">
+<span class="w-2 h-2 bg-emerald-500 inline-block"></span>
+<span class="">En Fermentación: 24 lotes</span>
+</span>
+<span class="flex items-center space-x-1.5">
+<span class="w-2 h-2 bg-amber-500 inline-block"></span>
+<span class="">En Horneado: 8 lotes</span>
+</span>
+</div>
+</div>
+<!-- Tabla de Lotes Activos -->
+<div class="bg-white border border-slate-200 overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead class="bg-slate-100 border-b border-slate-200 font-mono text-slate-600 uppercase">
+<tr>
+<th class="py-3 px-4">ID Lote</th>
+<th class="py-3 px-4">Producto / Receta</th>
+<th class="py-3 px-4">Amasadora</th>
+<th class="py-3 px-4 text-right">Kilos Masa</th>
+<th class="py-3 px-4">Hora Amasado</th>
+<th class="py-3 px-4">Entrada Cámara 4°C</th>
+<th class="py-3 px-4">Horneado Estimado</th>
+<th class="py-3 px-4">Estado de Proceso</th>
+<th class="py-3 px-4 text-center">Control</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 font-sans">
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-900">LOT-2025-0881</td>
+<td class="py-3 px-4 font-semibold text-slate-900">Hogaza Campesina Masa Madre (800g)</td>
+<td class="py-3 px-4 font-mono text-slate-700">Espirale Diosna SP-120</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">240 kg</td>
+<td class="py-3 px-4 font-mono text-slate-600">Ayer 16:30</td>
+<td class="py-3 px-4 font-mono text-slate-600">Ayer 18:00 (Cámara #02)</td>
+<td class="py-3 px-4 font-mono font-bold text-amber-800">Hoy 05:30 AM</td>
+<td class="py-3 px-4">
+<span class="bg-emerald-100 text-emerald-800 font-mono px-2 py-0.5 border border-emerald-300 font-semibold rounded-none">FERMENTACIÓN 34H (LISTO)</span>
+</td>
+<td class="py-3 px-4 text-center">
+<button class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white font-mono text-[11px] rounded-none">Mandar a Horno</button>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-900">LOT-2025-0882</td>
+<td class="py-3 px-4 font-semibold text-slate-900">Baguette Tradición Francesa Label Rouge</td>
+<td class="py-3 px-4 font-mono text-slate-700">Brazos Bongard Arto-90</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">180 kg</td>
+<td class="py-3 px-4 font-mono text-slate-600">Ayer 19:15</td>
+<td class="py-3 px-4 font-mono text-slate-600">Ayer 20:30 (Cámara #01)</td>
+<td class="py-3 px-4 font-mono font-bold text-slate-900">Hoy 06:15 AM</td>
+<td class="py-3 px-4">
+<span class="bg-emerald-100 text-emerald-800 font-mono px-2 py-0.5 border border-emerald-300 font-semibold rounded-none">EN FRÍO (22H)</span>
+</td>
+<td class="py-3 px-4 text-center">
+<button class="px-2 py-1 bg-white border border-slate-300 text-slate-800 hover:bg-slate-50 font-mono text-[11px] rounded-none">Ver Registro</button>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-900">LOT-2025-0883</td>
+<td class="py-3 px-4 font-semibold text-slate-900">Croissant Francés Mantequilla AOP Isigny</td>
+<td class="py-3 px-4 font-mono text-slate-700">Laminadora Rondo Smart</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">120 kg</td>
+<td class="py-3 px-4 font-mono text-slate-600">Hoy 02:00</td>
+<td class="py-3 px-4 font-mono text-slate-600">Hoy 03:45 (Cámara París #04)</td>
+<td class="py-3 px-4 font-mono font-bold text-amber-800">Hoy 05:00 AM</td>
+<td class="py-3 px-4">
+<span class="bg-amber-100 text-amber-800 font-mono px-2 py-0.5 border border-amber-300 font-semibold rounded-none">EN HORNO ROTATIVO B</span>
+</td>
+<td class="py-3 px-4 text-center">
+<button class="px-2 py-1 bg-amber-700 hover:bg-amber-800 text-white font-mono text-[11px] rounded-none">Supervisar</button>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-900">LOT-2025-0884</td>
+<td class="py-3 px-4 font-semibold text-slate-900">Brioche Nanterre Mantequilla 500g</td>
+<td class="py-3 px-4 font-mono text-slate-700">Espirale Diosna SP-120</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">95 kg</td>
+<td class="py-3 px-4 font-mono text-slate-600">Hoy 03:30</td>
+<td class="py-3 px-4 font-mono text-slate-600">En bloque mesa acondicionada</td>
+<td class="py-3 px-4 font-mono font-bold text-slate-900">Hoy 07:30 AM</td>
+<td class="py-3 px-4">
+<span class="bg-blue-100 text-blue-800 font-mono px-2 py-0.5 border border-blue-300 font-semibold rounded-none">FORMADO EN MESA</span>
+</td>
+<td class="py-3 px-4 text-center">
+<button class="px-2 py-1 bg-white border border-slate-300 text-slate-800 hover:bg-slate-50 font-mono text-[11px] rounded-none">Ver Registro</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></section>
+<!-- ======================================================== -->
+<!-- PESTAÑA 2: PUNTO DE VENTA (POS TÁCTIL)                    -->
+<!-- ======================================================== -->
+<section class="tab-content p-6 max-w-7xl mx-auto" id="tab-pos">
+<!-- Layout Dividido Estricto: 65% Izquierda y 35% Derecha -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
+<!-- COLUMNA IZQUIERDA (65%): Catálogo Rápido y Búsqueda -->
+<div class="lg:col-span-8 flex flex-col space-y-4">
+<!-- Barra Superior del POS (Buscador & Categorías Cuadradas) -->
+<div class="bg-white border border-slate-200 p-4">
+<div class="flex items-center space-x-3 mb-3">
+<div class="relative flex-1">
+<input class="w-full bg-slate-50 border border-slate-300 px-4 py-2 text-sm text-slate-900 focus:outline-none focus:border-slate-800 rounded-none" id="pos-search" placeholder="Buscar por SKU, nombre o código de barras (F2)..." type="text">
+</div>
+<button class="px-4 py-2 bg-slate-900 text-white text-xs font-semibold uppercase tracking-wider rounded-none">
+                Escanear
+              </button>
+</div>
+<!-- Botones de Categorías Cuadrados y Planos -->
+<div class="flex flex-wrap gap-2">
+<button class="cat-btn px-4 py-2 bg-slate-900 text-white text-xs font-bold uppercase rounded-none" onclick="filterPosCategory('all')">Todas</button>
+<button class="cat-btn px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 text-xs font-bold uppercase rounded-none" onclick="filterPosCategory('panaderia')">Panadería Masa Madre</button>
+<button class="cat-btn px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 text-xs font-bold uppercase rounded-none" onclick="filterPosCategory('bolleria')">Viennoiserie &amp; Hojaldres</button>
+<button class="cat-btn px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 text-xs font-bold uppercase rounded-none" onclick="filterPosCategory('pasteleria')">Pastelería Individual</button>
+<button class="cat-btn px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 text-xs font-bold uppercase rounded-none" onclick="filterPosCategory('bebidas')">Café Especialidad &amp; Bebidas</button>
+</div>
+</div>
+<!-- Cuadrícula de Selección Rápida Táctil -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 overflow-y-auto max-h-[620px] p-1">
+<!-- Item POS 1 -->
+<button class="bg-white border border-slate-300 hover:border-slate-900 p-3 text-left flex flex-col justify-between transition-none active:bg-slate-100 rounded-none h-40" onclick="addToCart('Hogaza Campesina', 4.80)">
+<div class="w-full h-20 bg-slate-200 mb-2 overflow-hidden border border-slate-200">
+<img alt="Hogaza Campesina" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+</div>
+<div class="font-bold text-xs text-slate-900 leading-tight">Hogaza Campesina 800g</div>
+<div class="font-mono text-sm font-bold text-amber-800 mt-1">$4.80</div>
+</button>
+<!-- Item POS 2 -->
+<button class="bg-white border border-slate-300 hover:border-slate-900 p-3 text-left flex flex-col justify-between transition-none active:bg-slate-100 rounded-none h-40" onclick="addToCart('Croissant Francés AOP', 2.60)">
+<div class="w-full h-20 bg-slate-200 mb-2 overflow-hidden border border-slate-200">
+<img alt="Croissant Francés" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+</div>
+<div class="font-bold text-xs text-slate-900 leading-tight">Croissant Mantequilla</div>
+<div class="font-mono text-sm font-bold text-amber-800 mt-1">$2.60</div>
+</button>
+<!-- Item POS 3 -->
+<button class="bg-white border border-slate-300 hover:border-slate-900 p-3 text-left flex flex-col justify-between transition-none active:bg-slate-100 rounded-none h-40" onclick="addToCart('Pain au Chocolat 70%', 2.95)">
+<div class="w-full h-20 bg-slate-200 mb-2 overflow-hidden border border-slate-200">
+<img alt="Pain au Chocolat" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+</div>
+<div class="font-bold text-xs text-slate-900 leading-tight">Pain au Chocolat Valrhona</div>
+<div class="font-mono text-sm font-bold text-amber-800 mt-1">$2.95</div>
+</button>
+<!-- Item POS 4 -->
+<button class="bg-white border border-slate-300 hover:border-slate-900 p-3 text-left flex flex-col justify-between transition-none active:bg-slate-100 rounded-none h-40" onclick="addToCart('Baguette Tradición', 1.75)">
+<div class="w-full h-20 bg-slate-200 mb-2 overflow-hidden border border-slate-200">
+<img alt="Baguette Tradición" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+</div>
+<div class="font-bold text-xs text-slate-900 leading-tight">Baguette Tradición</div>
+<div class="font-mono text-sm font-bold text-amber-800 mt-1">$1.75</div>
+</button>
+<!-- Item POS 5 -->
+<button class="bg-white border border-slate-300 hover:border-slate-900 p-3 text-left flex flex-col justify-between transition-none active:bg-slate-100 rounded-none h-40" onclick="addToCart('Tartaleta Frutos Rojos', 5.40)">
+<div class="w-full h-20 bg-slate-200 mb-2 overflow-hidden border border-slate-200">
+<img alt="Tartaleta Frutos Rojos" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+</div>
+<div class="font-bold text-xs text-slate-900 leading-tight">Tartaleta Frutos Rojos</div>
+<div class="font-mono text-sm font-bold text-amber-800 mt-1">$5.40</div>
+</button>
+<!-- Item POS 6 -->
+<button class="bg-white border border-slate-300 hover:border-slate-900 p-3 text-left flex flex-col justify-between transition-none active:bg-slate-100 rounded-none h-40" onclick="addToCart('Caja Macarons x12', 18.50)">
+<div class="w-full h-20 bg-slate-200 mb-2 overflow-hidden border border-slate-200">
+<img alt="Caja Macarons" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+</div>
+<div class="font-bold text-xs text-slate-900 leading-tight">Caja Macarons (12)</div>
+<div class="font-mono text-sm font-bold text-amber-800 mt-1">$18.50</div>
+</button>
+<!-- Item POS 7 -->
+<button class="bg-white border border-slate-300 hover:border-slate-900 p-3 text-left flex flex-col justify-between transition-none active:bg-slate-100 rounded-none h-40" onclick="addToCart('Brioche Mantequilla', 6.20)">
+<div class="w-full h-20 bg-slate-200 mb-2 overflow-hidden border border-slate-200">
+<img alt="Brioche" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+</div>
+<div class="font-bold text-xs text-slate-900 leading-tight">Brioche Molde 500g</div>
+<div class="font-mono text-sm font-bold text-amber-800 mt-1">$6.20</div>
+</button>
+<!-- Item POS 8 -->
+<button class="bg-white border border-slate-300 hover:border-slate-900 p-3 text-left flex flex-col justify-between transition-none active:bg-slate-100 rounded-none h-40" onclick="addToCart('Flat White Etiopía', 3.20)">
+<div class="w-full h-20 bg-slate-800 flex items-center justify-center mb-2 border border-slate-300 text-amber-500 font-bold text-xl font-mono">
+                ☕
+              </div>
+<div class="font-bold text-xs text-slate-900 leading-tight">Flat White Etiopía</div>
+<div class="font-mono text-sm font-bold text-amber-800 mt-1">$3.20</div>
+</button>
+</div>
+</div>
+<!-- COLUMNA DERECHA (35%): Ticket de Venta & Pasarela de Cobro -->
+<div class="lg:col-span-4 bg-white border border-slate-200 flex flex-col justify-between h-full">
+<!-- Encabezado del Ticket -->
+<div class="p-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+<div>
+<div class="text-xs font-mono text-slate-500">TICKET #TK-2025-0891</div>
+<div class="text-sm font-bold text-slate-900 mt-0.5">Cliente Mostrador / Venta Rápida</div>
+</div>
+<button class="text-xs text-red-600 hover:text-red-800 font-semibold uppercase tracking-wider" onclick="clearCart()">
+              Vaciar
+            </button>
+</div>
+<!-- Lista de Productos en el Carrito (Scrollable) -->
+<div class="p-4 overflow-y-auto flex-1 space-y-3 min-h-[300px]" id="cart-container">
+<div class="text-center py-16 text-slate-400 text-xs font-mono" id="cart-empty">
+              [ NO HAY PRODUCTOS SELECCIONADOS ]<br>
+              Haga clic en un producto para añadir al pedido
+            </div>
+<div class="space-y-2 hidden" id="cart-items">
+<!-- Renderizado dinámico vía JS -->
+</div>
+</div>
+<!-- Desglose Financiero -->
+<div class="p-4 bg-slate-50 border-t border-slate-200 space-y-2 font-mono text-xs">
+<div class="flex justify-between text-slate-600">
+<span class="">SUBTOTAL NETO</span>
+<span class="font-bold" id="pos-subtotal">$0.00</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span class="">IVA ALIMENTARIO (10%)</span>
+<span class="font-bold" id="pos-iva">$0.00</span>
+</div>
+<div class="flex justify-between text-slate-900 text-base font-bold pt-2 border-t border-slate-300">
+<span class="tracking-tight">TOTAL A PAGAR</span>
+<span class="text-amber-800 text-lg" id="pos-total">$0.00</span>
+</div>
+</div>
+<!-- Botones Sólidos de Métodos de Pago -->
+<div class="p-4 border-t border-slate-200 bg-white grid grid-cols-3 gap-2">
+<button class="py-3 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase rounded-none border border-slate-900 flex flex-col items-center justify-center" onclick="processPayment('Efectivo')">
+<span class="">EFECTIVO</span>
+<span class="text-[10px] text-slate-400 font-mono mt-0.5">[ F7 ]</span>
+</button>
+<button class="py-3 bg-amber-700 hover:bg-amber-800 text-white text-xs font-bold uppercase rounded-none border border-amber-700 flex flex-col items-center justify-center" onclick="processPayment('Tarjeta')">
+<span class="">TARJETA</span>
+<span class="text-[10px] text-amber-200 font-mono mt-0.5">[ F8 ]</span>
+</button>
+<button class="py-3 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold uppercase rounded-none border border-slate-800 flex flex-col items-center justify-center" onclick="processPayment('Transferencia')">
+<span class="">TRANSFER.</span>
+<span class="text-[10px] text-slate-400 font-mono mt-0.5">[ F9 ]</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- ======================================================== -->
+<!-- PESTAÑA 3: PROVEEDORES & FINANZAS                         -->
+<!-- ======================================================== -->
+<section class="tab-content p-8 max-w-7xl mx-auto space-y-8" id="tab-proveedores">
+<!-- Título de la Sección -->
+<div class="border-b border-slate-300 pb-4">
+<h2 class="text-2xl font-bold text-slate-900 tracking-tight">Proveedores, Gestión de Insumos y Tesorería</h2>
+<p class="text-xs text-slate-500 mt-1">Control de inventario crítico del obrador y balance de compromisos comerciales</p>
+</div>
+<!-- Tarjetas Superiores Sólidas de Balance -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white border border-slate-200 p-6">
+<div class="flex items-center justify-between">
+<span class="text-xs font-mono uppercase text-slate-500">Cuentas por Pagar (Proveedores)</span>
+<span class="px-2 py-0.5 bg-red-100 text-red-800 text-xs font-mono font-bold border border-red-200 rounded-none">VENCIMIENTO PRÓXIMO</span>
+</div>
+<div class="text-3xl font-bold text-slate-900 font-mono mt-2">$24,850.40</div>
+<p class="text-xs text-slate-600 mt-2">12 facturas pendientes (Moulins Viron, Elle &amp; Vire, Valrhona)</p>
+<div class="mt-4 pt-3 border-t border-slate-200 flex justify-between text-xs text-slate-500 font-mono">
+<span class="">Días Promedio Pago: 45</span>
+<span class="text-slate-900 font-semibold">Saldo al día</span>
+</div>
+</div>
+<div class="bg-white border border-slate-200 p-6">
+<div class="flex items-center justify-between">
+<span class="text-xs font-mono uppercase text-slate-500">Cuentas por Cobrar (Clientes HORECA)</span>
+<span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-xs font-mono font-bold border border-emerald-200 rounded-none">EN PLAZO</span>
+</div>
+<div class="text-3xl font-bold text-slate-900 font-mono mt-2">$41,320.00</div>
+<p class="text-xs text-slate-600 mt-2">Créditos autorizados a 18 Hoteles 5 Estrellas y Restaurantes Michelín</p>
+<div class="mt-4 pt-3 border-t border-slate-200 flex justify-between text-xs text-slate-500 font-mono">
+<span class="">Días Cobro Promedio: 28</span>
+<span class="text-emerald-700 font-semibold">Tasa Cumplimiento 98.4%</span>
+</div>
+</div>
+<div class="bg-white border border-slate-200 p-6">
+<div class="flex items-center justify-between">
+<span class="text-xs font-mono uppercase text-slate-500">Valor de Stock en Bodega Central</span>
+<span class="px-2 py-0.5 bg-slate-100 text-slate-800 text-xs font-mono font-bold border border-slate-300 rounded-none">AUDITADO</span>
+</div>
+<div class="text-3xl font-bold text-slate-900 font-mono mt-2">$58,940.15</div>
+<p class="text-xs text-slate-600 mt-2">Materias primas secas, cámaras de refrigeración y empaque de lujo</p>
+<div class="mt-4 pt-3 border-t border-slate-200 flex justify-between text-xs text-slate-500 font-mono">
+<span class="">Rotación: 6.2 días</span>
+<span class="text-slate-900 font-semibold">Margen Insumo: 24.1%</span>
+</div>
+</div>
+</div>
+<!-- Tabla Contable de Insumos Críticos del Obrador -->
+<div class="bg-white border border-slate-200">
+<div class="p-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+<div>
+<h3 class="font-bold text-slate-900 text-sm">Control de Stock de Materias Primas Críticas</h3>
+<p class="text-xs text-slate-500">Actualización en tiempo real desde silos y cámaras de conservación</p>
+</div>
+<button class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold uppercase tracking-wider rounded-none">
+            + Ordenar Reabastecimiento
+          </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead class="bg-slate-100 border-b border-slate-200 font-mono text-slate-600 uppercase">
+<tr>
+<th class="py-3 px-4">Código Insumo</th>
+<th class="py-3 px-4">Descripción del Material</th>
+<th class="py-3 px-4">Proveedor Principal</th>
+<th class="py-3 px-4 text-right">Stock Actual</th>
+<th class="py-3 px-4 text-right">Punto de Reorden</th>
+<th class="py-3 px-4">Estado / Alerta</th>
+<th class="py-3 px-4 text-right">Costo Unitario</th>
+<th class="py-3 px-4 text-center">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 font-sans">
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-800">MAT-HAR-01</td>
+<td class="py-3 px-4 font-semibold text-slate-900">Harina Tradición Francesa T65 (Saco 25kg)</td>
+<td class="py-3 px-4 text-slate-600">Grands Moulins de Paris</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">3,450 kg</td>
+<td class="py-3 px-4 text-right font-mono text-slate-500">1,500 kg</td>
+<td class="py-3 px-4">
+<span class="bg-emerald-100 text-emerald-800 font-mono px-2 py-0.5 border border-emerald-300 font-semibold rounded-none">ÓPTIMO</span>
+</td>
+<td class="py-3 px-4 text-right font-mono">$1.12 / kg</td>
+<td class="py-3 px-4 text-center">
+<button class="text-slate-600 hover:text-slate-900 font-mono font-bold">Ver Lotes</button>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-800">MAT-MAN-04</td>
+<td class="py-3 px-4 font-semibold text-slate-900">Mantequilla Extra Seca 84% M.G. Placas Hojaldre</td>
+<td class="py-3 px-4 text-slate-600">Elle &amp; Vire Gastronomie</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-amber-800">220 kg</td>
+<td class="py-3 px-4 text-right font-mono text-slate-500">300 kg</td>
+<td class="py-3 px-4">
+<span class="bg-amber-100 text-amber-800 font-mono px-2 py-0.5 border border-amber-300 font-semibold rounded-none">ALERTA REORDEN</span>
+</td>
+<td class="py-3 px-4 text-right font-mono">$8.40 / kg</td>
+<td class="py-3 px-4 text-center">
+<button class="text-amber-800 hover:text-amber-900 font-mono font-bold">Comprar</button>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-800">MAT-CHO-02</td>
+<td class="py-3 px-4 font-semibold text-slate-900">Cobertura Negra Guanaja 70% Gotas 3kg</td>
+<td class="py-3 px-4 text-slate-600">Valrhona España / Francia</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">450 kg</td>
+<td class="py-3 px-4 text-right font-mono text-slate-500">200 kg</td>
+<td class="py-3 px-4">
+<span class="bg-emerald-100 text-emerald-800 font-mono px-2 py-0.5 border border-emerald-300 font-semibold rounded-none">ÓPTIMO</span>
+</td>
+<td class="py-3 px-4 text-right font-mono">$16.80 / kg</td>
+<td class="py-3 px-4 text-center">
+<button class="text-slate-600 hover:text-slate-900 font-mono font-bold">Ver Lotes</button>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-800">MAT-LEV-01</td>
+<td class="py-3 px-4 font-semibold text-slate-900">Levadura Fresca Prensada Biológica (Bloque 500g)</td>
+<td class="py-3 px-4 text-slate-600">Lesaffre Ibérica</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">60 kg</td>
+<td class="py-3 px-4 text-right font-mono text-slate-500">30 kg</td>
+<td class="py-3 px-4">
+<span class="bg-emerald-100 text-emerald-800 font-mono px-2 py-0.5 border border-emerald-300 font-semibold rounded-none">ÓPTIMO</span>
+</td>
+<td class="py-3 px-4 text-right font-mono">$3.40 / kg</td>
+<td class="py-3 px-4 text-center">
+<button class="text-slate-600 hover:text-slate-900 font-mono font-bold">Ver Lotes</button>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-800">MAT-PAC-08</td>
+<td class="py-3 px-4 font-semibold text-slate-900">Cajas Rígidas Microcanal Gourmet Logo Dorado</td>
+<td class="py-3 px-4 text-slate-600">Packaging CartoLux S.A.</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-red-700">180 uds</td>
+<td class="py-3 px-4 text-right font-mono text-slate-500">500 uds</td>
+<td class="py-3 px-4">
+<span class="bg-red-100 text-red-800 font-mono px-2 py-0.5 border border-red-300 font-semibold rounded-none">CRÍTICO</span>
+</td>
+<td class="py-3 px-4 text-right font-mono">$1.45 / ud</td>
+<td class="py-3 px-4 text-center">
+<button class="text-red-700 hover:text-red-900 font-mono font-bold">Urgente</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Directorio de Órdenes de Compra Recientes -->
+<div class="bg-white border border-slate-200">
+<div class="p-4 border-b border-slate-200 bg-slate-50">
+<h3 class="font-bold text-slate-900 text-sm">Órdenes de Compra y Estado de Pago Comercial</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead class="bg-slate-100 border-b border-slate-200 font-mono text-slate-600 uppercase">
+<tr>
+<th class="py-3 px-4">N° Orden</th>
+<th class="py-3 px-4">Proveedor</th>
+<th class="py-3 px-4">Fecha Emisión</th>
+<th class="py-3 px-4">Fecha Vencimiento</th>
+<th class="py-3 px-4 text-right">Importe Total</th>
+<th class="py-3 px-4">Estado de Pago</th>
+<th class="py-3 px-4 text-center">Factura PDF</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200">
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-800">OC-2025-0412</td>
+<td class="py-3 px-4 font-semibold text-slate-900">Grands Moulins de Paris</td>
+<td class="py-3 px-4 font-mono text-slate-600">12/03/2025</td>
+<td class="py-3 px-4 font-mono text-slate-600">12/04/2025</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">$3,864.00</td>
+<td class="py-3 px-4">
+<span class="bg-emerald-100 text-emerald-800 font-mono px-2 py-0.5 border border-emerald-300 font-semibold rounded-none">PAGADO</span>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="text-slate-600 font-mono underline cursor-pointer">FAC-8921.pdf</span>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-800">OC-2025-0413</td>
+<td class="py-3 px-4 font-semibold text-slate-900">Elle &amp; Vire Gastronomie</td>
+<td class="py-3 px-4 font-mono text-slate-600">14/03/2025</td>
+<td class="py-3 px-4 font-mono text-slate-600">28/03/2025</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">$2,520.00</td>
+<td class="py-3 px-4">
+<span class="bg-amber-100 text-amber-800 font-mono px-2 py-0.5 border border-amber-300 font-semibold rounded-none">PENDIENTE</span>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="text-slate-600 font-mono underline cursor-pointer">FAC-5520.pdf</span>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-800">OC-2025-0414</td>
+<td class="py-3 px-4 font-semibold text-slate-900">Valrhona Chocolates</td>
+<td class="py-3 px-4 font-mono text-slate-600">15/03/2025</td>
+<td class="py-3 px-4 font-mono text-slate-600">30/03/2025</td>
+<td class="py-3 px-4 text-right font-mono font-bold text-slate-900">$4,200.00</td>
+<td class="py-3 px-4">
+<span class="bg-slate-200 text-slate-800 font-mono px-2 py-0.5 border border-slate-300 font-semibold rounded-none">EN REVISIÓN</span>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="text-slate-600 font-mono underline cursor-pointer">FAC-7711.pdf</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- ======================================================== -->
+<!-- PESTAÑA 4: LOGÍSTICA & RUTAS DE REPARTO                   -->
+<!-- ======================================================== -->
+<section class="tab-content p-8 max-w-7xl mx-auto space-y-8" id="tab-logistica">
+<!-- Encabezado de Logística -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-300 pb-4">
+<div>
+<h2 class="text-2xl font-bold text-slate-900 tracking-tight">Centro de Despacho y Flota de Reparto</h2>
+<p class="text-xs text-slate-500 mt-1">Supervisión en tiempo real de cadenas de frío, expedición HORECA y entregas a clientes</p>
+</div>
+<div class="flex items-center space-x-2">
+<button class="px-4 py-2 bg-slate-900 text-white text-xs font-semibold uppercase tracking-wider rounded-none">
+            Asignar Nuevo Pedido
+          </button>
+</div>
+</div>
+<!-- Tarjetas de Asignación de Vehículos (Flota Refrigerada) -->
+<div>
+<h3 class="text-sm font-bold uppercase font-mono text-slate-600 mb-4 tracking-wider">Estado de la Flota de Furgones Térmicos</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Vehículo 1 -->
+<div class="bg-white border border-slate-200 p-5">
+<div class="flex items-center justify-between border-b border-slate-200 pb-3">
+<div>
+<span class="text-xs font-mono font-bold text-slate-800">FURGÓN #01 [REFRIGERADO]</span>
+<div class="text-xs text-slate-500 font-mono">Mercedes-Benz Sprinter 314 CDI</div>
+</div>
+<span class="bg-emerald-100 text-emerald-800 font-mono text-xs px-2 py-0.5 border border-emerald-300 font-bold rounded-none">EN RUTA</span>
+</div>
+<div class="mt-4 space-y-2 text-xs">
+<div class="flex justify-between">
+<span class="text-slate-500">Repartidor Asignado:</span>
+<span class="font-bold text-slate-900">Carlos Méndez (Lic. B2)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-500">Zona de Cobertura:</span>
+<span class="font-semibold text-slate-900">Distrito Financiero &amp; Hoteles</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-500">Temperatura Cámara:</span>
+<span class="font-mono font-bold text-blue-700">4.2°C (Calibrada)</span>
+</div>
+<div class="mt-3">
+<div class="flex justify-between text-slate-500 mb-1">
+<span class="">Capacidad de Carga Ocupada:</span>
+<span class="font-mono font-bold text-slate-900">85% (340/400 kg)</span>
+</div>
+<div class="w-full bg-slate-200 h-2 rounded-none">
+<div class="bg-slate-900 h-2 w-[85%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Vehículo 2 -->
+<div class="bg-white border border-slate-200 p-5">
+<div class="flex items-center justify-between border-b border-slate-200 pb-3">
+<div>
+<span class="text-xs font-mono font-bold text-slate-800">FURGÓN #02 [ISOTÉRMICO]</span>
+<div class="text-xs text-slate-500 font-mono">Renault Master Z.E. Eléctrico</div>
+</div>
+<span class="bg-emerald-100 text-emerald-800 font-mono text-xs px-2 py-0.5 border border-emerald-300 font-bold rounded-none">EN RUTA</span>
+</div>
+<div class="mt-4 space-y-2 text-xs">
+<div class="flex justify-between">
+<span class="text-slate-500">Repartidor Asignado:</span>
+<span class="font-bold text-slate-900">David Santoro (Lic. B2)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-500">Zona de Cobertura:</span>
+<span class="font-semibold text-slate-900">Ruta Costera &amp; Restaurantes Gourmet</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-500">Temperatura Cámara:</span>
+<span class="font-mono font-bold text-blue-700">18.0°C (Panadería Caliente)</span>
+</div>
+<div class="mt-3">
+<div class="flex justify-between text-slate-500 mb-1">
+<span class="">Capacidad de Carga Ocupada:</span>
+<span class="font-mono font-bold text-slate-900">60% (180/300 kg)</span>
+</div>
+<div class="w-full bg-slate-200 h-2 rounded-none">
+<div class="bg-amber-700 h-2 w-[60%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Vehículo 3 -->
+<div class="bg-white border border-slate-200 p-5">
+<div class="flex items-center justify-between border-b border-slate-200 pb-3">
+<div>
+<span class="text-xs font-mono font-bold text-slate-800">FURGÓN #03 [EXPRESS]</span>
+<div class="text-xs text-slate-500 font-mono">Ford Transit Custom</div>
+</div>
+<span class="bg-slate-200 text-slate-800 font-mono text-xs px-2 py-0.5 border border-slate-300 font-bold rounded-none">EN MUELLE</span>
+</div>
+<div class="mt-4 space-y-2 text-xs">
+<div class="flex justify-between">
+<span class="text-slate-500">Repartidor Asignado:</span>
+<span class="font-bold text-slate-900">Álvaro Ruiz (En Espera)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-500">Zona de Cobertura:</span>
+<span class="font-semibold text-slate-900">Eventos Corporativos Especiales</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-500">Temperatura Cámara:</span>
+<span class="font-mono font-bold text-slate-600">Ambiental (Inactiva)</span>
+</div>
+<div class="mt-3">
+<div class="flex justify-between text-slate-500 mb-1">
+<span class="">Capacidad de Carga Ocupada:</span>
+<span class="font-mono font-bold text-slate-900">10% (Carga Inicial)</span>
+</div>
+<div class="w-full bg-slate-200 h-2 rounded-none">
+<div class="bg-slate-400 h-2 w-[10%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Tabla de Seguimiento de Rutas Activas y Estado de Despacho -->
+<div class="bg-white border border-slate-200">
+<div class="p-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+<h3 class="font-bold text-slate-900 text-sm">Monitor de Despachos en Tiempo Real (HORECA &amp; Catering)</h3>
+<span class="font-mono text-xs text-slate-500">Hora de corte matutino: 07:30 AM</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead class="bg-slate-100 border-b border-slate-200 font-mono text-slate-600 uppercase">
+<tr>
+<th class="py-3 px-4">Pedido #</th>
+<th class="py-3 px-4">Cliente Destino</th>
+<th class="py-3 px-4">Dirección / Punto de Entrega</th>
+<th class="py-3 px-4">Hora Límite</th>
+<th class="py-3 px-4">Unidad Asignada</th>
+<th class="py-3 px-4">Estado del Pedido</th>
+<th class="py-3 px-4 text-right">Volumen</th>
+<th class="py-3 px-4 text-center">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 font-sans">
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-900">PED-0982</td>
+<td class="py-3 px-4 font-bold text-slate-900">Gran Hotel Miramar 5* GL</td>
+<td class="py-3 px-4 text-slate-600">Paseo de Reding 22, Recepción Cocina</td>
+<td class="py-3 px-4 font-mono font-semibold text-slate-800">06:45 AM</td>
+<td class="py-3 px-4 font-mono text-slate-700">Furgón #01</td>
+<td class="py-3 px-4">
+<span class="bg-emerald-100 text-emerald-800 font-mono px-2 py-0.5 border border-emerald-300 font-bold rounded-none">ENTREGADO</span>
+</td>
+<td class="py-3 px-4 text-right font-mono text-slate-700">120 piezas</td>
+<td class="py-3 px-4 text-center">
+<button class="text-slate-800 hover:text-slate-900 font-mono font-bold">Albarán</button>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-900">PED-0983</td>
+<td class="py-3 px-4 font-bold text-slate-900">Restaurante Kaleja (1 Estrella Michelín)</td>
+<td class="py-3 px-4 text-slate-600">Calle Marquesa de Moya 9</td>
+<td class="py-3 px-4 font-mono font-semibold text-amber-700">08:15 AM</td>
+<td class="py-3 px-4 font-mono text-slate-700">Furgón #01</td>
+<td class="py-3 px-4">
+<span class="bg-blue-100 text-blue-800 font-mono px-2 py-0.5 border border-blue-300 font-bold rounded-none">EN RUTA (A 5 MIN)</span>
+</td>
+<td class="py-3 px-4 text-right font-mono text-slate-700">45 piezas</td>
+<td class="py-3 px-4 text-center">
+<button class="text-slate-800 hover:text-slate-900 font-mono font-bold">Rastrear</button>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-900">PED-0984</td>
+<td class="py-3 px-4 font-bold text-slate-900">Boutique Café &amp; Co. Soho</td>
+<td class="py-3 px-4 text-slate-600">Calle Tomás Heredia 14</td>
+<td class="py-3 px-4 font-mono font-semibold text-slate-800">08:45 AM</td>
+<td class="py-3 px-4 font-mono text-slate-700">Furgón #02</td>
+<td class="py-3 px-4">
+<span class="bg-amber-100 text-amber-800 font-mono px-2 py-0.5 border border-amber-300 font-bold rounded-none">EMPACADO EN MUELLE</span>
+</td>
+<td class="py-3 px-4 text-right font-mono text-slate-700">80 piezas</td>
+<td class="py-3 px-4 text-center">
+<button class="text-slate-800 hover:text-slate-900 font-mono font-bold">Cargar</button>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-4 font-mono font-bold text-slate-900">PED-0985</td>
+<td class="py-3 px-4 font-bold text-slate-900">Club Financiero y Empresarial</td>
+<td class="py-3 px-4 text-slate-600">Av. de Andalucía 88, Planta 12</td>
+<td class="py-3 px-4 font-mono font-semibold text-slate-800">10:00 AM</td>
+<td class="py-3 px-4 font-mono text-slate-700">Furgón #03</td>
+<td class="py-3 px-4">
+<span class="bg-slate-100 text-slate-800 font-mono px-2 py-0.5 border border-slate-300 font-bold rounded-none">EN OBRADOR (HORNO)</span>
+</td>
+<td class="py-3 px-4 text-right font-mono text-slate-700">160 piezas</td>
+<td class="py-3 px-4 text-center">
+<button class="text-slate-800 hover:text-slate-900 font-mono font-bold">Ver Lote</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- ======================================================== -->
+<!-- PESTAÑA 5: DASHBOARD EJECUTIVO [VIP TEMA OSCURO SÓLIDO]    -->
+<!-- ======================================================== -->
+<section class="tab-content bg-zinc-950 p-8 min-h-screen text-white" id="tab-dashboard">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Encabezado VIP 100% Sólido sin Píldoras -->
+<div class="bg-zinc-900 border border-zinc-800 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div>
+<div class="text-xs font-mono text-amber-400 uppercase tracking-widest font-semibold">PANEL DE CONTROL ESTRATÉGICO DIRECTIVO</div>
+<h1 class="text-2xl font-bold text-white mt-1">Indicadores Ejecutivos &amp; Rendimiento Industrial</h1>
+<p class="text-xs text-zinc-400 mt-1">Consolidado general de margen bruto, rotación de activos y balance de hornos en tiempo real</p>
+</div>
+<div class="flex items-center space-x-3">
+<div class="text-right font-mono text-xs text-zinc-400">
+<span class="">SINCRO OBRADOR: </span>
+<span class="text-emerald-400 font-bold">ACTIVA (0.4s)</span>
+</div>
+<button class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-black font-bold text-xs uppercase tracking-wider rounded-none">
+              Exportar Informe Auditoría
+            </button>
+</div>
+</div>
+<!-- KPIs en Tiempo Real (Tarjetas Sólidas bg-zinc-900) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-zinc-900 border border-zinc-800 p-5">
+<span class="text-xs font-mono uppercase text-zinc-400">Ventas Totales Hoy</span>
+<div class="text-3xl font-bold text-white font-mono mt-2">$8,492.30</div>
+<div class="flex items-center space-x-2 mt-2 text-xs">
+<span class="text-emerald-400 font-mono font-bold">+14.6%</span>
+<span class="text-zinc-500">vs mismo día anterior</span>
+</div>
+</div>
+<div class="bg-zinc-900 border border-zinc-800 p-5">
+<span class="text-xs font-mono uppercase text-zinc-400">Ticket Promedio Mayorista</span>
+<div class="text-3xl font-bold text-white font-mono mt-2">$284.10</div>
+<div class="flex items-center space-x-2 mt-2 text-xs">
+<span class="text-emerald-400 font-mono font-bold">+4.2%</span>
+<span class="text-zinc-500">volumen por cliente HORECA</span>
+</div>
+</div>
+<div class="bg-zinc-900 border border-zinc-800 p-5">
+<span class="text-xs font-mono uppercase text-zinc-400">Margen Bruto de Explotación</span>
+<div class="text-3xl font-bold text-amber-400 font-mono mt-2">68.4%</div>
+<div class="flex items-center space-x-2 mt-2 text-xs">
+<span class="text-emerald-400 font-mono font-bold">+2.1%</span>
+<span class="text-zinc-500">optimización de harinas T65</span>
+</div>
+</div>
+<div class="bg-zinc-900 border border-zinc-800 p-5">
+<span class="text-xs font-mono uppercase text-zinc-400">Merma Técnica Obrador</span>
+<div class="text-3xl font-bold text-emerald-400 font-mono mt-2">1.82%</div>
+<div class="flex items-center space-x-2 mt-2 text-xs">
+<span class="text-emerald-400 font-mono font-bold">-0.4%</span>
+<span class="text-zinc-500">bajo el umbral máximo de 2.5%</span>
+</div>
+</div>
+</div>
+<!-- Sección de Monitoreo del Obrador y Capacidad de Horneado -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Capacidad de Horneado y Lotes en Vivo (7 Columnas) -->
+<div class="lg:col-span-7 bg-zinc-900 border border-zinc-800 p-6 space-y-6">
+<div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+<div>
+<h3 class="text-sm font-bold text-white uppercase tracking-wider">Capacidad de Horneado &amp; Fermentación</h3>
+<p class="text-xs text-zinc-400 mt-0.5">Control termodinámico y ocupación de cámaras</p>
+</div>
+<span class="text-xs font-mono text-emerald-400 font-bold">HORNO CENTRAL: 240°C</span>
+</div>
+<!-- Barras Sólidas de Hornos y Fermentación -->
+<div class="space-y-4 text-xs font-mono">
+<div>
+<div class="flex justify-between text-zinc-300 mb-1">
+<span class="">HORNO DE SOLERA A (PANELES 1 Y 2 - PAN RÚSTICO)</span>
+<span class="font-bold text-white">85% OCUPACIÓN</span>
+</div>
+<div class="w-full bg-zinc-950 h-3 border border-zinc-800 rounded-none">
+<div class="bg-amber-600 h-full w-[85%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-zinc-300 mb-1">
+<span class="">HORNO ROTATIVO B (VIENNOISERIE &amp; BRIOCHE)</span>
+<span class="font-bold text-white">92% OCUPACIÓN</span>
+</div>
+<div class="w-full bg-zinc-950 h-3 border border-zinc-800 rounded-none">
+<div class="bg-amber-600 h-full w-[92%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-zinc-300 mb-1">
+<span class="">CÁMARAS DE FERMENTACIÓN CONTROLADA (LENTA 4°C)</span>
+<span class="font-bold text-white">74% DE CAPACIDAD</span>
+</div>
+<div class="w-full bg-zinc-950 h-3 border border-zinc-800 rounded-none">
+<div class="bg-emerald-500 h-full w-[74%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-zinc-300 mb-1">
+<span class="">HORNO DE CONVECCIÓN C (TARTALETAS &amp; MACARONS)</span>
+<span class="font-bold text-white">50% OCUPACIÓN</span>
+</div>
+<div class="w-full bg-zinc-950 h-3 border border-zinc-800 rounded-none">
+<div class="bg-zinc-600 h-full w-[50%]"></div>
+</div>
+</div>
+</div>
+<!-- Métricas Secundarias del Obrador -->
+<div class="grid grid-cols-3 gap-3 pt-4 border-t border-zinc-800 text-center font-mono text-xs">
+<div class="bg-zinc-950 p-3 border border-zinc-800">
+<span class="text-zinc-500 block">PIEZAS / HORA</span>
+<span class="text-lg font-bold text-white mt-1 block">420 uds</span>
+</div>
+<div class="bg-zinc-950 p-3 border border-zinc-800">
+<span class="text-zinc-500 block">CONSUMO ELÉCTRICO</span>
+<span class="text-lg font-bold text-white mt-1 block">34.8 kW/h</span>
+</div>
+<div class="bg-zinc-950 p-3 border border-zinc-800">
+<span class="text-zinc-500 block">TEMPERATURA AMBIENTE</span>
+<span class="text-lg font-bold text-emerald-400 mt-1 block">21.5°C</span>
+</div>
+</div>
+</div>
+<!-- Rendimiento Financiero: Comparativo Ingresos vs Costos (5 Columnas) -->
+<div class="lg:col-span-5 bg-zinc-900 border border-zinc-800 p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+<h3 class="text-sm font-bold text-white uppercase tracking-wider">Rendimiento Semanal</h3>
+<span class="text-xs font-mono text-zinc-400">Semana 11 - 2025</span>
+</div>
+<div class="mt-4 flex items-center space-x-6 text-xs font-mono">
+<div class="flex items-center space-x-2">
+<div class="w-3 h-3 bg-amber-500"></div>
+<span class="text-zinc-300">Ingresos ($)</span>
+</div>
+<div class="flex items-center space-x-2">
+<div class="w-3 h-3 bg-zinc-700"></div>
+<span class="text-zinc-300">Costos Operativos ($)</span>
+</div>
+</div>
+<!-- Gráfico de Barras Sólidas con Tailwind CSS Puro -->
+<div class="mt-6 space-y-4">
+<!-- Día Lunes -->
+<div class="space-y-1">
+<div class="flex justify-between text-[11px] font-mono text-zinc-400">
+<span class="">LUN</span>
+<span class="">$6.2k / $2.1k</span>
+</div>
+<div class="flex h-3 bg-zinc-950 border border-zinc-800">
+<div class="bg-amber-500 h-full w-[65%]"></div>
+<div class="bg-zinc-700 h-full w-[25%]"></div>
+</div>
+</div>
+<!-- Día Martes -->
+<div class="space-y-1">
+<div class="flex justify-between text-[11px] font-mono text-zinc-400">
+<span class="">MAR</span>
+<span class="">$7.1k / $2.2k</span>
+</div>
+<div class="flex h-3 bg-zinc-950 border border-zinc-800">
+<div class="bg-amber-500 h-full w-[72%]"></div>
+<div class="bg-zinc-700 h-full w-[24%]"></div>
+</div>
+</div>
+<!-- Día Miércoles -->
+<div class="space-y-1">
+<div class="flex justify-between text-[11px] font-mono text-zinc-400">
+<span class="">MIÉ</span>
+<span class="">$8.4k / $2.4k</span>
+</div>
+<div class="flex h-3 bg-zinc-950 border border-zinc-800">
+<div class="bg-amber-500 h-full w-[84%]"></div>
+<div class="bg-zinc-700 h-full w-[26%]"></div>
+</div>
+</div>
+<!-- Día Jueves -->
+<div class="space-y-1">
+<div class="flex justify-between text-[11px] font-mono text-zinc-400">
+<span class="">JUE</span>
+<span class="">$7.8k / $2.3k</span>
+</div>
+<div class="flex h-3 bg-zinc-950 border border-zinc-800">
+<div class="bg-amber-500 h-full w-[78%]"></div>
+<div class="bg-zinc-700 h-full w-[25%]"></div>
+</div>
+</div>
+<!-- Día Viernes -->
+<div class="space-y-1">
+<div class="flex justify-between text-[11px] font-mono text-zinc-400">
+<span class="">VIE (Pico HORECA)</span>
+<span class="text-amber-400 font-bold">$10.2k / $2.8k</span>
+</div>
+<div class="flex h-3 bg-zinc-950 border border-zinc-800">
+<div class="bg-amber-500 h-full w-[96%]"></div>
+<div class="bg-zinc-700 h-full w-[28%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Resumen de Margen Neto Semanal -->
+<div class="mt-6 pt-4 border-t border-zinc-800 flex items-center justify-between font-mono text-xs">
+<span class="text-zinc-400">MARGEN NETO ACUMULADO:</span>
+<span class="text-emerald-400 font-bold text-sm">+$27,940.00 (69.8%)</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- PIE DE PÁGINA CORPORATIVO SÓLIDO -->
+<footer class="bg-slate-900 border-t border-slate-800 py-3 px-6 text-slate-400 text-xs font-mono flex flex-col sm:flex-row justify-between items-center shrink-0">
+<div>
+<span class="">ARTEPAN &amp; CO. SISTEMA DE GESTIÓN EMPRESARIAL © <?php echo date('Y'); ?></span>
+<span class="mx-2 text-slate-700">|</span>
+<span class="">PHP 8.3 / TAILWIND CSS SÓLIDO</span>
+</div>
+<div class="flex items-center space-x-4 mt-2 sm:mt-0 text-slate-300">
+<span class="">SERVER: SVR-OBRADOR-MAD01</span>
+<span class="">PING: 14ms</span>
+<span class="text-emerald-400">ESTADO: 100% OPERATIVO</span>
+</div>
+</footer>
+<!-- SCRIPT MINIMALISTA EN VANILLA JS PARA INTERACTIVIDAD INMEDIATA (5 PESTAÑAS Y POS) -->
+<script>
+    // Gestión de Pestañas
+    function switchTab(tabId) {
+      // Ocultar todos los contenidos
+      document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.remove('active');
+      });
+
+      // Mostrar seleccionado
+      const target = document.getElementById('tab-' + tabId);
+      if (target) {
+        target.classList.add('active');
+      }
+
+      // Estilos de botones de navegación
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('bg-slate-800', 'border-amber-600', 'text-white');
+        btn.classList.add('border-transparent', 'text-slate-300');
+      });
+
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('border-transparent', 'text-slate-300');
+        if (tabId === 'dashboard') {
+          activeBtn.classList.add('bg-zinc-800', 'border-amber-500', 'text-amber-400');
+        } else {
+          activeBtn.classList.add('bg-slate-800', 'border-amber-600', 'text-white');
+        }
+      }
+    }
+
+    // Carrito del POS
+    let cart = [];
+
+    function addToCart(name, price) {
+      const existing = cart.find(item => item.name === name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      renderCart();
+    }
+
+    function changeQty(name, delta) {
+      const item = cart.find(i => i.name === name);
+      if (item) {
+        item.qty += delta;
+        if (item.qty <= 0) {
+          cart = cart.filter(i => i.name !== name);
+        }
+      }
+      renderCart();
+    }
+
+    function clearCart() {
+      cart = [];
+      renderCart();
+    }
+
+    function renderCart() {
+      const emptyMsg = document.getElementById('cart-empty');
+      const itemsContainer = document.getElementById('cart-items');
+      const subtotalEl = document.getElementById('pos-subtotal');
+      const ivaEl = document.getElementById('pos-iva');
+      const totalEl = document.getElementById('pos-total');
+
+      if (cart.length === 0) {
+        emptyMsg.classList.remove('hidden');
+        itemsContainer.classList.add('hidden');
+        itemsContainer.innerHTML = '';
+        subtotalEl.innerText = '$0.00';
+        ivaEl.innerText = '$0.00';
+        totalEl.innerText = '$0.00';
+        return;
+      }
+
+      emptyMsg.classList.add('hidden');
+      itemsContainer.classList.remove('hidden');
+      itemsContainer.innerHTML = '';
+
+      let subtotal = 0;
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.qty;
+        subtotal += itemTotal;
+
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between p-2 bg-slate-50 border border-slate-200 text-xs';
+        row.innerHTML = `
+          <div class="flex-1 pr-2">
+            <div class="font-bold text-slate-900 leading-tight">${item.name}</div>
+            <div class="text-[11px] text-slate-500 font-mono">$${item.price.toFixed(2)} c/u</div>
+          </div>
+          <div class="flex items-center space-x-1">
+            <button onclick="changeQty('${item.name}', -1)" class="w-6 h-6 bg-white border border-slate-300 text-slate-800 font-bold hover:bg-slate-100 flex items-center justify-center rounded-none">-</button>
+            <span class="w-7 text-center font-mono font-bold text-slate-900">${item.qty}</span>
+            <button onclick="changeQty('${item.name}', 1)" class="w-6 h-6 bg-white border border-slate-300 text-slate-800 font-bold hover:bg-slate-100 flex items-center justify-center rounded-none">+</button>
+          </div>
+          <div class="w-16 text-right font-mono font-bold text-slate-900">
+            $${itemTotal.toFixed(2)}
+          </div>
+        `;
+        itemsContainer.appendChild(row);
+      });
+
+      const iva = subtotal * 0.10;
+      const total = subtotal + iva;
+
+      subtotalEl.innerText = `$${subtotal.toFixed(2)}`;
+      ivaEl.innerText = `$${iva.toFixed(2)}`;
+      totalEl.innerText = `$${total.toFixed(2)}`;
+    }
+
+    function processPayment(method) {
+      if (cart.length === 0) {
+        alert('Debe añadir al menos un producto al pedido antes de cobrar.');
+        return;
+      }
+      const total = document.getElementById('pos-total').innerText;
+      alert(`Cobro procesado con éxito.\nMétodo: ${method}\nTotal Cobrado: ${total}\nTicket #TK-2025-0891 generado e impreso.`);
+      clearCart();
+    }
+
+    function filterPosCategory(category) {
+      // Feedback visual en botones de categoría
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('bg-slate-900', 'text-white');
+        btn.classList.add('bg-slate-100', 'text-slate-800');
+      });
+      event.target.classList.remove('bg-slate-100', 'text-slate-800');
+      event.target.classList.add('bg-slate-900', 'text-white');
+    }
+  </script>
+
+
+
+
+</body></html>

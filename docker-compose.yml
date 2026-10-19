@@ -1,0 +1,53 @@
+services:
+  # ERP Web Server (PHP 8.2 + Apache + MariaDB Driver)
+  web:
+    container_name: panyqueque_erp_web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: panyqueque-erp:1.0.0
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      # Hot-reload mount for live development
+      - .:/var/www/html
+      # Custom Apache configuration (DocumentRoot at /public)
+      - ./docker/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    env_file:
+      - .env
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+    depends_on:
+      - db
+    networks:
+      - panyqueque_net
+
+  # Central Database (MariaDB 10.11 LTS)
+  db:
+    container_name: panyqueque_erp_db
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-erp_root_password_2026}
+      - TZ=${TZ:-America/Santiago}
+    ports:
+      - "3306:3306"
+    volumes:
+      - panyqueque_mariadb_data:/var/lib/mysql
+      - ./docker/mariadb/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - panyqueque_net
+
+networks:
+  panyqueque_net:
+    driver: bridge
+    name: panyqueque_network
+
+volumes:
+  panyqueque_mariadb_data:
+    name: panyqueque_mariadb_data
