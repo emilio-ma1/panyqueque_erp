@@ -34,6 +34,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     exit;
 }
 
+// ==============================================================================
+// PROCESAR NUEVA RUTA DE DESPACHO EN MARIADB (POST ENDPOINT)
+// ==============================================================================
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'create_route') {
+    header('Content-Type: application/json; charset=utf-8');
+
+    $time = trim((string)($_POST['time'] ?? '08:00 AM'));
+    $title = trim((string)($_POST['title'] ?? ''));
+    $type = trim((string)($_POST['type'] ?? 'Restaurantes & Cafés'));
+    $destination = trim((string)($_POST['destination'] ?? ''));
+    $address = trim((string)($_POST['address'] ?? ''));
+    $driver = trim((string)($_POST['driver'] ?? 'Carlos Mendoza'));
+    $items = trim((string)($_POST['items'] ?? ''));
+    $notes = trim((string)($_POST['notes'] ?? ''));
+
+    if (empty($title) || empty($destination)) {
+        echo json_encode(['success' => false, 'error' => 'Título de ruta y cliente/destino son requeridos.']);
+        exit;
+    }
+
+    $res = DispatchService::createRoute($time, $title, $type, $destination, $address, $driver, $items, $notes);
+    echo json_encode($res);
+    exit;
+}
+
 $currentPage = 'dispatch';
 $pageTitle = 'Logística & Rutas HORECA';
 require_once __DIR__ . '/../includes/header.php';
@@ -79,6 +104,10 @@ $completedCount = count(array_filter($routes, fn($r) => !empty($r['completado'])
                     <span class="text-xs font-mono font-bold text-slate-900">ISO-22000 OK</span>
                 </div>
             </div>
+            <button type="button" onclick="openModal('modal-nueva-ruta')" class="bg-amber-700 hover:bg-amber-800 text-white px-4 py-2.5 text-xs font-bold uppercase font-mono tracking-wider rounded-none flex items-center gap-1.5 border border-amber-800 transition-none">
+                <span class="material-symbols-outlined text-base">add_circle</span>
+                <span>+ Programar Nueva Ruta</span>
+            </button>
             <button type="button" onclick="location.reload();" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2.5 text-xs font-bold uppercase font-mono tracking-wider rounded-none flex items-center gap-1.5 border border-slate-900 transition-none">
                 <span class="material-symbols-outlined text-base">sync</span>
                 <span>Sincronizar Rutas</span>
@@ -418,6 +447,81 @@ $completedCount = count(array_filter($routes, fn($r) => !empty($r['completado'])
     </div>
 </div>
 
+<!-- MODAL: PROGRAMAR NUEVA RUTA DE DESPACHO (FUNCIONAL CON GUARDADO EN BD) -->
+<div id="modal-nueva-ruta" class="hidden fixed inset-0 z-50 bg-slate-950/80 flex items-center justify-center p-4">
+    <div class="bg-white rounded-none max-w-lg w-full p-6 border-2 border-slate-900 shadow-none max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-4">
+            <div class="flex items-center space-x-2">
+                <span class="material-symbols-outlined text-slate-900">local_shipping</span>
+                <h3 class="text-base font-bold text-slate-900 uppercase font-mono tracking-tight">Programar Nueva Ruta de Despacho</h3>
+            </div>
+            <button type="button" onclick="closeModal('modal-nueva-ruta')" class="text-slate-400 hover:text-slate-900 text-xl font-mono">&times;</button>
+        </div>
+
+        <form onsubmit="handleCreateRoute(event)" class="space-y-4 text-xs font-mono">
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block uppercase tracking-wider text-slate-700 font-bold mb-1">Horario Estimado *</label>
+                    <input type="text" id="ruta-hora" required value="08:30 AM" placeholder="08:30 AM" class="w-full px-3 py-2 border border-slate-300 text-xs font-mono rounded-none focus:outline-none focus:border-slate-900">
+                </div>
+                <div>
+                    <label class="block uppercase tracking-wider text-slate-700 font-bold mb-1">Tipo de Cliente *</label>
+                    <select id="ruta-tipo" class="w-full px-3 py-2 border border-slate-300 text-xs font-mono rounded-none focus:outline-none focus:border-slate-900">
+                        <option value="Restaurantes & Cafés">Restaurantes & Cafés</option>
+                        <option value="Hoteles & Eventos">Hoteles & Eventos</option>
+                        <option value="Hospitalario & Salud">Hospitalario & Salud</option>
+                        <option value="Sucursales Propias">Sucursales Propias</option>
+                        <option value="Supermercados">Supermercados</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block uppercase tracking-wider text-slate-700 font-bold mb-1">Título de la Ruta *</label>
+                <input type="text" id="ruta-titulo" required placeholder="Ej. Ruta 05 - Reparto Cafeterías Casco Histórico" class="w-full px-3 py-2 border border-slate-300 text-xs font-mono rounded-none focus:outline-none focus:border-slate-900">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block uppercase tracking-wider text-slate-700 font-bold mb-1">Cliente / Destino *</label>
+                    <input type="text" id="ruta-destino" required placeholder="Ej. Café Colonial La Serena" class="w-full px-3 py-2 border border-slate-300 text-xs font-mono rounded-none focus:outline-none focus:border-slate-900">
+                </div>
+                <div>
+                    <label class="block uppercase tracking-wider text-slate-700 font-bold mb-1">Conductor Asignado *</label>
+                    <select id="ruta-conductor" class="w-full px-3 py-2 border border-slate-300 text-xs font-mono rounded-none focus:outline-none focus:border-slate-900">
+                        <option value="Carlos Mendoza">Carlos Mendoza (Furgón 01 - Frío)</option>
+                        <option value="Juan Pablo Riquelme">Juan Pablo Riquelme (Furgón 02 - Seco)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block uppercase tracking-wider text-slate-700 font-bold mb-1">Dirección de Entrega *</label>
+                <input type="text" id="ruta-direccion" required placeholder="Ej. Av. Balmaceda 916, La Serena" class="w-full px-3 py-2 border border-slate-300 text-xs font-mono rounded-none focus:outline-none focus:border-slate-900">
+            </div>
+
+            <div>
+                <label class="block uppercase tracking-wider text-slate-700 font-bold mb-1">Detalle de Carga y Productos *</label>
+                <textarea id="ruta-carga" rows="2" required placeholder="Ej. 60 kg Marraqueta, 40 kg Hallullas, 15 Docenas Empanadas" class="w-full px-3 py-2 border border-slate-300 text-xs font-mono rounded-none focus:outline-none focus:border-slate-900"></textarea>
+            </div>
+
+            <div>
+                <label class="block uppercase tracking-wider text-slate-700 font-bold mb-1">Observaciones / Trazabilidad Térmica</label>
+                <input type="text" id="ruta-obs" placeholder="Control cadena de frío a +3.8°C. Firma digital requerida." class="w-full px-3 py-2 border border-slate-300 text-xs font-mono rounded-none focus:outline-none focus:border-slate-900">
+            </div>
+
+            <div class="pt-2 flex space-x-2">
+                <button type="button" onclick="closeModal('modal-nueva-ruta')" class="flex-1 py-2.5 border border-slate-300 text-slate-800 font-mono font-bold uppercase hover:bg-slate-50 rounded-none">
+                    Cancelar
+                </button>
+                <button type="submit" id="btn-submit-ruta" class="flex-1 py-2.5 bg-slate-900 text-white font-mono font-bold uppercase hover:bg-slate-800 rounded-none">
+                    Guardar y Programar Ruta
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
     function confirmDelivery(id, cliente) {
         document.getElementById('modal-route-id').value = id;
@@ -428,6 +532,52 @@ $completedCount = count(array_filter($routes, fn($r) => !empty($r['completado'])
     function closeModal(id) {
         const modal = document.getElementById(id);
         if (modal) modal.classList.add('hidden');
+    }
+
+    function openModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) modal.classList.remove('hidden');
+    }
+
+    async function handleCreateRoute(e) {
+        e.preventDefault();
+        const btn = document.getElementById('btn-submit-ruta');
+        btn.disabled = true;
+        btn.textContent = 'Programando en MariaDB...';
+
+        try {
+            const formData = new URLSearchParams();
+            formData.append('action', 'create_route');
+            formData.append('time', document.getElementById('ruta-hora').value);
+            formData.append('title', document.getElementById('ruta-titulo').value);
+            formData.append('type', document.getElementById('ruta-tipo').value);
+            formData.append('destination', document.getElementById('ruta-destino').value);
+            formData.append('address', document.getElementById('ruta-direccion').value);
+            formData.append('driver', document.getElementById('ruta-conductor').value);
+            formData.append('items', document.getElementById('ruta-carga').value);
+            formData.append('notes', document.getElementById('ruta-obs').value);
+
+            const res = await fetch('dispatch.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData.toString()
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                alert(`¡Nueva ruta de despacho programada con éxito en MariaDB!\n\nRuta #${data.id}`);
+                closeModal('modal-nueva-ruta');
+                location.reload();
+            } else {
+                alert('Error al programar ruta: ' + (data.error || 'Error desconocido'));
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Error de conexión con el servidor.');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Guardar y Programar Ruta';
+        }
     }
 
     async function handleSignatureDelivery(e) {

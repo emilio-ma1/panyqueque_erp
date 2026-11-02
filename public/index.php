@@ -329,6 +329,16 @@ $activeProducts = ProductService::getActiveProducts();
             }
         });
     }
+
+    // AutoAnimate: smooth transitions for catalog grid filtering
+    function initIndexAnimations() {
+        if (typeof autoAnimate !== 'undefined') {
+            const grid = document.getElementById('catalog-grid');
+            if (grid) autoAnimate(grid);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', initIndexAnimations);
+    window.addEventListener('autoAnimateReady', initIndexAnimations);
 </script>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

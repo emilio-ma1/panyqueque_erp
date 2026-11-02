@@ -139,6 +139,42 @@ class DispatchService
      * @param string $obs Optional delivery remarks.
      * @return bool True on success, false on failure.
      */
+    /**
+     * Create a new dispatch route in the database.
+     */
+    public static function createRoute(
+        string $time,
+        string $title,
+        string $type,
+        string $destination,
+        string $address,
+        string $driver,
+        string $items,
+        string $notes = ''
+    ): array {
+        if (!class_exists('DB') || !DB::isConnected()) {
+            return ['success' => false, 'error' => 'Base de datos no conectada.'];
+        }
+
+        try {
+            $routeId = DB::insert(
+                "INSERT INTO dispatch_routes (time, title, type, destination, address, driver, status, items, notes, created_at)
+                 VALUES (?, ?, ?, ?, ?, ?, 'Pendiente', ?, ?, NOW())",
+                [$time, $title, $type, $destination, $address, $driver, $items, $notes]
+            );
+
+            AuditService::log(
+                'LOGÍSTICA',
+                'Ruta Programada',
+                "Hoja de ruta #{$routeId} programada para {$destination} ({$time})"
+            );
+
+            return ['success' => true, 'id' => $routeId];
+        } catch (Exception $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
     public static function confirmDelivery(int $routeId, string $recipientName, string $obs = ''): bool
     {
         if (!class_exists('DB') || !DB::isConnected()) {

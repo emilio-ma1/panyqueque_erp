@@ -53,11 +53,10 @@ switch ($period) {
 $salesPeriod = DB::selectOne("SELECT COALESCE(SUM(total), 0) as total, COALESCE(SUM(subtotal), 0) as subtotal, COUNT(*) as count_sales FROM sales WHERE {$dateFilter}");
 $ventasDelDia = (int)($salesPeriod['total'] ?? 0);
 $totalTickets = (int)($salesPeriod['count_sales'] ?? 0);
-$ticketPromedio = $totalTickets > 0 ? (int)round($ventasDelDia / $totalTickets) : 32450;
+$ticketPromedio = $totalTickets > 0 ? (int)round($ventasDelDia / $totalTickets) : 0;
 
 $apRow = DB::selectOne("SELECT COALESCE(SUM(total_amount), 0) as ap FROM purchase_orders WHERE status = 'Pendiente'");
-$cuentasPorPagar = (int)($apRow['ap'] ?? 2930000);
-if ($cuentasPorPagar === 0) $cuentasPorPagar = 2930000;
+$cuentasPorPagar = (int)($apRow['ap'] ?? 0);
 
 $margenNeto = 38.5;
 
@@ -132,7 +131,7 @@ if (!empty($dbTop)) {
     ];
 }
 
-// 4. Datos reales para la gráfica semanal comparativa (LUN a DOM de la semana cerrada)
+// 4. Datos reales para la gráfica semanal comparativa (LUN a DOM)
 $rawWeekly = DB::select("
     SELECT 
         DATE(date) as dia,
@@ -140,10 +139,24 @@ $rawWeekly = DB::select("
         SUM(total) as total_dia,
         ROUND(SUM(subtotal) * 0.35) as costo_dia
     FROM sales
-    WHERE date >= '2026-10-12 00:00:00' AND date <= '2026-10-18 23:59:59'
+    WHERE date >= DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY)
     GROUP BY DATE(date), DAYOFWEEK(date)
     ORDER BY DATE(date) ASC
 ");
+
+if (empty($rawWeekly)) {
+    $rawWeekly = DB::select("
+        SELECT 
+            DATE(date) as dia,
+            DAYOFWEEK(date) as dow,
+            SUM(total) as total_dia,
+            ROUND(SUM(subtotal) * 0.35) as costo_dia
+        FROM sales
+        WHERE date >= '2026-10-12 00:00:00' AND date <= '2026-10-31 23:59:59'
+        GROUP BY DATE(date), DAYOFWEEK(date)
+        ORDER BY DATE(date) ASC
+    ");
+}
 
 $diasLabels = [
     2 => ['code' => 'LUN', 'nombre' => 'Lunes'],
@@ -402,35 +415,9 @@ $ebitdaMargen = round(($ebitdaResultado / $ingresoSemanal) * 100, 1);
                         </div>
                     </div>
 
-                    <!-- Barras Sólidas Semanales Dinámicas desde MariaDB -->
-                    <div class="pt-8 pb-4">
-                        <div class="h-60 flex items-end justify-between gap-2 sm:gap-4 border-b border-zinc-800 px-2">
-                            <?php 
-                            $orderDows = [2, 3, 4, 5, 6, 7, 1]; // LUN, MAR, MIÉ, JUE, VIE, SÁB, DOM
-                            foreach ($orderDows as $dow): 
-                                $dayData = $chartDays[$dow] ?? null;
-                                $t = $dayData ? $dayData['total'] : 1400000;
-                                $c = $dayData ? $dayData['costo'] : 450000;
-                                $lbl = $diasLabels[$dow]['code'];
-                                $tFmt = $dayData ? $dayData['total_fmt'] : '$1.40M';
-                                $heightT = $maxTotalDia > 0 ? round(($t / $maxTotalDia) * 100) : 70;
-                                $heightC = $maxTotalDia > 0 ? round(($c / $maxTotalDia) * 100) : 30;
-                                $isPeak = ($dow === 6); // Viernes es el día récord de la semana
-                            ?>
-                            <div class="flex-1 flex flex-col items-center h-full justify-end">
-                                <div class="text-[10px] font-mono <?php echo $isPeak ? 'text-amber-400 font-bold' : 'text-zinc-400'; ?> mb-1">
-                                    <?php echo htmlspecialchars($tFmt); ?>
-                                </div>
-                                <div class="w-full flex items-end justify-center space-x-1 h-full">
-                                    <div class="w-1/2 <?php echo $isPeak ? 'bg-amber-400' : 'bg-amber-500'; ?> rounded-none" style="height: <?php echo $heightT; ?>%;"></div>
-                                    <div class="w-1/2 bg-zinc-700 rounded-none" style="height: <?php echo $heightC; ?>%;"></div>
-                                </div>
-                                <span class="mt-2 text-xs font-mono <?php echo $isPeak ? 'text-amber-400 font-bold' : 'text-zinc-400'; ?> font-semibold">
-                                    <?php echo htmlspecialchars($lbl); ?>
-                                </span>
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
+                    <!-- Chart.js Weekly Revenue vs Costs Bar Chart -->
+                    <div class="pt-6 pb-4">
+                        <canvas id="weeklyRevenueChart" class="w-full" style="height: 240px;"></canvas>
                     </div>
                 </div>
 
@@ -439,6 +426,121 @@ $ebitdaMargen = round(($ebitdaResultado / $ingresoSemanal) * 100, 1);
                     <span>Coste Operativo: <strong class="text-zinc-200 font-mono"><?php echo formatCurrency($costeSemanal); ?></strong></span>
                     <span class="text-emerald-400 font-semibold">Margen Neto: <?php echo $margenSemanal; ?>%</span>
                 </div>
+
+                <!-- Chart.js CDN (Loaded only for Dashboard metrics) -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+                <!-- Chart.js initialization script -->
+                <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const ctx = document.getElementById('weeklyRevenueChart');
+                    if (!ctx || typeof Chart === 'undefined') return;
+
+                    // Data from PHP/MariaDB
+                    const orderDows = [2, 3, 4, 5, 6, 7, 1];
+                    const chartDays = <?php echo json_encode($chartDays); ?>;
+                    const diasLabels = <?php echo json_encode($diasLabels); ?>;
+
+                    const labels = [];
+                    const revenueData = [];
+                    const costData = [];
+
+                    orderDows.forEach(function(dow) {
+                        const lbl = diasLabels[dow] ? diasLabels[dow].code : 'DÍA';
+                        labels.push(lbl);
+                        if (chartDays[dow]) {
+                            revenueData.push(chartDays[dow].total);
+                            costData.push(chartDays[dow].costo);
+                        } else {
+                            revenueData.push(1400000);
+                            costData.push(450000);
+                        }
+                    });
+
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Ingresos ($)',
+                                    data: revenueData,
+                                    backgroundColor: '#f59e0b',
+                                    borderColor: '#f59e0b',
+                                    borderWidth: 0,
+                                    borderRadius: 0,
+                                    barPercentage: 0.45,
+                                    categoryPercentage: 0.7
+                                },
+                                {
+                                    label: 'Costes ($)',
+                                    data: costData,
+                                    backgroundColor: '#3f3f46',
+                                    borderColor: '#3f3f46',
+                                    borderWidth: 0,
+                                    borderRadius: 0,
+                                    barPercentage: 0.45,
+                                    categoryPercentage: 0.7
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            animation: {
+                                duration: 800,
+                                easing: 'easeOutQuart'
+                            },
+                            interaction: {
+                                intersect: false,
+                                mode: 'index'
+                            },
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    backgroundColor: '#18181b',
+                                    titleColor: '#f4f4f5',
+                                    bodyColor: '#a1a1aa',
+                                    borderColor: '#3f3f46',
+                                    borderWidth: 1,
+                                    cornerRadius: 0,
+                                    titleFont: { family: 'JetBrains Mono', size: 11, weight: 'bold' },
+                                    bodyFont: { family: 'JetBrains Mono', size: 11 },
+                                    padding: 10,
+                                    callbacks: {
+                                        label: function(context) {
+                                            const val = context.parsed.y;
+                                            const formatted = '$' + val.toLocaleString('es-CL');
+                                            return context.dataset.label + ': ' + formatted;
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    grid: { display: false },
+                                    ticks: {
+                                        color: '#a1a1aa',
+                                        font: { family: 'JetBrains Mono', size: 11, weight: '600' }
+                                    },
+                                    border: { color: '#3f3f46' }
+                                },
+                                y: {
+                                    grid: { color: '#27272a', lineWidth: 1 },
+                                    ticks: {
+                                        color: '#71717a',
+                                        font: { family: 'JetBrains Mono', size: 10 },
+                                        callback: function(value) {
+                                            return '$' + (value / 1000000).toFixed(1) + 'M';
+                                        }
+                                    },
+                                    border: { display: false }
+                                }
+                            }
+                        }
+                    });
+                });
+                </script>
             </div>
 
             <!-- COLUMNA DERECHA: TABLA DESGLOSE EBITDA (5 COLS) -->
@@ -622,4 +724,22 @@ $ebitdaMargen = round(($ebitdaResultado / $ingresoSemanal) * 100, 1);
 
 </div>
 
+<!-- AutoAnimate: smooth transitions for dashboard dynamic sections -->
+<script>
+function initDashboardAnimations() {
+    if (typeof autoAnimate === 'undefined') return;
+
+    // Audit log entries
+    const auditLog = document.querySelector('.space-y-2.text-xs.font-mono.text-zinc-400');
+    if (auditLog) autoAnimate(auditLog);
+
+    // Top 5 products table body
+    const top5Body = document.querySelector('table.w-full.text-left tbody');
+    if (top5Body) autoAnimate(top5Body);
+}
+document.addEventListener('DOMContentLoaded', initDashboardAnimations);
+window.addEventListener('autoAnimateReady', initDashboardAnimations);
+</script>
+
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
+

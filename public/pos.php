@@ -496,7 +496,7 @@ require_once __DIR__ . '/../includes/header.php';
     function renderTicketRowHtml(item, index) {
         const itemTotal = item.precio * item.qty;
         return `
-            <div class="flex items-center justify-between py-2 border-b border-slate-200">
+            <div key="${item.id}" class="flex items-center justify-between py-2 border-b border-slate-200">
                 <div class="flex-1 pr-2">
                     <div class="font-bold text-slate-900 text-xs">${item.nombre}</div>
                     <div class="text-[11px] text-slate-500 font-mono">
@@ -746,11 +746,23 @@ require_once __DIR__ . '/../includes/header.php';
         clockEl.textContent = `${hrs}:${mins}:${secs}`;
     }
 
+    function initPosAnimations() {
+        if (typeof autoAnimate !== 'undefined') {
+            const ticketContainer = document.getElementById('ticket-items-container');
+            if (ticketContainer) autoAnimate(ticketContainer);
+
+            const catalogGrid = document.querySelector('.pos-item-card')?.parentElement;
+            if (catalogGrid) autoAnimate(catalogGrid);
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         renderTicket();
         updateClock();
         setInterval(updateClock, 1000);
+        initPosAnimations();
     });
+    window.addEventListener('autoAnimateReady', initPosAnimations);
 </script>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

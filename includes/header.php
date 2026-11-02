@@ -47,13 +47,29 @@ if (!empty($currentUser['full_name'])) {
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-    <!-- Google Fonts: Inter, JetBrains Mono & Material Symbols Outlined -->
+    <!-- Preconnect to external CDNs -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Google Fonts: Inter, JetBrains Mono & Material Symbols Outlined -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/custom.css">
+
+    <!-- Alpine.js (lightweight reactive framework - non-blocking defer) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+
+    <!-- AutoAnimate (smooth list transitions via ESM) -->
+    <script type="module">
+        import autoAnimate from 'https://cdn.jsdelivr.net/npm/@formkit/auto-animate@0.8.2/+esm';
+        window.autoAnimate = autoAnimate;
+        window.dispatchEvent(new CustomEvent('autoAnimateReady'));
+    </script>
 
     <script>
         tailwind.config = {
@@ -194,62 +210,51 @@ if (!empty($currentUser['full_name'])) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                 </a>
 
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" type="button" class="lg:hidden p-2 text-white hover:bg-slate-800 rounded-none focus:outline-none" aria-label="Abrir menú">
-                    <span class="material-symbols-outlined text-xl" id="menu-icon-open">menu</span>
-                    <span class="material-symbols-outlined text-xl hidden" id="menu-icon-close">close</span>
-                </button>
-            </div>
-        </div>
+                <!-- Mobile Menu Button (Alpine.js) -->
+                <div x-data="{ mobileOpen: false }" class="lg:hidden">
+                    <button @click="mobileOpen = !mobileOpen" type="button" class="p-2 text-white hover:bg-slate-800 rounded-none focus:outline-none" aria-label="Abrir menú">
+                        <span class="material-symbols-outlined text-xl" x-show="!mobileOpen">menu</span>
+                        <span class="material-symbols-outlined text-xl" x-show="mobileOpen" x-cloak>close</span>
+                    </button>
 
-        <!-- Mobile Dropdown Menu (Solid rectangular) -->
-        <div id="mobile-menu" class="hidden lg:hidden <?php echo $isDarkTheme ? 'bg-zinc-900 border-t border-zinc-800 text-zinc-200' : 'bg-slate-900 border-t border-slate-800 text-slate-200'; ?> px-4 py-3 space-y-1 text-xs uppercase font-mono">
-            <a href="index.php" class="block py-2.5 px-3 <?php echo ($currentPage === 'inicio') ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800'; ?> rounded-none">
-                1. Inicio &amp; Catálogo
-            </a>
-            <a href="pos.php" class="block py-2.5 px-3 <?php echo ($currentPage === 'pos') ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800'; ?> rounded-none">
-                2. Punto de Venta (POS) <?php if (!AuthService::canAccessModule('pos')) echo '[RESTRINGIDO]'; ?>
-            </a>
-            <a href="suppliers.php" class="block py-2.5 px-3 <?php echo ($currentPage === 'suppliers') ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800'; ?> rounded-none">
-                3. Proveedores &amp; Finanzas <?php if (!AuthService::canAccessModule('suppliers')) echo '[RESTRINGIDO]'; ?>
-            </a>
-            <a href="dispatch.php" class="block py-2.5 px-3 <?php echo ($currentPage === 'dispatch') ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800'; ?> rounded-none">
-                4. Logística &amp; Rutas <?php if (!AuthService::canAccessModule('dispatch')) echo '[RESTRINGIDO]'; ?>
-            </a>
-            <a href="dashboard.php" class="block py-2.5 px-3 text-amber-400 font-bold hover:bg-slate-800 rounded-none">
-                5. Dashboard Ejecutivo <?php if (!AuthService::canAccessModule('dashboard')) echo '[RESTRINGIDO]'; ?>
-            </a>
-            <div class="pt-2 border-t border-zinc-800 flex justify-between items-center text-xs">
-                <span>Cuenta: <?php echo htmlspecialchars($currentUser['username']); ?> (<?php echo strtoupper($userRole); ?>)</span>
-                <a href="login.php" class="text-amber-400 hover:underline">Cambiar Rol</a>
+                    <!-- Mobile Dropdown Menu (Solid rectangular, Alpine.js controlled) -->
+                    <div x-show="mobileOpen"
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 -translate-y-2"
+                         x-transition:enter-end="opacity-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 translate-y-0"
+                         x-transition:leave-end="opacity-0 -translate-y-2"
+                         x-cloak
+                         @click.outside="mobileOpen = false"
+                         class="absolute left-0 right-0 top-16 z-40 <?php echo $isDarkTheme ? 'bg-zinc-900 border-t border-zinc-800 text-zinc-200' : 'bg-slate-900 border-t border-slate-800 text-slate-200'; ?> px-4 py-3 space-y-1 text-xs uppercase font-mono">
+                        <a href="index.php" class="block py-2.5 px-3 <?php echo ($currentPage === 'inicio') ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800'; ?> rounded-none">
+                            1. Inicio &amp; Catálogo
+                        </a>
+                        <a href="pos.php" class="block py-2.5 px-3 <?php echo ($currentPage === 'pos') ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800'; ?> rounded-none">
+                            2. Punto de Venta (POS) <?php if (!AuthService::canAccessModule('pos')) echo '[RESTRINGIDO]'; ?>
+                        </a>
+                        <a href="suppliers.php" class="block py-2.5 px-3 <?php echo ($currentPage === 'suppliers') ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800'; ?> rounded-none">
+                            3. Proveedores &amp; Finanzas <?php if (!AuthService::canAccessModule('suppliers')) echo '[RESTRINGIDO]'; ?>
+                        </a>
+                        <a href="dispatch.php" class="block py-2.5 px-3 <?php echo ($currentPage === 'dispatch') ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800'; ?> rounded-none">
+                            4. Logística &amp; Rutas <?php if (!AuthService::canAccessModule('dispatch')) echo '[RESTRINGIDO]'; ?>
+                        </a>
+                        <a href="dashboard.php" class="block py-2.5 px-3 text-amber-400 font-bold hover:bg-slate-800 rounded-none">
+                            5. Dashboard Ejecutivo <?php if (!AuthService::canAccessModule('dashboard')) echo '[RESTRINGIDO]'; ?>
+                        </a>
+                        <div class="pt-2 border-t border-zinc-800 flex justify-between items-center text-xs">
+                            <span>Cuenta: <?php echo htmlspecialchars($currentUser['username']); ?> (<?php echo strtoupper($userRole); ?>)</span>
+                            <a href="login.php" class="text-amber-400 hover:underline">Cambiar Rol</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Script for mobile menu toggle -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const btn = document.getElementById('mobile-menu-btn');
-            const menu = document.getElementById('mobile-menu');
-            const iconOpen = document.getElementById('menu-icon-open');
-            const iconClose = document.getElementById('menu-icon-close');
-
-            if (btn && menu) {
-                btn.addEventListener('click', function () {
-                    const isHidden = menu.classList.contains('hidden');
-                    if (isHidden) {
-                        menu.classList.remove('hidden');
-                        if (iconOpen) iconOpen.classList.add('hidden');
-                        if (iconClose) iconClose.classList.remove('hidden');
-                    } else {
-                        menu.classList.add('hidden');
-                        if (iconOpen) iconOpen.classList.remove('hidden');
-                        if (iconClose) iconClose.classList.add('hidden');
-                    }
-                });
-            }
-        });
-    </script>
+    <!-- Alpine.js x-cloak: hide elements until Alpine initializes -->
+    <style>[x-cloak] { display: none !important; }</style>
 
     <!-- Main Content Wrapper -->
     <main class="flex-1 w-full overflow-y-auto">
