@@ -196,4 +196,4 @@ Porque Noviembre 2026 se dejó limpio intencionalmente. En cuanto emita su prime
 En la esquina superior derecha de cualquier pantalla, haga clic en el botón con el icono de usuario o **Cerrar Sesión** (`/logout.php`), lo que lo devolverá a la pantalla de login para ingresar con otro rol.
 
 #### ¿Dónde se configuran las credenciales de la base de datos?
-Todas las variables de entorno se definen en el archivo [`.env`](file:///c:/Users/email/Documents/Proyectos/Redes%202/.env) en la raíz del proyecto.
+Todas las variables de entorno se definen en el archivo [`.env`](../.env) en la raíz del proyecto.
