@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PAN Y QUEQUE - Intranet ERP Corporativo</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            margin: 0;
+            padding: 0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .header-bar {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-bottom: 3px solid #b45309;
+        }
+        .header-bar h1 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: 1px;
+            color: #ffffff;
+            display: inline-block;
+        }
+        .header-tag {
+            background-color: #b45309;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 6px;
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+        .header-info {
+            float: right;
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            margin: 15px auto;
+        }
+        .network-banner {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            font-size: 11px;
+        }
+        .network-banner td {
+            padding: 4px 10px;
+        }
+        .badge-net {
+            background-color: #e2e8f0;
+            color: #334155;
+            padding: 2px 6px;
+            font-weight: bold;
+            font-family: monospace;
+            border: 1px solid #cbd5e1;
+        }
+        .badge-ok {
+            background-color: #dcfce7;
+            color: #15803d;
+            padding: 2px 6px;
+            font-weight: bold;
+            border: 1px solid #86efac;
+        }
+        .section-title {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 8px 12px;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            border-left: 4px solid #b45309;
+        }
+        .modules-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 10px;
+            margin-bottom: 20px;
+        }
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 15px;
+            vertical-align: top;
+            width: 50%;
+        }
+        .card-dark {
+            background-color: #18181b;
+            color: #f4f4f5;
+            border: 1px solid #27272a;
+            padding: 15px;
+            vertical-align: top;
+            width: 50%;
+        }
+        .card-header {
+            font-size: 10px;
+            font-weight: bold;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .card-dark .card-header {
+            color: #fbbf24;
+        }
+        .card-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #0f172a;
+            margin: 0 0 8px 0;
+        }
+        .card-dark .card-title {
+            color: #ffffff;
+        }
+        .card-desc {
+            font-size: 11px;
+            color: #475569;
+            margin-bottom: 15px;
+            min-height: 42px;
+        }
+        .card-dark .card-desc {
+            color: #a1a1aa;
+        }
+        .card-meta {
+            font-size: 10px;
+            font-family: monospace;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 8px;
+            margin-bottom: 10px;
+        }
+        .card-dark .card-meta {
+            border-top: 1px solid #27272a;
+            color: #71717a;
+        }
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 8px 14px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #0f172a;
+            color: #ffffff;
+            border: 1px solid #0f172a;
+        }
+        .btn-primary:hover {
+            background-color: #1e293b;
+        }
+        .btn-warning {
+            background-color: #b45309;
+            color: #ffffff;
+            border: 1px solid #b45309;
+        }
+        .btn-warning:hover {
+            background-color: #d97706;
+        }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            border: 1px solid #cbd5e1;
+        }
+        .stats-table td {
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            text-align: center;
+            width: 25%;
+        }
+        .stat-val {
+            font-size: 20px;
+            font-weight: bold;
+            color: #0f172a;
+            font-family: monospace;
+        }
+        .stat-lbl {
+            font-size: 10px;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+        .filter-bar {
+            margin-bottom: 10px;
+        }
+        .filter-btn {
+            background-color: #e2e8f0;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 5px 10px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        .filter-btn-active {
+            background-color: #0f172a;
+            color: #ffffff;
+            border: 1px solid #0f172a;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            font-size: 12px;
+        }
+        .data-table th {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid #334155;
+        }
+        .data-table td {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+        }
+        .data-table tr:hover {
+            background-color: #f8fafc;
+        }
+        .footer {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            font-size: 11px;
+            border-top: 2px solid #b45309;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR INSTITUCIONAL -->
+    <div class="header-bar">
+        <h1>PAN Y QUEQUE</h1>
+        <span class="header-tag">INTRANET ERP v1.0</span>
+        <div class="header-info">
+            SERVIDOR HTTP CISCO PT &bull; IPv6: 2001:db8:acad:30::80 &bull; SESI&Oacute;N: GERENCIA GENERAL
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- TELEMETRÍA Y CONTROL DE RED INSTITUCIONAL (P2 REDES II) -->
+        <table class="network-banner" width="100%">
+            <tr>
+                <td><strong>Topolog&iacute;a de Red:</strong> <span class="badge-net">VLAN 30 (Servidores)</span></td>
+                <td><strong>Direccionamiento Servidor Web:</strong> <span class="badge-net">2001:db8:acad:30::80</span></td>
+                <td><strong>Estado HTTP:</strong> <span class="badge-ok">&bull; EN L&Iacute;NEA (PUERTO 80/TCP)</span></td>
+            </tr>
+            <tr>
+                <td><strong>Pol&iacute;ticas ACL Activas:</strong> <span class="badge-net">ACL_PERFIL_CHOFERES / ACL_PERFIL_GERENTE</span></td>
+                <td><strong>Segmentos Autorizados:</strong> <span class="badge-net">VLAN 10, VLAN 20, VLAN 30, VPNs</span></td>
+                <td><strong>Persistencia:</strong> <span class="badge-ok">DATOS MAESTROS 2026</span></td>
+            </tr>
+        </table>
+
+        <!-- INDICADORES OPERATIVOS DEL OBRADOR CENTRAL -->
+        <table class="stats-table">
+            <tr>
+                <td>
+                    <div class="stat-val">1.840 kg</div>
+                    <div class="stat-lbl">Harinas Procesadas Hoy</div>
+                </td>
+                <td>
+                    <div class="stat-val">42 Lotes</div>
+                    <div class="stat-lbl">Fermentaci&oacute;n Fr&iacute;a 4&deg;C</div>
+                </td>
+                <td>
+                    <div class="stat-val">28 Pedidos</div>
+                    <div class="stat-lbl">&Oacute;rdenes HORECA Activas</div>
+                </td>
+                <td>
+                    <div class="stat-val" style="color: #15803d;">94.2%</div>
+                    <div class="stat-lbl">Eficiencia Hornos Solera</div>
+                </td>
+            </tr>
+        </table>
+
+        <!-- 4 MÓDULOS PRINCIPALES DE NAVEGACIÓN -->
+        <div class="section-title">M&oacute;dulos Integrados del Sistema ERP</div>
+
+        <table class="modules-table">
+            <tr>
+                <!-- MÓDULO 02: CAJA / POS -->
+                <td class="card">
+                    <div class="card-header">M&oacute;dulo 02 // Sala de Ventas</div>
+                    <div class="card-title">Punto de Venta (POS) y Cajas</div>
+                    <div class="card-desc">
+                        Terminal t&aacute;ctil de mostrador para atenci&oacute;n de p&uacute;blico, emisi&oacute;n de boletas tributarias, selecci&oacute;n de cat&aacute;logo y cuadratura de caja en vivo.
+                    </div>
+                    <div class="card-meta">
+                        RED: VLAN 20 (Cajas_Ventas) &bull; SEGMENTO: 2001:db8:acad:20::/64
+                    </div>
+                    <a href="caja.html" class="btn btn-primary">Abrir M&oacute;dulo de Caja &rarr;</a>
+                </td>
+
+                <!-- MÓDULO 03: PROVEEDORES Y FINANZAS -->
+                <td class="card">
+                    <div class="card-header">M&oacute;dulo 03 // Suministro y Administraci&oacute;n</div>
+                    <div class="card-title">Proveedores &amp; Finanzas</div>
+                    <div class="card-desc">
+                        Gesti&oacute;n de compras de materias primas cr&iacute;ticas (harinas, levaduras, l&aacute;cteos), emisi&oacute;n de &oacute;rdenes de compra (PO) y balance general de pasivos.
+                    </div>
+                    <div class="card-meta">
+                        RED: VLAN 10 (Administraci&oacute;n) &bull; SEGMENTO: 2001:db8:acad:10::/64
+                    </div>
+                    <a href="proveedores.html" class="btn btn-primary">Gestionar Proveedores &rarr;</a>
+                </td>
+            </tr>
+            <tr>
+                <!-- MÓDULO 04: LOGÍSTICA Y REPARTO -->
+                <td class="card">
+                    <div class="card-header">M&oacute;dulo 04 // Distribuci&oacute;n y Flota</div>
+                    <div class="card-title">Log&iacute;stica &amp; Reparto HORECA</div>
+                    <div class="card-desc">
+                        Hojas de ruta de choferes, trazabilidad de cadena de fr&iacute;o en furgones (+3.8&deg;C) y confirmaci&oacute;n de entrega de albaranes en hoteles y casinos.
+                    </div>
+                    <div class="card-meta">
+                        RED: VPN Choferes Remota &bull; HOST: 2001:db8:wan::100
+                    </div>
+                    <a href="reparto.html" class="btn btn-primary">Ver Hojas de Reparto &rarr;</a>
+                </td>
+
+                <!-- MÓDULO 05: DASHBOARD EJECUTIVO -->
+                <td class="card-dark">
+                    <div class="card-header">M&oacute;dulo 05 // Alta Direcci&oacute;n</div>
+                    <div class="card-title">Dashboard Gerencial</div>
+                    <div class="card-desc">
+                        Consolidado anal&iacute;tico en tiempo real: facturaci&oacute;n del d&iacute;a, margen de explotaci&oacute;n EBITDA, cuentas por pagar y consola de auditor&iacute;a confidencial.
+                    </div>
+                    <div class="card-meta">
+                        ACCESO EXCLUSIVO: VPN Gerencia &bull; HOST: 2001:db8:wan::200
+                    </div>
+                    <!-- Para bloqueo por ACL de Choferes en VLAN 30, cambiar a: http://[2001:db8:acad:30::db]/dashboard.html -->
+                    <a href="dashboard.html" class="btn btn-warning">Abrir Dashboard Gerencial &rarr;</a>
+                </td>
+            </tr>
+        </table>
+
+        <!-- CATÁLOGO MAESTRO DE PRODUCTOS (DATOS FIJOS EN HTML) -->
+        <div class="section-title">Cat&aacute;logo Maestro de Productos en Stock</div>
+
+        <div class="filter-bar">
+            <strong>Filtrar por Categor&iacute;a:</strong>
+            <button type="button" class="filter-btn filter-btn-active" onclick="filtrar('TODOS', this)">[TODOS]</button>
+            <button type="button" class="filter-btn" onclick="filtrar('Panaderia', this)">[PANADER&Iacute;A]</button>
+            <button type="button" class="filter-btn" onclick="filtrar('Pasteleria', this)">[PASTELER&Iacute;A]</button>
+            <button type="button" class="filter-btn" onclick="filtrar('Rotiseria', this)">[ROTISER&Iacute;A]</button>
+        </div>
+
+        <table class="data-table" id="tabla-catalogo">
+            <thead>
+                <tr>
+                    <th width="80">SKU</th>
+                    <th>Producto</th>
+                    <th>Categor&iacute;a</th>
+                    <th>Descripci&oacute;n T&eacute;cnica</th>
+                    <th width="90">Stock</th>
+                    <th width="80">Unidad</th>
+                    <th width="100">Precio Mayorista</th>
+                    <th width="90">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="item-cat-Panaderia">
+                    <td><code>PAN-01</code></td>
+                    <td><strong>Pan Marraqueta Tradicional</strong></td>
+                    <td>Panader&iacute;a</td>
+                    <td>Crocante, doble fermentaci&oacute;n artesanal en piso de piedra</td>
+                    <td align="right">250</td>
+                    <td>kg</td>
+                    <td align="right"><strong>$2.190</strong></td>
+                    <td align="center"><span class="badge-ok">ACTIVO</span></td>
+                </tr>
+                <tr class="item-cat-Panaderia">
+                    <td><code>PAN-02</code></td>
+                    <td><strong>Hallullas Especiales</strong></td>
+                    <td>Panader&iacute;a</td>
+                    <td>Masa suave y hojaldrada con manteca de primera selecci&oacute;n</td>
+                    <td align="right">200</td>
+                    <td>kg</td>
+                    <td align="right"><strong>$2.290</strong></td>
+                    <td align="center"><span class="badge-ok">ACTIVO</span></td>
+                </tr>
+                <tr class="item-cat-Pasteleria">
+                    <td><code>PAS-03</code></td>
+                    <td><strong>Torta Selva Negra</strong></td>
+                    <td>Pasteler&iacute;a</td>
+                    <td>Bizcocho h&uacute;medo de cacao, cerezas maceradas y crema chantilly</td>
+                    <td align="right">25</td>
+                    <td>un</td>
+                    <td align="right"><strong>$18.500</strong></td>
+                    <td align="center"><span class="badge-ok">ACTIVO</span></td>
+                </tr>
+                <tr class="item-cat-Rotiseria">
+                    <td><code>EMP-04</code></td>
+                    <td><strong>Empanadas de Pino Horno</strong></td>
+                    <td>Rotiser&iacute;a</td>
+                    <td>Pino vacuno picado a cuchillo con cebolla caramelizada</td>
+                    <td align="right">150</td>
+                    <td>un</td>
+                    <td align="right"><strong>$2.600</strong></td>
+                    <td align="center"><span class="badge-ok">ACTIVO</span></td>
+                </tr>
+                <tr class="item-cat-Pasteleria">
+                    <td><code>PAS-05</code></td>
+                    <td><strong>Pasteles Surtidos Finos</strong></td>
+                    <td>Pasteler&iacute;a</td>
+                    <td>Eclairs de chocolate belga, milhojas de manjar y tartaletas</td>
+                    <td align="right">80</td>
+                    <td>un</td>
+                    <td align="right"><strong>$1.800</strong></td>
+                    <td align="center"><span class="badge-ok">ACTIVO</span></td>
+                </tr>
+                <tr class="item-cat-Panaderia">
+                    <td><code>PAN-06</code></td>
+                    <td><strong>Baguette Tradici&oacute;n Francesa</strong></td>
+                    <td>Panader&iacute;a</td>
+                    <td>Elaboraci&oacute;n con masa madre y 24 horas de fermentaci&oacute;n fr&iacute;a</td>
+                    <td align="right">80</td>
+                    <td>un</td>
+                    <td align="right"><strong>$1.690</strong></td>
+                    <td align="center"><span class="badge-ok">ACTIVO</span></td>
+                </tr>
+                <tr class="item-cat-Panaderia">
+                    <td><code>PAN-07</code></td>
+                    <td><strong>Croissant Mantequilla AOP</strong></td>
+                    <td>Panader&iacute;a</td>
+                    <td>Hojaldrado fino de 24 capas con mantequilla pura 84% MG</td>
+                    <td align="right">90</td>
+                    <td>un</td>
+                    <td align="right"><strong>$2.400</strong></td>
+                    <td align="center"><span class="badge-ok">ACTIVO</span></td>
+                </tr>
+                <tr class="item-cat-Pasteleria">
+                    <td><code>PAS-08</code></td>
+                    <td><strong>Torta &Oacute;pera Grand Cru 70%</strong></td>
+                    <td>Pasteler&iacute;a</td>
+                    <td>Bizcocho Joconde con caf&eacute; ar&aacute;bica y ganache cacao 70%</td>
+                    <td align="right">18</td>
+                    <td>un</td>
+                    <td align="right"><strong>$18.500</strong></td>
+                    <td align="center"><span class="badge-ok">ACTIVO</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- PIE DE PÁGINA CORPORATIVO -->
+    <div class="footer">
+        Panader&iacute;a y Pasteler&iacute;a Pan y Queque &copy; 2026 &bull; Sistema ERP para Servidor HTTP Cisco Packet Tracer &bull; VLANs 10, 20 y 30 &bull; IPv6 Nativo
+    </div>
+
+    <!-- SCRIPT ES5 BÁSICO COMPATIBLE CON CISCO PACKET TRACER -->
+    <script>
+        function filtrar(categoria, boton) {
+            var botones = document.getElementsByClassName("filter-btn");
+            for (var i = 0; i < botones.length; i++) {
+                botones[i].className = "filter-btn";
+            }
+            if (boton) {
+                boton.className = "filter-btn filter-btn-active";
+            }
+
+            var filas = document.getElementById("tabla-catalogo").getElementsByTagName("tr");
+            for (var j = 1; j < filas.length; j++) {
+                var f = filas[j];
+                if (categoria === "TODOS") {
+                    f.style.display = "";
+                } else if (f.className.indexOf("item-cat-" + categoria) !== -1) {
+                    f.style.display = "";
+                } else {
+                    f.style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+

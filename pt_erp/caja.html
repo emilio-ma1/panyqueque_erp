@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PAN Y QUEQUE - Módulo de Cajas &amp; POS</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            margin: 0;
+            padding: 0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .header-bar {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-bottom: 3px solid #b45309;
+        }
+        .header-bar h1 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: 1px;
+            color: #ffffff;
+            display: inline-block;
+        }
+        .header-tag {
+            background-color: #15803d;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 6px;
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+        .header-nav {
+            float: right;
+            margin-top: 3px;
+        }
+        .nav-link {
+            color: #ffffff;
+            background-color: #334155;
+            text-decoration: none;
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: bold;
+            border: 1px solid #475569;
+        }
+        .nav-link:hover {
+            background-color: #b45309;
+            border-color: #b45309;
+        }
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            margin: 15px auto;
+        }
+        .meta-strip {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 8px 15px;
+            margin-bottom: 15px;
+            font-size: 11px;
+        }
+        .meta-strip td {
+            padding: 2px 10px;
+        }
+        .badge {
+            padding: 2px 6px;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 11px;
+        }
+        .badge-vlan {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+        }
+        .badge-caja {
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+        .pos-layout {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .pos-left {
+            width: 58%;
+            vertical-align: top;
+            padding-right: 15px;
+        }
+        .pos-right {
+            width: 42%;
+            vertical-align: top;
+        }
+        .section-box {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        .section-title {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 7px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: -12px -12px 12px -12px;
+            border-left: 4px solid #b45309;
+        }
+        .catalog-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        .catalog-table th {
+            background-color: #f8fafc;
+            color: #334155;
+            padding: 6px 8px;
+            text-align: left;
+            border-bottom: 2px solid #cbd5e1;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        .catalog-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .btn-add {
+            background-color: #0f172a;
+            color: #ffffff;
+            border: none;
+            padding: 4px 8px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-add:hover {
+            background-color: #b45309;
+        }
+        .qty-box {
+            width: 32px;
+            text-align: center;
+            padding: 3px;
+            font-size: 11px;
+            border: 1px solid #cbd5e1;
+        }
+        .ticket-box {
+            background-color: #ffffff;
+            border: 2px solid #0f172a;
+            padding: 15px;
+        }
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px dashed #0f172a;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+        .ticket-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+        .ticket-table th {
+            border-bottom: 1px solid #334155;
+            padding: 4px;
+            text-align: left;
+        }
+        .ticket-table td {
+            padding: 4px;
+            border-bottom: 1px dotted #cbd5e1;
+        }
+        .ticket-totals {
+            width: 100%;
+            border-top: 1px solid #334155;
+            font-size: 12px;
+            margin-top: 5px;
+            padding-top: 5px;
+        }
+        .ticket-totals td {
+            padding: 3px 0;
+        }
+        .ticket-total-val {
+            font-size: 16px;
+            font-weight: bold;
+            color: #b45309;
+            text-align: right;
+            font-family: monospace;
+        }
+        .pay-method {
+            margin: 12px 0;
+            padding: 8px;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            font-size: 11px;
+        }
+        .btn-sale {
+            width: 100%;
+            background-color: #15803d;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .btn-sale:hover {
+            background-color: #16a34a;
+        }
+        .btn-clear {
+            width: 100%;
+            background-color: #dc2626;
+            color: #ffffff;
+            border: none;
+            padding: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+        .btn-clear:hover {
+            background-color: #ef4444;
+        }
+        .arqueo-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            font-size: 12px;
+        }
+        .arqueo-table th {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        .arqueo-table td {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+        }
+        .alert-box {
+            display: none;
+            background-color: #dcfce7;
+            border: 1px solid #86efac;
+            color: #166534;
+            padding: 8px 12px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .footer {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            font-size: 11px;
+            border-top: 2px solid #b45309;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR -->
+    <div class="header-bar">
+        <h1>PAN Y QUEQUE &bull; M&Oacute;DULO DE CAJA</h1>
+        <span class="header-tag">CAJA 02 ACTIVA</span>
+        <div class="header-nav">
+            <a href="index.html" class="nav-link">&larr; Volver al Portal Principal</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- TELEMETRÍA DE RED Y PUNTOS DE VENTA -->
+        <table class="meta-strip" width="100%">
+            <tr>
+                <td><strong>M&oacute;dulo:</strong> 02 // Punto de Venta (POS) &amp; Cuadratura</td>
+                <td><strong>VLAN Asignada:</strong> <span class="badge badge-vlan">VLAN 20 - Cajas_Ventas (2001:db8:acad:20::/64)</span></td>
+                <td><strong>Cajero(a):</strong> Marcela Soto (Turno Tarde)</td>
+                <td><strong>Estado:</strong> <span class="badge badge-caja">&bull; TURNO ABIERTO</span></td>
+            </tr>
+        </table>
+
+        <!-- ALERTA DE VENTA EMITIDA (CONTROLADA POR JS) -->
+        <div id="msg-venta-exitosa" class="alert-box">
+            &check; &iexcl;BOLETA EMITIDA CON &Eacute;XITO! Folio generado: <span id="lbl-folio-nuevo">BOL-004896</span>. Stock actualizado y registrado en arqueo.
+        </div>
+
+        <!-- LAYOUT DE 2 COLUMNAS (CATÁLOGO + TICKET FISCAL) -->
+        <table class="pos-layout">
+            <tr>
+                <!-- COLUMNA IZQUIERDA: CATÁLOGO DE PANIFICACIÓN Y PASTELERÍA -->
+                <td class="pos-left">
+                    <div class="section-box">
+                        <div class="section-title">Cat&aacute;logo de Mostrador (Precios de Venta)</div>
+                        <table class="catalog-table">
+                            <thead>
+                                <tr>
+                                    <th>SKU</th>
+                                    <th>Descripci&oacute;n Producto</th>
+                                    <th>Stock</th>
+                                    <th>Precio</th>
+                                    <th width="50">Cant.</th>
+                                    <th width="75">Acci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>PAN-01</code></td>
+                                    <td><strong>Pan Marraqueta Tradicional</strong></td>
+                                    <td><span id="stock-1">250</span> kg</td>
+                                    <td><strong>$2.190</strong></td>
+                                    <td><input type="number" id="qty-1" value="1" min="1" max="50" class="qty-box"></td>
+                                    <td><button type="button" class="btn-add" onclick="agregarAlTicket(1, 'Pan Marraqueta Tradicional', 2190, 'kg')">+ Agregar</button></td>
+                                </tr>
+                                <tr>
+                                    <td><code>PAN-02</code></td>
+                                    <td><strong>Hallullas Especiales</strong></td>
+                                    <td><span id="stock-2">200</span> kg</td>
+                                    <td><strong>$2.290</strong></td>
+                                    <td><input type="number" id="qty-2" value="1" min="1" max="50" class="qty-box"></td>
+                                    <td><button type="button" class="btn-add" onclick="agregarAlTicket(2, 'Hallullas Especiales', 2290, 'kg')">+ Agregar</button></td>
+                                </tr>
+                                <tr>
+                                    <td><code>PAS-03</code></td>
+                                    <td><strong>Torta Selva Negra</strong></td>
+                                    <td><span id="stock-3">25</span> un</td>
+                                    <td><strong>$18.500</strong></td>
+                                    <td><input type="number" id="qty-3" value="1" min="1" max="10" class="qty-box"></td>
+                                    <td><button type="button" class="btn-add" onclick="agregarAlTicket(3, 'Torta Selva Negra', 18500, 'un')">+ Agregar</button></td>
+                                </tr>
+                                <tr>
+                                    <td><code>EMP-04</code></td>
+                                    <td><strong>Empanadas de Pino Horno</strong></td>
+                                    <td><span id="stock-4">150</span> un</td>
+                                    <td><strong>$2.600</strong></td>
+                                    <td><input type="number" id="qty-4" value="2" min="1" max="50" class="qty-box"></td>
+                                    <td><button type="button" class="btn-add" onclick="agregarAlTicket(4, 'Empanadas de Pino Horno', 2600, 'un')">+ Agregar</button></td>
+                                </tr>
+                                <tr>
+                                    <td><code>PAS-05</code></td>
+                                    <td><strong>Pasteles Surtidos Finos</strong></td>
+                                    <td><span id="stock-5">80</span> un</td>
+                                    <td><strong>$1.800</strong></td>
+                                    <td><input type="number" id="qty-5" value="4" min="1" max="30" class="qty-box"></td>
+                                    <td><button type="button" class="btn-add" onclick="agregarAlTicket(5, 'Pasteles Surtidos Finos', 1800, 'un')">+ Agregar</button></td>
+                                </tr>
+                                <tr>
+                                    <td><code>PAN-06</code></td>
+                                    <td><strong>Baguette Tradici&oacute;n Francesa</strong></td>
+                                    <td><span id="stock-6">80</span> un</td>
+                                    <td><strong>$1.690</strong></td>
+                                    <td><input type="number" id="qty-6" value="1" min="1" max="20" class="qty-box"></td>
+                                    <td><button type="button" class="btn-add" onclick="agregarAlTicket(6, 'Baguette Tradici&oacute;n Francesa', 1690, 'un')">+ Agregar</button></td>
+                                </tr>
+                                <tr>
+                                    <td><code>PAN-07</code></td>
+                                    <td><strong>Croissant Mantequilla AOP</strong></td>
+                                    <td><span id="stock-7">90</span> un</td>
+                                    <td><strong>$2.400</strong></td>
+                                    <td><input type="number" id="qty-7" value="2" min="1" max="20" class="qty-box"></td>
+                                    <td><button type="button" class="btn-add" onclick="agregarAlTicket(7, 'Croissant Mantequilla AOP', 2400, 'un')">+ Agregar</button></td>
+                                </tr>
+                                <tr>
+                                    <td><code>PAS-08</code></td>
+                                    <td><strong>Torta &Oacute;pera Grand Cru 70%</strong></td>
+                                    <td><span id="stock-8">18</span> un</td>
+                                    <td><strong>$18.500</strong></td>
+                                    <td><input type="number" id="qty-8" value="1" min="1" max="10" class="qty-box"></td>
+                                    <td><button type="button" class="btn-add" onclick="agregarAlTicket(8, 'Torta &Oacute;pera Grand Cru 70%', 18500, 'un')">+ Agregar</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+
+                <!-- COLUMNA DERECHA: TICKET DE VENTA FISCAL -->
+                <td class="pos-right">
+                    <div class="ticket-box">
+                        <div class="ticket-header">
+                            <strong style="font-size: 13px;">PANADER&Iacute;A Y PASTELER&Iacute;A PAN Y QUEQUE</strong><br>
+                            <span style="font-size: 10px; color: #475569;">R.U.T.: 76.543.210-K &bull; GIRO: PANIFICACI&Oacute;N INDUSTRIAL</span><br>
+                            <span style="font-size: 10px; color: #b45309; font-weight: bold;">BOLETA ELECTR&Oacute;NICA &bull; FOLIO EN CURSO: <span id="lbl-folio-actual">BOL-004896</span></span>
+                        </div>
+
+                        <table class="ticket-table" id="tabla-ticket">
+                            <thead>
+                                <tr>
+                                    <th width="40">Cant</th>
+                                    <th>Descripci&oacute;n</th>
+                                    <th width="50" align="right">P.Unit</th>
+                                    <th width="60" align="right">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ticket-body">
+                                <tr>
+                                    <td colspan="4" align="center" style="color: #64748b; padding: 15px;"><em>Ticket vac&iacute;o. Seleccione productos a la izquierda.</em></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="ticket-totals">
+                            <tr>
+                                <td>Subtotal Neto (exento IVA):</td>
+                                <td align="right" id="lbl-subtotal" style="font-family: monospace;">$0</td>
+                            </tr>
+                            <tr>
+                                <td>I.V.A. Afecto (19%):</td>
+                                <td align="right" id="lbl-iva" style="font-family: monospace;">$0</td>
+                            </tr>
+                            <tr>
+                                <td><strong style="font-size: 13px;">TOTAL A PAGAR:</strong></td>
+                                <td class="ticket-total-val" id="lbl-total">$0</td>
+                            </tr>
+                        </table>
+
+                        <div class="pay-method">
+                            <strong>Forma de Pago:</strong><br>
+                            <label><input type="radio" name="forma_pago" value="Efectivo" checked> 💵 Efectivo</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="forma_pago" value="Tarjeta Debito"> 💳 Débito</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="forma_pago" value="Transferencia"> 📱 Transf.</label>
+                        </div>
+
+                        <button type="button" class="btn-sale" onclick="emitirBoleta()">&check; EMITIR BOLETA Y COBRAR</button>
+                        <button type="button" class="btn-clear" onclick="vaciarTicket()">&times; VACIAR TICKET</button>
+
+                        <div style="text-align: center; font-size: 9px; color: #64748b; margin-top: 8px;">
+                            Timbre Electr&oacute;nico S.I.I. Res. 80 de 2026 &bull; Verifique documento en www.sii.cl
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <!-- CUADRATURA Y ARQUEO DE CAJA EN VIVO -->
+        <div class="section-box">
+            <div class="section-title">Cuadratura y Arqueo de Caja del Turno (Caja 02)</div>
+            <table class="arqueo-table">
+                <thead>
+                    <tr>
+                        <th>Concepto de Cuadratura</th>
+                        <th>Detalle de Auditor&iacute;a</th>
+                        <th width="120" align="right">Monto Recaudado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fondo Base de Apertura</strong></td>
+                        <td>Efectivo asignado al inicio del turno de mostrador</td>
+                        <td align="right" style="font-family: monospace;">$150.000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ventas en Efectivo</strong></td>
+                        <td>18 transacciones liquidadas en caja</td>
+                        <td align="right" style="font-family: monospace;" id="arqueo-efectivo">$465.000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ventas Tarjeta D&eacute;bito (Transbank)</strong></td>
+                        <td>24 transacciones con voucher POS bancario</td>
+                        <td align="right" style="font-family: monospace;" id="arqueo-debito">$780.000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Transferencias Electr&oacute;nicas Bancarias</strong></td>
+                        <td>6 transacciones verificadas por cuenta corriente</td>
+                        <td align="right" style="font-family: monospace;" id="arqueo-transf">$320.000</td>
+                    </tr>
+                    <tr style="background-color: #f8fafc; font-weight: bold; border-top: 2px solid #0f172a;">
+                        <td>TOTAL RECAUDADO EN TURNO</td>
+                        <td>48 Boletas emitidas hoy en Caja 02</td>
+                        <td align="right" style="font-size: 14px; color: #15803d; font-family: monospace;" id="arqueo-total">$1.715.000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- HISTORIAL DE ÚLTIMAS BOLETAS EMITIDAS -->
+        <div class="section-box">
+            <div class="section-title">&Uacute;ltimas Boletas Emitidas Hoy (Caja 02)</div>
+            <table class="arqueo-table" id="tabla-ultimas-ventas">
+                <thead>
+                    <tr>
+                        <th width="100">Folio</th>
+                        <th>Hora</th>
+                        <th>Cajero(a)</th>
+                        <th>M&eacute;todo de Pago</th>
+                        <th width="100" align="right">Subtotal</th>
+                        <th width="90" align="right">IVA (19%)</th>
+                        <th width="110" align="right">Total Boleta</th>
+                        <th width="90">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>BOL-004895</code></td>
+                        <td>12:14:22</td>
+                        <td>Marcela Soto</td>
+                        <td>Tarjeta D&eacute;bito</td>
+                        <td align="right">$18.908</td>
+                        <td align="right">$3.592</td>
+                        <td align="right"><strong>$22.500</strong></td>
+                        <td align="center"><span style="color: #15803d; font-weight: bold;">Completada</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>BOL-004894</code></td>
+                        <td>12:02:15</td>
+                        <td>Marcela Soto</td>
+                        <td>Efectivo</td>
+                        <td align="right">$4.370</td>
+                        <td align="right">$830</td>
+                        <td align="right"><strong>$5.200</strong></td>
+                        <td align="center"><span style="color: #15803d; font-weight: bold;">Completada</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>BOL-004893</code></td>
+                        <td>11:48:30</td>
+                        <td>Marcela Soto</td>
+                        <td>Transferencia</td>
+                        <td align="right">$15.546</td>
+                        <td align="right">$2.954</td>
+                        <td align="right"><strong>$18.500</strong></td>
+                        <td align="center"><span style="color: #15803d; font-weight: bold;">Completada</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p style="text-align: center; margin-top: 15px;">
+            <a href="index.html" class="nav-link">&larr; Volver al Portal Principal</a>
+        </p>
+
+    </div>
+
+    <div class="footer">
+        Panader&iacute;a y Pasteler&iacute;a Pan y Queque &copy; 2026 &bull; M&oacute;dulo de Cajas POS &bull; VLAN 20 Cajas &bull; Servidor HTTP Cisco Packet Tracer
+    </div>
+
+    <!-- SCRIPT ES5 PARA FUNCIONALIDAD DE VENTA Y TICKET LOCAL -->
+    <script>
+        var ticketItems = [];
+        var correlativoFolio = 4896;
+        var efectivoAcumulado = 465000;
+        var debitoAcumulado = 780000;
+        var transfAcumulado = 320000;
+
+        function formatearCLP(monto) {
+            var str = Math.round(monto).toString();
+            var out = "";
+            var c = 0;
+            for (var i = str.length - 1; i >= 0; i--) {
+                out = str.charAt(i) + out;
+                c++;
+                if (c === 3 && i !== 0) {
+                    out = "." + out;
+                    c = 0;
+                }
+            }
+            return "$" + out;
+        }
+
+        function agregarAlTicket(id, nombre, precio, unidad) {
+            var qtyInput = document.getElementById("qty-" + id);
+            var cantidad = parseInt(qtyInput.value, 10);
+            if (isNaN(cantidad) || cantidad <= 0) cantidad = 1;
+
+            var encontrado = false;
+            for (var i = 0; i < ticketItems.length; i++) {
+                if (ticketItems[i].id === id) {
+                    ticketItems[i].cantidad += cantidad;
+                    ticketItems[i].subtotal = ticketItems[i].cantidad * precio;
+                    encontrado = true;
+                    break;
+                }
+            }
+
+            if (!encontrado) {
+                ticketItems.push({
+                    id: id,
+                    nombre: nombre,
+                    precio: precio,
+                    cantidad: cantidad,
+                    unidad: unidad,
+                    subtotal: cantidad * precio
+                });
+            }
+
+            renderizarTicket();
+        }
+
+        function renderizarTicket() {
+            var tbody = document.getElementById("ticket-body");
+            tbody.innerHTML = "";
+
+            if (ticketItems.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" align="center" style="color: #64748b; padding: 15px;"><em>Ticket vac&iacute;o. Seleccione productos a la izquierda.</em></td></tr>';
+                document.getElementById("lbl-subtotal").innerHTML = "$0";
+                document.getElementById("lbl-iva").innerHTML = "$0";
+                document.getElementById("lbl-total").innerHTML = "$0";
+                return;
+            }
+
+            var totalNeto = 0;
+            for (var i = 0; i < ticketItems.length; i++) {
+                var it = ticketItems[i];
+                totalNeto += it.subtotal;
+
+                var tr = document.createElement("tr");
+                tr.innerHTML = '<td>' + it.cantidad + ' ' + it.unidad + '</td>' +
+                               '<td>' + it.nombre + '</td>' +
+                               '<td align="right">' + formatearCLP(it.precio) + '</td>' +
+                               '<td align="right"><strong>' + formatearCLP(it.subtotal) + '</strong></td>';
+                tbody.appendChild(tr);
+            }
+
+            var subtotalNeto = Math.round(totalNeto / 1.19);
+            var iva = totalNeto - subtotalNeto;
+
+            document.getElementById("lbl-subtotal").innerHTML = formatearCLP(subtotalNeto);
+            document.getElementById("lbl-iva").innerHTML = formatearCLP(iva);
+            document.getElementById("lbl-total").innerHTML = formatearCLP(totalNeto);
+        }
+
+        function vaciarTicket() {
+            ticketItems = [];
+            renderizarTicket();
+            document.getElementById("msg-venta-exitosa").style.display = "none";
+        }
+
+        function emitirBoleta() {
+            if (ticketItems.length === 0) {
+                alert("Atención: El ticket no contiene productos. Agregue productos antes de cobrar.");
+                return;
+            }
+
+            var metodo = "Efectivo";
+            var radios = document.getElementsByName("forma_pago");
+            for (var r = 0; r < radios.length; r++) {
+                if (radios[r].checked) {
+                    metodo = radios[r].value;
+                    break;
+                }
+            }
+
+            var totalVenta = 0;
+            for (var i = 0; i < ticketItems.length; i++) {
+                totalVenta += ticketItems[i].subtotal;
+
+                // Descontar visualmente el stock
+                var stEl = document.getElementById("stock-" + ticketItems[i].id);
+                if (stEl) {
+                    var act = parseInt(stEl.innerHTML, 10);
+                    if (!isNaN(act)) {
+                        stEl.innerHTML = Math.max(0, act - ticketItems[i].cantidad);
+                    }
+                }
+            }
+
+            var subtotalNeto = Math.round(totalVenta / 1.19);
+            var iva = totalVenta - subtotalNeto;
+            var folioStr = "BOL-00" + correlativoFolio;
+            correlativoFolio++;
+
+            // Agregar a la tabla de últimas ventas
+            var tablaVentas = document.getElementById("tabla-ultimas-ventas").getElementsByTagName("tbody")[0];
+            var newRow = tablaVentas.insertRow(0);
+            newRow.innerHTML = '<td><code>' + folioStr + '</code></td>' +
+                               '<td>Reci&eacute;n</td>' +
+                               '<td>Marcela Soto</td>' +
+                               '<td>' + metodo + '</td>' +
+                               '<td align="right">' + formatearCLP(subtotalNeto) + '</td>' +
+                               '<td align="right">' + formatearCLP(iva) + '</td>' +
+                               '<td align="right"><strong>' + formatearCLP(totalVenta) + '</strong></td>' +
+                               '<td align="center"><span style="color: #15803d; font-weight: bold;">Completada</span></td>';
+
+            // Actualizar Arqueo
+            if (metodo === "Efectivo") efectivoAcumulado += totalVenta;
+            if (metodo === "Tarjeta Debito") debitoAcumulado += totalVenta;
+            if (metodo === "Transferencia") transfAcumulado += totalVenta;
+
+            document.getElementById("arqueo-efectivo").innerHTML = formatearCLP(efectivoAcumulado);
+            document.getElementById("arqueo-debito").innerHTML = formatearCLP(debitoAcumulado);
+            document.getElementById("arqueo-transf").innerHTML = formatearCLP(transfAcumulado);
+            document.getElementById("arqueo-total").innerHTML = formatearCLP(150000 + efectivoAcumulado + debitoAcumulado + transfAcumulado);
+
+            // Mostrar mensaje
+            var msg = document.getElementById("msg-venta-exitosa");
+            document.getElementById("lbl-folio-nuevo").innerHTML = folioStr;
+            msg.style.display = "block";
+
+            // Preparar siguiente folio y vaciar ticket
+            document.getElementById("lbl-folio-actual").innerHTML = "BOL-00" + correlativoFolio;
+            ticketItems = [];
+            renderizarTicket();
+        }
+    </script>
+</body>
+</html>
+

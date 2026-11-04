@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PAN Y QUEQUE - Logística &amp; Reparto HORECA</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            margin: 0;
+            padding: 0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .header-bar {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-bottom: 3px solid #b45309;
+        }
+        .header-bar h1 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: 1px;
+            color: #ffffff;
+            display: inline-block;
+        }
+        .header-tag {
+            background-color: #0369a1;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 6px;
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+        .header-nav {
+            float: right;
+            margin-top: 3px;
+        }
+        .nav-link {
+            color: #ffffff;
+            background-color: #334155;
+            text-decoration: none;
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: bold;
+            border: 1px solid #475569;
+        }
+        .nav-link:hover {
+            background-color: #b45309;
+            border-color: #b45309;
+        }
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            margin: 15px auto;
+        }
+        .meta-strip {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 8px 15px;
+            margin-bottom: 15px;
+            font-size: 11px;
+        }
+        .meta-strip td {
+            padding: 2px 10px;
+        }
+        .badge {
+            padding: 2px 6px;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 11px;
+        }
+        .badge-vpn {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+        }
+        .badge-ok {
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+        .badge-camino {
+            background-color: #fef9c3;
+            color: #854d0e;
+            border: 1px solid #fef08a;
+        }
+        .badge-pend {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fca5a5;
+        }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            border: 1px solid #cbd5e1;
+        }
+        .stats-table td {
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            text-align: center;
+            width: 25%;
+        }
+        .stat-val {
+            font-size: 20px;
+            font-weight: bold;
+            font-family: monospace;
+        }
+        .stat-lbl {
+            font-size: 10px;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+        .section-box {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 7px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: -15px -15px 15px -15px;
+            border-left: 4px solid #b45309;
+        }
+        .form-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        .form-table td {
+            padding: 5px 8px;
+        }
+        .input-text, .input-select {
+            width: 95%;
+            padding: 5px;
+            border: 1px solid #cbd5e1;
+            font-size: 12px;
+            font-family: Arial, sans-serif;
+        }
+        .btn-submit {
+            background-color: #0f172a;
+            color: #ffffff;
+            border: none;
+            padding: 7px 14px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .btn-submit:hover {
+            background-color: #b45309;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            font-size: 12px;
+        }
+        .data-table th {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 11px;
+            text-transform: uppercase;
+            border: 1px solid #334155;
+        }
+        .data-table td {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+        }
+        .data-table tr:hover {
+            background-color: #f8fafc;
+        }
+        .btn-confirm {
+            background-color: #15803d;
+            color: #ffffff;
+            border: none;
+            padding: 4px 8px;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .btn-confirm:hover {
+            background-color: #16a34a;
+        }
+        .footer {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            font-size: 11px;
+            border-top: 2px solid #b45309;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR -->
+    <div class="header-bar">
+        <h1>PAN Y QUEQUE &bull; LOG&Iacute;STICA &amp; REPARTO HORECA</h1>
+        <span class="header-tag">FLOTA ACTIVA</span>
+        <div class="header-nav">
+            <a href="index.html" class="nav-link">&larr; Volver al Portal Principal</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- TELEMETRÍA DE RED Y CONDUCTORES -->
+        <table class="meta-strip" width="100%">
+            <tr>
+                <td><strong>M&oacute;dulo:</strong> 04 // Log&iacute;stica, Despacho y Cadena de Fr&iacute;o</td>
+                <td><strong>Perfil de Red:</strong> <span class="badge badge-vpn">VPN Choferes (2001:db8:wan::100)</span></td>
+                <td><strong>Furgones:</strong> #01 Fr&iacute;o (Carlos Mendoza) &bull; #02 Seco (Juan Pablo Riquelme)</td>
+                <td><strong>Auditor&iacute;a T&eacute;rmica:</strong> <span class="badge badge-ok">&bull; +3.8&deg;C CONFORME</span></td>
+            </tr>
+        </table>
+
+        <!-- INDICADORES OPERATIVOS DE DISTRIBUCIÓN -->
+        <table class="stats-table">
+            <tr>
+                <td>
+                    <div class="stat-val" style="color: #0369a1;">05:00 AM</div>
+                    <div class="stat-lbl">Turno Madrugada Iniciado</div>
+                </td>
+                <td>
+                    <div class="stat-val" style="color: #15803d;">+3.8&deg;C</div>
+                    <div class="stat-lbl">Cadena de Fr&iacute;o Furg&oacute;n 01</div>
+                </td>
+                <td>
+                    <div class="stat-val" id="rutas-completadas" style="color: #0f172a;">12 / 14</div>
+                    <div class="stat-lbl">Rutas Entregadas Hoy</div>
+                </td>
+                <td>
+                    <div class="stat-val" style="color: #b45309;">92.8%</div>
+                    <div class="stat-lbl">Tasa de Cumplimiento HORECA</div>
+                </td>
+            </tr>
+        </table>
+
+        <!-- FORMULARIO DE PROGRAMACIÓN DE NUEVA RUTA -->
+        <div class="section-box">
+            <div class="section-title">Programar Nueva Ruta de Despacho en Hoja de Ruta</div>
+            <form onsubmit="programarRuta(event)">
+                <table class="form-table">
+                    <tr>
+                        <td width="15%"><strong>Horario:</strong></td>
+                        <td width="35%"><input type="text" id="ruta-hora" class="input-text" value="14:30 PM" required></td>
+                        <td width="15%"><strong>Chofer Asignado:</strong></td>
+                        <td width="35%">
+                            <select id="ruta-chofer" class="input-select" required>
+                                <option value="Carlos Mendoza (Furgón 01 Frío)">Carlos Mendoza (Furg&oacute;n 01 Fr&iacute;o)</option>
+                                <option value="Juan Pablo Riquelme (Furgón 02 Seco)">Juan Pablo Riquelme (Furg&oacute;n 02 Seco)</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cliente / Destino:</strong></td>
+                        <td><input type="text" id="ruta-destino" class="input-text" value="Cafetería del Puerto - Coquimbo" required></td>
+                        <td><strong>Direcci&oacute;n:</strong></td>
+                        <td><input type="text" id="ruta-direccion" class="input-text" value="Melgarejo 1020, Coquimbo" required></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Detalle Carga:</strong></td>
+                        <td colspan="2"><input type="text" id="ruta-carga" class="input-text" value="60 kg Marraqueta, 40 Baguettes, 25 Pasteles Finos" required></td>
+                        <td><button type="submit" class="btn-submit">&plus; Programar Ruta</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <!-- TABLA PRINCIPAL: HOJA DE RUTA Y DESPACHOS DEL DÍA -->
+        <div class="section-box">
+            <div class="section-title">Hoja de Ruta y Despachos del D&iacute;a (Albaranes HORECA)</div>
+            <table class="data-table" id="tabla-rutas">
+                <thead>
+                    <tr>
+                        <th width="70">Horario</th>
+                        <th width="110">Estado</th>
+                        <th>Ruta &amp; Cliente / Destino</th>
+                        <th>Direcci&oacute;n de Entrega</th>
+                        <th width="160">Chofer &amp; Furg&oacute;n</th>
+                        <th>Detalle de Mercader&iacute;a</th>
+                        <th>Observaci&oacute;n / T&deg;</th>
+                        <th width="90">Acci&oacute;n</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="fila-ruta-1">
+                        <td><code>06:30 AM</code></td>
+                        <td><span class="badge badge-ok">&check; ENTREGADO</span></td>
+                        <td><strong>Casino Central Servicio Salud</strong></td>
+                        <td>Av. Balmaceda 916, La Serena</td>
+                        <td>Carlos Mendoza (Furg&oacute;n 01 Fr&iacute;o)</td>
+                        <td>90 kg Marraqueta, 50 Baguettes, 35 Pasteles</td>
+                        <td>Entregado conforme (+3.8&deg;C)</td>
+                        <td align="center"><span style="color: #64748b; font-size: 11px;">Liquidado</span></td>
+                    </tr>
+                    <tr id="fila-ruta-2">
+                        <td><code>08:00 AM</code></td>
+                        <td><span class="badge badge-ok">&check; ENTREGADO</span></td>
+                        <td><strong>Buffet Desayunos Enjoy Coquimbo</strong></td>
+                        <td>Pe&ntilde;uelas Norte 56, Coquimbo</td>
+                        <td>Juan Pablo Riquelme (Furg&oacute;n 02 Seco)</td>
+                        <td>50 kg Hallullas, 18 Selva Negra, 100 Empanadas</td>
+                        <td>Furg&oacute;n refrigerado conforme (+3.7&deg;C)</td>
+                        <td align="center"><span style="color: #64748b; font-size: 11px;">Liquidado</span></td>
+                    </tr>
+                    <tr id="fila-ruta-3">
+                        <td><code>09:30 AM</code></td>
+                        <td><span class="badge badge-ok">&check; ENTREGADO</span></td>
+                        <td><strong>Centro de Eventos El Faro</strong></td>
+                        <td>Av. Francisco de Aguirre 010</td>
+                        <td>Juan Pablo Riquelme (Furg&oacute;n 02 Seco)</td>
+                        <td>20 Tortas &Oacute;pera, 90 Pasteles, 60 Croissants</td>
+                        <td>Recepci&oacute;n banquetera conforme</td>
+                        <td align="center"><span style="color: #64748b; font-size: 11px;">Liquidado</span></td>
+                    </tr>
+                    <tr id="fila-ruta-4">
+                        <td><code>11:30 AM</code></td>
+                        <td><span class="badge badge-ok">&check; ENTREGADO</span></td>
+                        <td><strong>Hospital Regional de La Serena</strong></td>
+                        <td>Av. Balmaceda 916, La Serena</td>
+                        <td>Carlos Mendoza (Furg&oacute;n 01 Fr&iacute;o)</td>
+                        <td>80 kg Marraqueta, 50 kg Hallulla, 20 Docenas Empanadas</td>
+                        <td>Cocina central recibida (+3.8&deg;C)</td>
+                        <td align="center"><span style="color: #64748b; font-size: 11px;">Liquidado</span></td>
+                    </tr>
+                    <tr id="fila-ruta-5">
+                        <td><code>13:15 PM</code></td>
+                        <td><span class="badge badge-camino">&bull; EN CAMINO</span></td>
+                        <td><strong>Caf&eacute; Colonial La Serena</strong></td>
+                        <td>Prat 420, La Serena</td>
+                        <td>Carlos Mendoza (Furg&oacute;n 01 Fr&iacute;o)</td>
+                        <td>60 Croissants AOP, 40 Baguettes, 10 Tortas</td>
+                        <td>Ruta vespertina en tr&aacute;nsito</td>
+                        <td align="center"><button type="button" class="btn-confirm" onclick="confirmarEntrega('fila-ruta-5')">&check; Confirmar</button></td>
+                    </tr>
+                    <tr id="fila-ruta-6">
+                        <td><code>14:00 PM</code></td>
+                        <td><span class="badge badge-pend">⏳ PENDIENTE</span></td>
+                        <td><strong>Supermercado Central La Florida</strong></td>
+                        <td>Av. Panor&aacute;mica 110, La Serena</td>
+                        <td>Juan Pablo Riquelme (Furg&oacute;n 02 Seco)</td>
+                        <td>160 kg Marraqueta, 130 kg Hallullas</td>
+                        <td>And&eacute;n de carga reservado</td>
+                        <td align="center"><button type="button" class="btn-confirm" onclick="confirmarEntrega('fila-ruta-6')">&check; Confirmar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p style="text-align: center; margin-top: 15px;">
+            <a href="index.html" class="nav-link">&larr; Volver al Portal Principal</a>
+        </p>
+
+    </div>
+
+    <div class="footer">
+        Panader&iacute;a y Pasteler&iacute;a Pan y Queque &copy; 2026 &bull; Log&iacute;stica y Flota HORECA &bull; VPN Choferes &bull; Servidor HTTP Cisco Packet Tracer
+    </div>
+
+    <!-- SCRIPT ES5 PARA LIQUIDACIÓN LOCAL DE RUTAS Y NUEVOS DESPACHOS -->
+    <script>
+        var entregasCompletadas = 12;
+        var totalRutas = 14;
+
+        function confirmarEntrega(filaId) {
+            var fila = document.getElementById(filaId);
+            if (!fila) return;
+
+            var celdas = fila.getElementsByTagName("td");
+            if (celdas.length >= 8) {
+                celdas[1].innerHTML = '<span class="badge badge-ok">&check; ENTREGADO</span>';
+                celdas[6].innerHTML = 'Recepcionado conforme (+3.8&deg;C). Firma OK';
+                celdas[7].innerHTML = '<span style="color: #64748b; font-size: 11px;">Liquidado</span>';
+
+                entregasCompletadas++;
+                document.getElementById("rutas-completadas").innerHTML = entregasCompletadas + " / " + totalRutas;
+            }
+        }
+
+        function programarRuta(e) {
+            if (e && e.preventDefault) e.preventDefault();
+
+            var hora = document.getElementById("ruta-hora").value;
+            var chofer = document.getElementById("ruta-chofer").value;
+            var destino = document.getElementById("ruta-destino").value;
+            var direccion = document.getElementById("ruta-direccion").value;
+            var carga = document.getElementById("ruta-carga").value;
+
+            totalRutas++;
+            var nuevoId = "fila-ruta-" + totalRutas;
+
+            var tabla = document.getElementById("tabla-rutas").getElementsByTagName("tbody")[0];
+            var newRow = tabla.insertRow(-1);
+            newRow.id = nuevoId;
+            newRow.innerHTML = '<td><code>' + hora + '</code></td>' +
+                               '<td><span class="badge badge-pend">⏳ PENDIENTE</span></td>' +
+                               '<td><strong>' + destino + '</strong></td>' +
+                               '<td>' + direccion + '</td>' +
+                               '<td>' + chofer + '</td>' +
+                               '<td>' + carga + '</td>' +
+                               '<td>En cola de despacho</td>' +
+                               '<td align="center"><button type="button" class="btn-confirm" onclick="confirmarEntrega(\'' + nuevoId + '\')">&check; Confirmar</button></td>';
+
+            document.getElementById("rutas-completadas").innerHTML = entregasCompletadas + " / " + totalRutas;
+            alert("Ruta agregada exitosamente a la Hoja de Ruta.");
+            return false;
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PAN Y QUEQUE - Dashboard Gerencial</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #09090b;
+            color: #f4f4f5;
+            margin: 0;
+            padding: 0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .header-bar {
+            background-color: #18181b;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-bottom: 3px solid #d97706;
+        }
+        .header-bar h1 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: 1px;
+            color: #ffffff;
+            display: inline-block;
+        }
+        .header-tag {
+            background-color: #d97706;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 6px;
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+        .header-nav {
+            float: right;
+            margin-top: 3px;
+        }
+        .nav-link {
+            color: #ffffff;
+            background-color: #27272a;
+            text-decoration: none;
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: bold;
+            border: 1px solid #3f3f46;
+        }
+        .nav-link:hover {
+            background-color: #d97706;
+            border-color: #d97706;
+        }
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            margin: 15px auto;
+        }
+        .confidential-alert {
+            background-color: #450a0a;
+            border: 2px solid #ef4444;
+            color: #fecaca;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            font-size: 11px;
+        }
+        .confidential-title {
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .meta-strip {
+            background-color: #18181b;
+            border: 1px solid #27272a;
+            padding: 8px 15px;
+            margin-bottom: 15px;
+            font-size: 11px;
+            color: #a1a1aa;
+        }
+        .meta-strip td {
+            padding: 2px 10px;
+        }
+        .badge {
+            padding: 2px 6px;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 11px;
+        }
+        .badge-vpn {
+            background-color: #78350f;
+            color: #fef3c7;
+            border: 1px solid #b45309;
+        }
+        .badge-ok {
+            background-color: #064e3b;
+            color: #a7f3d0;
+            border: 1px solid #059669;
+        }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #18181b;
+            margin-bottom: 20px;
+            border: 1px solid #27272a;
+        }
+        .stats-table td {
+            padding: 14px;
+            border: 1px solid #27272a;
+            text-align: center;
+            width: 25%;
+        }
+        .stat-val {
+            font-size: 22px;
+            font-weight: bold;
+            font-family: monospace;
+            margin-top: 3px;
+        }
+        .stat-lbl {
+            font-size: 10px;
+            color: #a1a1aa;
+            text-transform: uppercase;
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+        .section-box {
+            background-color: #18181b;
+            border: 1px solid #27272a;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            background-color: #27272a;
+            color: #ffffff;
+            padding: 7px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: -15px -15px 15px -15px;
+            border-left: 4px solid #d97706;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #18181b;
+            border: 1px solid #27272a;
+            font-size: 12px;
+        }
+        .data-table th {
+            background-color: #27272a;
+            color: #fbbf24;
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 11px;
+            text-transform: uppercase;
+            border: 1px solid #3f3f46;
+        }
+        .data-table td {
+            padding: 8px 10px;
+            border: 1px solid #27272a;
+            color: #e4e4e7;
+        }
+        .data-table tr:hover {
+            background-color: #27272a;
+        }
+        .progress-bar-bg {
+            background-color: #27272a;
+            border: 1px solid #3f3f46;
+            height: 14px;
+            width: 100%;
+        }
+        .progress-bar-fill {
+            height: 14px;
+            background-color: #d97706;
+        }
+        .progress-bar-fill-green {
+            height: 14px;
+            background-color: #059669;
+        }
+        .log-console {
+            background-color: #09090b;
+            border: 1px solid #27272a;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 11px;
+            color: #d4d4d8;
+            max-height: 160px;
+            overflow-y: auto;
+        }
+        .log-line {
+            padding: 3px 0;
+            border-bottom: 1px dotted #27272a;
+        }
+        .log-time {
+            color: #71717a;
+            font-weight: bold;
+        }
+        .log-mod {
+            color: #fbbf24;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #18181b;
+            color: #71717a;
+            text-align: center;
+            font-size: 11px;
+            border-top: 2px solid #d97706;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR -->
+    <div class="header-bar">
+        <h1>PAN Y QUEQUE &bull; DASHBOARD EJECUTIVO</h1>
+        <span class="header-tag">ALTA DIRECCI&Oacute;N</span>
+        <div class="header-nav">
+            <a href="index.html" class="nav-link">&larr; Volver al Portal Principal</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ALERTA DE SEGURIDAD Y CONFIDENCIALIDAD -->
+        <div class="confidential-alert">
+            <div class="confidential-title">&#9888; ALERTA DE SEGURIDAD Y CONFIDENCIALIDAD: INFORMACI&Oacute;N FINANCIERA RESTRINGIDA</div>
+            Acceso exclusivo para Gerencia General y Direcci&oacute;n Financiera. Prohibido el acceso no autorizado desde terminales de sala de ventas (VLAN 20) o choferes (VPN Choferes). Tr&aacute;fico filtrado por pol&iacute;ticas ACL Capa 3/4 en Router R1/R2 (<code>ACL_PERFIL_GERENTE</code>).
+        </div>
+
+        <!-- TELEMETRÍA DE RED Y PERFIL -->
+        <table class="meta-strip" width="100%">
+            <tr>
+                <td><strong>M&oacute;dulo:</strong> 05 // Panel de Control Ejecutivo</td>
+                <td><strong>Red Autorizada:</strong> <span class="badge badge-vpn">VPN Gerencia (2001:db8:wan::200)</span></td>
+                <td><strong>Servidor Central:</strong> 2001:db8:acad:30::80</td>
+                <td><strong>Nivel de Acceso:</strong> <span class="badge badge-ok">ROOT / GERENCIAL TOTAL</span></td>
+            </tr>
+        </table>
+
+        <!-- KPIS FINANCIEROS PRINCIPALES -->
+        <table class="stats-table">
+            <tr>
+                <td>
+                    <div class="stat-val" style="color: #fbbf24;">$10.220.798</div>
+                    <div class="stat-lbl">Facturaci&oacute;n Neta (7 D&iacute;as)</div>
+                </td>
+                <td>
+                    <div class="stat-val" style="color: #38bdf8;">$24.850</div>
+                    <div class="stat-lbl">Ticket Promedio Mayorista</div>
+                </td>
+                <td>
+                    <div class="stat-val" style="color: #4ade80;">38.5%</div>
+                    <div class="stat-lbl">Margen Neto de Explotaci&oacute;n</div>
+                </td>
+                <td>
+                    <div class="stat-val" style="color: #f87171;">$14.600.000</div>
+                    <div class="stat-lbl">Pasivo Corriente (Cuentas x Pagar)</div>
+                </td>
+            </tr>
+        </table>
+
+        <!-- DESGLOSE OPERATIVO EBITDA (ESTRUCTURA DE COSTES) -->
+        <div class="section-box">
+            <div class="section-title">Estructura Operativa de Costes &amp; Margen EBITDA (Semanal)</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Rubro Operativo de Panificaci&oacute;n</th>
+                        <th width="120">% de Ingresos</th>
+                        <th width="130" align="right">Monto Asignado</th>
+                        <th width="200">Distribuci&oacute;n Porcentual</th>
+                        <th>Estado de Control</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Materias Primas e Insumos</strong> (Harinas flor, mantequilla AOP, levaduras)</td>
+                        <td align="center"><strong>31.6%</strong></td>
+                        <td align="right" style="font-family: monospace;">$3.229.772</td>
+                        <td>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 31.6%;"></div></div>
+                        </td>
+                        <td><span style="color: #4ade80;">Conforme a Presupuesto (&le; 33%)</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mano de Obra Directa</strong> (N&oacute;mina maestros panaderos y pasteleros obrador)</td>
+                        <td align="center"><strong>24.0%</strong></td>
+                        <td align="right" style="font-family: monospace;">$2.452.991</td>
+                        <td>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 24.0%;"></div></div>
+                        </td>
+                        <td><span style="color: #4ade80;">Turno madrugador normalizado</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Suministro Energ&eacute;tico</strong> (Consumo gas y electricidad hornos solera 245&deg;C)</td>
+                        <td align="center"><strong>10.0%</strong></td>
+                        <td align="right" style="font-family: monospace;">$1.022.080</td>
+                        <td>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 10.0%;"></div></div>
+                        </td>
+                        <td><span style="color: #38bdf8;">Eficiencia 94.2%</span></td>
+                    </tr>
+                    <tr style="background-color: #27272a; font-weight: bold; border-top: 2px solid #d97706;">
+                        <td style="color: #fbbf24;">RESULTADO OPERATIVO EBITDA DE EXPLOTACI&Oacute;N</td>
+                        <td align="center" style="color: #4ade80; font-size: 13px;">34.4%</td>
+                        <td align="right" style="color: #4ade80; font-family: monospace; font-size: 13px;">$3.515.955</td>
+                        <td>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill-green" style="width: 34.4%;"></div></div>
+                        </td>
+                        <td style="color: #4ade80;">SUPER&Aacute;VIT OPERACIONAL</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TOP 5 PRODUCTOS MÁS DEMANDADOS -->
+        <div class="section-box">
+            <div class="section-title">Top 5 Productos m&aacute;s Demandados y Rentabilidad (MariaDB 10.11)</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th width="50">Rank</th>
+                        <th>Producto Estrella</th>
+                        <th>L&iacute;nea de Producci&oacute;n</th>
+                        <th width="120" align="right">Volumen Vendido</th>
+                        <th width="130" align="right">Facturaci&oacute;n Generada</th>
+                        <th width="100" align="center">Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td align="center"><code>#1</code></td>
+                        <td><strong>Pan Marraqueta Tradicional</strong></td>
+                        <td>Panader&iacute;a Masa Madre</td>
+                        <td align="right">2.807 kg</td>
+                        <td align="right" style="font-family: monospace; color: #fbbf24;"><strong>$6.147.330</strong></td>
+                        <td align="center"><span style="color: #4ade80; font-weight: bold;">+14.4%</span></td>
+                    </tr>
+                    <tr>
+                        <td align="center"><code>#2</code></td>
+                        <td><strong>Empanadas de Pino Horno</strong></td>
+                        <td>Rotiser&iacute;a Caliente</td>
+                        <td align="right">413 unid</td>
+                        <td align="right" style="font-family: monospace; color: #fbbf24;"><strong>$1.073.800</strong></td>
+                        <td align="center"><span style="color: #4ade80; font-weight: bold;">+12.4%</span></td>
+                    </tr>
+                    <tr>
+                        <td align="center"><code>#3</code></td>
+                        <td><strong>Hallullas Especiales</strong></td>
+                        <td>Panader&iacute;a Tradicional</td>
+                        <td align="right">405 kg</td>
+                        <td align="right" style="font-family: monospace; color: #fbbf24;"><strong>$927.450</strong></td>
+                        <td align="center"><span style="color: #4ade80; font-weight: bold;">+9.8%</span></td>
+                    </tr>
+                    <tr>
+                        <td align="center"><code>#4</code></td>
+                        <td><strong>Torta Selva Negra</strong></td>
+                        <td>Pasteler&iacute;a Fina</td>
+                        <td align="right">22 unid</td>
+                        <td align="right" style="font-family: monospace; color: #fbbf24;"><strong>$407.000</strong></td>
+                        <td align="center"><span style="color: #4ade80; font-weight: bold;">+7.1%</span></td>
+                    </tr>
+                    <tr>
+                        <td align="center"><code>#5</code></td>
+                        <td><strong>Baguette Tradici&oacute;n Francesa</strong></td>
+                        <td>Panader&iacute;a Tradici&oacute;n</td>
+                        <td align="right">235 unid</td>
+                        <td align="right" style="font-family: monospace; color: #fbbf24;"><strong>$397.150</strong></td>
+                        <td align="center"><span style="color: #4ade80; font-weight: bold;">+5.5%</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TELEMETRÍA DE HORNOS Y CAPACIDAD INDUSTRIAL -->
+        <div class="section-box">
+            <div class="section-title">Capacidad Industrial &amp; Telemetr&iacute;a de Hornos de Solera</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Maquinaria Pesada</th>
+                        <th width="100">Carga Operativa</th>
+                        <th width="180">Nivel de Carga</th>
+                        <th>Telemetr&iacute;a T&eacute;rmica / Mec&aacute;nica</th>
+                        <th width="120">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hornos de Solera de Piedra (Deck)</strong></td>
+                        <td align="center"><strong>88%</strong></td>
+                        <td><div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 88%;"></div></div></td>
+                        <td>6 m&oacute;dulos a 245&deg;C. Masa madre r&uacute;stica y baguettes.</td>
+                        <td><span style="color: #4ade80;">ESTABLE &plusmn;1.2&deg;C</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hornos Rotativos de Convecci&oacute;n</strong></td>
+                        <td align="center"><strong>74%</strong></td>
+                        <td><div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 74%;"></div></div></td>
+                        <td>Viennoiserie y brioches laminados. Vapor a 90s.</td>
+                        <td><span style="color: #4ade80;">1.400 RPM NORMAL</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>C&aacute;maras de Fr&iacute;o Lento (4&deg;C)</strong></td>
+                        <td align="center"><strong>92%</strong></td>
+                        <td><div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 92%;"></div></div></td>
+                        <td>42 Lotes en maduraci&oacute;n retardada (36h). pH masa madre 4.15.</td>
+                        <td><span style="color: #4ade80;">84% HUMEDAD</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Amasadoras de Espiral Industrial</strong></td>
+                        <td align="center"><strong>65%</strong></td>
+                        <td><div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 65%;"></div></div></td>
+                        <td>320 kg harina/hora en turno matutino. 14 maestros en l&iacute;nea.</td>
+                        <td><span style="color: #38bdf8;">RITMO NORMAL</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- BITÁCORA DE AUDITORÍA Y EVENTOS CRÍTICOS -->
+        <div class="section-box">
+            <div class="section-title">Consola de Auditor&iacute;a Operacional en Vivo</div>
+            <div class="log-console">
+                <div class="log-line">
+                    <span class="log-time">[12:14:22]</span> <span class="log-mod">[POS]</span> Boleta BOL-004895 emitida por $22.500 (Tarjeta Débito) por Marcela Soto &bull; IP: 2001:db8:acad:20::50
+                </div>
+                <div class="log-line">
+                    <span class="log-time">[11:30:10]</span> <span class="log-mod">[Logística]</span> Entrega albarán confirmada a Hospital Regional de La Serena (+3.8°C) por Carlos Mendoza &bull; IP: 2001:db8:wan::100
+                </div>
+                <div class="log-line">
+                    <span class="log-time">[10:15:45]</span> <span class="log-mod">[Proveedores]</span> Emisión PO-2026-016 a Harina Los Andes S.A. por $3.200.000 &bull; IP: 2001:db8:acad:10::15
+                </div>
+                <div class="log-line">
+                    <span class="log-time">[09:00:12]</span> <span class="log-mod">[Seguridad]</span> Acceso exitoso rol [gerente] Ing. M. Valenzuela desde túnel VPN Gerencia &bull; IP: 2001:db8:wan::200
+                </div>
+                <div class="log-line">
+                    <span class="log-time">[06:30:00]</span> <span class="log-mod">[Cajas]</span> Apertura de turno Caja 02 Mostrador - Fondo base $150.000 &bull; IP: 2001:db8:acad:20::50
+                </div>
+                <div class="log-line">
+                    <span class="log-time">[05:00:00]</span> <span class="log-mod">[Sistema]</span> Sincronización exitosa con servidor de base de datos MariaDB 10.11 en VLAN 30 (2001:db8:acad:30::db)
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 15px;">
+            <a href="index.html" class="nav-link">&larr; Volver al Portal Principal</a>
+        </p>
+
+    </div>
+
+    <div class="footer">
+        Panader&iacute;a y Pasteler&iacute;a Pan y Queque &copy; 2026 &bull; Dashboard Gerencial &bull; Acceso Restringido VPN Gerencia &bull; Servidor HTTP Cisco Packet Tracer
+    </div>
+
+</body>
+</html>
+

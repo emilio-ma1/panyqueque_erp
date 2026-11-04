@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PAN Y QUEQUE - Proveedores &amp; Finanzas</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            margin: 0;
+            padding: 0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .header-bar {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-bottom: 3px solid #b45309;
+        }
+        .header-bar h1 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: 1px;
+            color: #ffffff;
+            display: inline-block;
+        }
+        .header-tag {
+            background-color: #b45309;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 6px;
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+        .header-nav {
+            float: right;
+            margin-top: 3px;
+        }
+        .nav-link {
+            color: #ffffff;
+            background-color: #334155;
+            text-decoration: none;
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: bold;
+            border: 1px solid #475569;
+        }
+        .nav-link:hover {
+            background-color: #b45309;
+            border-color: #b45309;
+        }
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            margin: 15px auto;
+        }
+        .meta-strip {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 8px 15px;
+            margin-bottom: 15px;
+            font-size: 11px;
+        }
+        .meta-strip td {
+            padding: 2px 10px;
+        }
+        .badge {
+            padding: 2px 6px;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 11px;
+        }
+        .badge-vlan {
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        .badge-ok {
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+        .badge-wait {
+            background-color: #fef9c3;
+            color: #854d0e;
+            border: 1px solid #fef08a;
+        }
+        .badge-proc {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+        }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            border: 1px solid #cbd5e1;
+        }
+        .stats-table td {
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            text-align: center;
+            width: 25%;
+        }
+        .stat-val {
+            font-size: 20px;
+            font-weight: bold;
+            font-family: monospace;
+        }
+        .stat-lbl {
+            font-size: 10px;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+        .section-box {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 7px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: -15px -15px 15px -15px;
+            border-left: 4px solid #b45309;
+        }
+        .form-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        .form-table td {
+            padding: 6px 8px;
+        }
+        .input-text, .input-select {
+            width: 95%;
+            padding: 6px;
+            border: 1px solid #cbd5e1;
+            font-size: 12px;
+            font-family: Arial, sans-serif;
+        }
+        .btn-submit {
+            background-color: #0f172a;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .btn-submit:hover {
+            background-color: #b45309;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            font-size: 12px;
+        }
+        .data-table th {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 11px;
+            text-transform: uppercase;
+            border: 1px solid #334155;
+        }
+        .data-table td {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+        }
+        .data-table tr:hover {
+            background-color: #f8fafc;
+        }
+        .alert-box {
+            display: none;
+            background-color: #dcfce7;
+            border: 1px solid #86efac;
+            color: #166534;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .footer {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            font-size: 11px;
+            border-top: 2px solid #b45309;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR -->
+    <div class="header-bar">
+        <h1>PAN Y QUEQUE &bull; PROVEEDORES &amp; FINANZAS</h1>
+        <span class="header-tag">LIBRO MAYOR ACTIVO</span>
+        <div class="header-nav">
+            <a href="index.html" class="nav-link">&larr; Volver al Portal Principal</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- TELEMETRÍA DE RED Y SEGURIDAD -->
+        <table class="meta-strip" width="100%">
+            <tr>
+                <td><strong>M&oacute;dulo:</strong> 03 // Finanzas, Compras y Libro Mayor</td>
+                <td><strong>VLAN Asignada:</strong> <span class="badge badge-vlan">VLAN 10 - Administraci&oacute;n (2001:db8:acad:10::/64)</span></td>
+                <td><strong>Jefe Finanzas:</strong> Rodrigo Silva</td>
+                <td><strong>Auditor&iacute;a:</strong> <span class="badge badge-ok">&bull; CONCILIACI&Oacute;N AL D&Iacute;A</span></td>
+            </tr>
+        </table>
+
+        <!-- ALERTA DE ORDEN CREADA -->
+        <div id="msg-orden-creada" class="alert-box">
+            &check; &iexcl;&Oacute;RDEN DE COMPRA EMITIDA! Folio generado: <span id="lbl-po-folio">PO-2026-017</span>. Registrada en Cuentas por Pagar e historial.
+        </div>
+
+        <!-- TARJETAS DE BALANCE FINANCIERO Y LIQUIDEZ -->
+        <table class="stats-table">
+            <tr>
+                <td>
+                    <div class="stat-val" id="ap-val" style="color: #b45309;">$28.150.000</div>
+                    <div class="stat-lbl">Cuentas por Pagar Insumos (AP)</div>
+                </td>
+                <td>
+                    <div class="stat-val" style="color: #0369a1;">$19.420.000</div>
+                    <div class="stat-lbl">Cuentas por Cobrar HORECA (AR)</div>
+                </td>
+                <td>
+                    <div class="stat-val" style="color: #15803d;">$45.890.000</div>
+                    <div class="stat-lbl">Fondo Operativo L&iacute;quido</div>
+                </td>
+                <td>
+                    <div class="stat-val" style="color: #0f172a;">38.4%</div>
+                    <div class="stat-lbl">Margen Bruto de Explotaci&oacute;n</div>
+                </td>
+            </tr>
+        </table>
+
+        <!-- FORMULARIO DE EMISIÓN DE NUEVA ORDEN DE COMPRA (PO) -->
+        <div class="section-box">
+            <div class="section-title">Emisi&oacute;n de Nueva &Oacute;rden de Compra de Materias Primas (PO)</div>
+            <form onsubmit="registrarOrden(event)">
+                <table class="form-table">
+                    <tr>
+                        <td width="25%"><strong>Proveedor Homologado:</strong></td>
+                        <td width="40%">
+                            <select id="po-supplier" class="input-select" required>
+                                <option value="Harina Los Andes S.A.">Harina Los Andes S.A. (RUT 76.432.890-1)</option>
+                                <option value="Lácteos del Sur SpA">L&aacute;cteos del Sur SpA (RUT 77.109.432-8)</option>
+                                <option value="Azúcar Refinada del Valle">Az&uacute;car Refinada del Valle (RUT 76.882.114-K)</option>
+                                <option value="Levaduras del Maipo">Levaduras del Maipo (RUT 78.332.901-3)</option>
+                                <option value="Chocolates & Coberturas Belgas">Chocolates &amp; Coberturas Belgas (RUT 76.012.778-5)</option>
+                            </select>
+                        </td>
+                        <td width="15%"><strong>Monto Bruto (CLP):</strong></td>
+                        <td width="20%">
+                            <input type="number" id="po-monto" class="input-text" value="2500000" min="50000" step="10000" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Detalle de Insumos:</strong></td>
+                        <td colspan="2">
+                            <input type="text" id="po-detalle" class="input-text" value="50 sacos Harina Flor Especial 50kg en andén de descarga" required>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn-submit">&plus; Generar &Oacute;rden PO</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <!-- TABLA 1: PROVEEDORES HOMOLOGADOS DE MATERIAS PRIMAS -->
+        <div class="section-box">
+            <div class="section-title">Proveedores Homologados de Materias Primas</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Empresa Proveedora</th>
+                        <th width="110">RUT</th>
+                        <th>Contacto Comercial</th>
+                        <th>Tel&eacute;fono</th>
+                        <th>Rubro de Insumos</th>
+                        <th width="110" align="right">Volumen Acumulado</th>
+                        <th width="90">&Uacute;ltima Compra</th>
+                        <th width="90">Estado Pago</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Harina Los Andes S.A.</strong></td>
+                        <td><code>76.432.890-1</code></td>
+                        <td>Rodrigo Silva</td>
+                        <td>+56 9 8452 1190</td>
+                        <td>Harinas &amp; Granos de Trigo</td>
+                        <td align="right"><strong>$14.600.000</strong></td>
+                        <td align="center">30/10/2026</td>
+                        <td align="center"><span class="badge badge-wait">Pendiente</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>L&aacute;cteos del Sur SpA</strong></td>
+                        <td><code>77.109.432-8</code></td>
+                        <td>Camila Morales</td>
+                        <td>+56 9 7321 4455</td>
+                        <td>Mantequillas AOP &amp; Cremas</td>
+                        <td align="right"><strong>$5.200.000</strong></td>
+                        <td align="center">31/10/2026</td>
+                        <td align="center"><span class="badge badge-proc">En proceso</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Az&uacute;car Refinada del Valle</strong></td>
+                        <td><code>76.882.114-K</code></td>
+                        <td>Ignacio Fuentes</td>
+                        <td>+56 9 9123 6670</td>
+                        <td>Az&uacute;cares &amp; Endulzantes</td>
+                        <td align="right"><strong>$1.360.000</strong></td>
+                        <td align="center">22/10/2026</td>
+                        <td align="center"><span class="badge badge-ok">Al d&iacute;a</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Levaduras del Maipo</strong></td>
+                        <td><code>78.332.901-3</code></td>
+                        <td>Patricia Vega</td>
+                        <td>+56 9 6554 8821</td>
+                        <td>Levaduras &amp; Mejoradores</td>
+                        <td align="right"><strong>$1.350.000</strong></td>
+                        <td align="center">28/10/2026</td>
+                        <td align="center"><span class="badge badge-ok">Al d&iacute;a</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chocolates &amp; Coberturas Belgas</strong></td>
+                        <td><code>76.012.778-5</code></td>
+                        <td>Marcelo Dubois</td>
+                        <td>+56 9 5210 9943</td>
+                        <td>Cacao 70% &amp; Chocolater&iacute;a</td>
+                        <td align="right"><strong>$5.640.000</strong></td>
+                        <td align="center">29/10/2026</td>
+                        <td align="center"><span class="badge badge-wait">Pendiente</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TABLA 2: HISTORIAL DE ÓRDENES DE COMPRA (PO) -->
+        <div class="section-box">
+            <div class="section-title">Registro Hist&oacute;rico de &Oacute;rdenes de Compra (PO)</div>
+            <table class="data-table" id="tabla-po">
+                <thead>
+                    <tr>
+                        <th width="100">Folio PO</th>
+                        <th>Proveedor</th>
+                        <th width="90">Fecha</th>
+                        <th>Detalle de Insumos</th>
+                        <th width="110" align="right">Monto Bruto</th>
+                        <th width="100">Estado PO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>PO-2026-016</code></td>
+                        <td><strong>Harina Los Andes S.A.</strong></td>
+                        <td align="center">30/10/2026</td>
+                        <td>50 sacos Harina Flor Especial 50kg</td>
+                        <td align="right"><strong>$3.200.000</strong></td>
+                        <td align="center"><span class="badge badge-wait">Pendiente</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>PO-2026-015</code></td>
+                        <td><strong>L&aacute;cteos del Sur SpA</strong></td>
+                        <td align="center">28/10/2026</td>
+                        <td>20 cajas Mantequilla 84% MG AOP Isigny</td>
+                        <td align="right"><strong>$1.850.000</strong></td>
+                        <td align="center"><span class="badge badge-proc">En proceso</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>PO-2026-014</code></td>
+                        <td><strong>Chocolates &amp; Coberturas Belgas</strong></td>
+                        <td align="center">25/10/2026</td>
+                        <td>12 baldes Cobertura Cacao 70% Grand Cru</td>
+                        <td align="right"><strong>$2.100.000</strong></td>
+                        <td align="center"><span class="badge badge-ok">Aprobada</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>PO-2026-013</code></td>
+                        <td><strong>Harina Los Andes S.A.</strong></td>
+                        <td align="center">22/10/2026</td>
+                        <td>45 sacos Harina Integral Fina 50kg</td>
+                        <td align="right"><strong>$2.950.000</strong></td>
+                        <td align="center"><span class="badge badge-ok">Aprobada</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>PO-2026-012</code></td>
+                        <td><strong>Levaduras del Maipo</strong></td>
+                        <td align="center">19/10/2026</td>
+                        <td>30 cajas Levadura Fresca en Bloque</td>
+                        <td align="right"><strong>$720.000</strong></td>
+                        <td align="center"><span class="badge badge-ok">Aprobada</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p style="text-align: center; margin-top: 15px;">
+            <a href="index.html" class="nav-link">&larr; Volver al Portal Principal</a>
+        </p>
+
+    </div>
+
+    <div class="footer">
+        Panader&iacute;a y Pasteler&iacute;a Pan y Queque &copy; 2026 &bull; Finanzas y Proveedores &bull; VLAN 10 Administraci&oacute;n &bull; Servidor HTTP Cisco Packet Tracer
+    </div>
+
+    <!-- SCRIPT ES5 PARA REGISTRO LOCAL DE ÓRDENES DE COMPRA -->
+    <script>
+        var correlativoPO = 17;
+        var totalAP = 28150000;
+
+        function formatearCLP(monto) {
+            var str = Math.round(monto).toString();
+            var out = "";
+            var c = 0;
+            for (var i = str.length - 1; i >= 0; i--) {
+                out = str.charAt(i) + out;
+                c++;
+                if (c === 3 && i !== 0) {
+                    out = "." + out;
+                    c = 0;
+                }
+            }
+            return "$" + out;
+        }
+
+        function registrarOrden(e) {
+            if (e && e.preventDefault) e.preventDefault();
+
+            var prov = document.getElementById("po-supplier").value;
+            var monto = parseInt(document.getElementById("po-monto").value, 10);
+            var detalle = document.getElementById("po-detalle").value;
+
+            if (isNaN(monto) || monto <= 0) {
+                alert("Por favor ingrese un monto válido.");
+                return false;
+            }
+
+            var folioPO = "PO-2026-0" + correlativoPO;
+            correlativoPO++;
+
+            // Insertar fila en tabla
+            var tabla = document.getElementById("tabla-po").getElementsByTagName("tbody")[0];
+            var newRow = tabla.insertRow(0);
+            newRow.innerHTML = '<td><code>' + folioPO + '</code></td>' +
+                               '<td><strong>' + prov + '</strong></td>' +
+                               '<td align="center">Hoy</td>' +
+                               '<td>' + detalle + '</td>' +
+                               '<td align="right"><strong>' + formatearCLP(monto) + '</strong></td>' +
+                               '<td align="center"><span class="badge badge-wait">Pendiente</span></td>';
+
+            // Actualizar pasivo AP
+            totalAP += monto;
+            document.getElementById("ap-val").innerHTML = formatearCLP(totalAP);
+
+            // Alerta
+            document.getElementById("lbl-po-folio").innerHTML = folioPO;
+            document.getElementById("msg-orden-creada").style.display = "block";
+
+            return false;
+        }
+    </script>
+</body>
+</html>
+
